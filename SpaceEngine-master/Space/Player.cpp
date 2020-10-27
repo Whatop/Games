@@ -13,7 +13,7 @@ Player::Player()
 	m_red->SetScale(1.5f,1.5f);
 
 	m_blue = Sprite::Create(L"Painting/Player/blue.png", COLORKEY_PINK);
-	m_blue->SetParent(this);
+	m_blue->SetParent(this);	
 	m_blue->SetScale(1.5f,1.5f);
 
 	m_red->A = 0;
