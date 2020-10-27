@@ -1,0 +1,51 @@
+#include "stdafx.h"
+#include "BattleScene.h"
+#include "Player.h"
+
+BattleScene::BattleScene()
+{
+}
+
+BattleScene::~BattleScene()
+{
+}
+
+void BattleScene::Init()
+{
+	for (auto& iter : ObjMgr->m_Objects)
+	{
+		if (iter->m_Tag == "Player")
+		{
+			PlayerPos = iter->m_Position;
+		}
+	}
+	SceneDirector::GetInst()->SetScene(scene::battlescene);
+	ObjMgr->DeleteObject("sans");
+	ObjMgr->DeleteObject("Dialog");
+	m_BG = Sprite::Create(L"Painting/Map/BossBattle.png",COLORKEY_PURPLE);
+	m_BG->SetScale(1.3f, 1.3f);
+	m_BG->SetPosition(PlayerPos.x-415,PlayerPos.y -300);
+
+	m_Frame = Sprite::Create(L"Painting/Map/Battle.png",COLORKEY_BALCK);
+	m_Frame->SetPosition(45, 325);
+	ObjMgr->AddObject(m_Frame, "Frame");
+	//m_StartLine = new LineMgr();
+	//m_StartLine->Init(10, true);
+	//m_StartLine->SetColor(D3DXCOLOR(255, 255, 23, 255));
+
+}
+
+void BattleScene::Release()
+{
+}
+
+void BattleScene::Update(float deltaTime, float time)
+{
+	//m_BG->SetVertex();
+}
+
+void BattleScene::Render()
+{
+	//m_StartLine->DrawLine(m_BG->m_Vertex, 3);
+	m_BG->Render();
+}
