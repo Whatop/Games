@@ -93,6 +93,10 @@ Player::Player()
 	m_Soul_Right->m_Visible = false;
 	m_Soul_Down->m_Visible = false;
 	m_Soul_Up->m_Visible = false;
+<<<<<<< HEAD
+=======
+	Camera::GetInst()->Follow(this);
+>>>>>>> fb7c4ba8d5f8bb2480b3d5b8d07fa8bc95ebb64a
 }
 //-10 3590 333 560
 Player::~Player()
@@ -134,7 +138,11 @@ void Player::Move(float deltaTime, float Time)
 			m_Status = Status::LEFT;
 
 			
+<<<<<<< HEAD
 			if (!Left && m_Position.x > 10) {
+=======
+			if (!Left&& m_Position.x >10) {
+>>>>>>> fb7c4ba8d5f8bb2480b3d5b8d07fa8bc95ebb64a
 				m_Position.x -= m_Speed * dt;
 				if (m_Player->m_CurrentFrame % 2 == 0)
 					m_Player->Update(deltaTime, Time);
@@ -160,7 +168,11 @@ void Player::Move(float deltaTime, float Time)
 			m_Player->Update(deltaTime, Time);
 		}
 	}
+<<<<<<< HEAD
 	if (SceneDirector::GetInst()->m_scene == scene::dialogscene)//´ëÈ­
+=======
+	if (SceneDirector::GetInst()->m_scene == scene::dialogscene)
+>>>>>>> fb7c4ba8d5f8bb2480b3d5b8d07fa8bc95ebb64a
 	{
 		if (m_Status != Status::NONE && m_Player->m_CurrentFrame % 2 != 0)
 		{
@@ -172,6 +184,7 @@ void Player::Move(float deltaTime, float Time)
 
 void Player::Update(float deltaTime, float Time)
 {
+<<<<<<< HEAD
 	if (m_Position.x < 270)
 		Camera::GetInst()->SetPos(270);
 	else if (m_scene != scene::battlescene)
@@ -182,6 +195,16 @@ void Player::Update(float deltaTime, float Time)
 	Right = false;
 	Down = false;
 
+=======
+	if (m_scene != scene::battlescene&&m_Position.x>270)
+		Camera::GetInst()->Follow(this);
+
+	Left = false;
+	Up = false;
+	Right = false;
+	Down = false;
+
+>>>>>>> fb7c4ba8d5f8bb2480b3d5b8d07fa8bc95ebb64a
 	ObjMgr->CollisionCheak(this, "Chest");
 	ObjMgr->CollisionCheak(this, "Solids");
 	ObjMgr->CollisionCheak(this, "Dialog");
@@ -249,6 +272,7 @@ void Player::OnCollision(Object* other)
 	}
 
 	if (other->m_Tag == "Chest")
+<<<<<<< HEAD
 	{
 		RECT rc;
 		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
@@ -276,6 +300,34 @@ void Player::OnCollision(Object* other)
 	if (other->m_Tag == "Solids")
 	{
 		RECT rc;
+=======
+	{
+		RECT rc;
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
+		{
+			if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
+			{
+				Left = true;
+			}
+			else if (IntersectRect(&rc, &m_Right->m_Collision, &other->m_Collision))
+			{
+				Right = true;
+			}
+			if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
+			{
+				Down = true;
+			}
+			else if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
+			{
+				Up = true;
+			}
+		}
+	}
+		
+	if (other->m_Tag == "Solids")
+	{
+		RECT rc;
+>>>>>>> fb7c4ba8d5f8bb2480b3d5b8d07fa8bc95ebb64a
 			if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
 			{	
 				Left = true;
@@ -311,7 +363,10 @@ void Player::OnCollision(Object* other)
 			if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
 			{
 				Down = true;
+<<<<<<< HEAD
 				Left = false;
+=======
+>>>>>>> fb7c4ba8d5f8bb2480b3d5b8d07fa8bc95ebb64a
 			}
 			else if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
 			{
