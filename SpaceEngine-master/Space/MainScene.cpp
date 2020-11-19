@@ -27,11 +27,7 @@ void MainScene::Init()
 	ObjMgr->AddObject(new Save(Vec2(30, 560)), "Save");
 	ObjMgr->AddObject(new Player, "Player");
 	ObjMgr->AddObject(new sans(Vec2(0, -200)), "sans");
-<<<<<<< HEAD
 	ObjMgr->AddObject(new Dialog(Vec2(2480, 450)), "Dialog");
-=======
-	ObjMgr->AddObject(new Dialog(Vec2(2900, 450)), "Dialog");
->>>>>>> fb7c4ba8d5f8bb2480b3d5b8d07fa8bc95ebb64a
 
 	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 344)), "Solids");
 	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 702)), "Solids");
@@ -63,11 +59,7 @@ void MainScene::Init()
 			ObjMgr->AddObject(new Solids(L"Painting/Solids/Small.png", Vec2((a + (i * 69)), 343 + 73)), "Solids");
 		} 
 	}
-<<<<<<< HEAD
 	ObjMgr->AddObject(new Pillar(Vec2(386, 0)), "Pillar");
-=======
-	ObjMgr->AddObject(new Pillar(Vec2(0, 0)), "Pillar");
->>>>>>> fb7c4ba8d5f8bb2480b3d5b8d07fa8bc95ebb64a
 }
 void MainScene::Release()
 {
