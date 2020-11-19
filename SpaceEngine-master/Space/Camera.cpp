@@ -24,6 +24,11 @@ void Camera::Translate()
 
 }
 
+void Camera::SetPos(float x)
+{
+	m_Position.x = x - App::GetInst()->m_Width / 2;
+}
+
 void Camera::Follow(Object* obj)
 {
 	if (obj != nullptr)

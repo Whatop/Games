@@ -28,6 +28,7 @@ public:
 
 	void Init();
 	void Translate();
+	void SetPos(float x);
 	void Follow(Object* obj);
 	void Update(float deltaTime, float time);
 	void Render();

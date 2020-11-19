@@ -27,10 +27,10 @@ void MainScene::Init()
 	ObjMgr->AddObject(new Save(Vec2(30, 560)), "Save");
 	ObjMgr->AddObject(new Player, "Player");
 	ObjMgr->AddObject(new sans(Vec2(0, -200)), "sans");
-	ObjMgr->AddObject(new Dialog(Vec2(2740, 450)), "Dialog");
+	ObjMgr->AddObject(new Dialog(Vec2(2480, 450)), "Dialog");
 
 	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 344)), "Solids");
-	ObjMgr->AddObject(new Solids(L"Painting/Solids/width.png", Vec2(0, 702)), "Solids");
+	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 702)), "Solids");
 
 	m_Text = new TextMgr();
 	m_Text->Init(32, true, false, L"Determination Mono");
@@ -42,6 +42,10 @@ void MainScene::Init()
 	{
 		ObjMgr->AddObject(new Solids(L"Painting/Solids/Small.png", Vec2(-69, 420 + (i * 69))), "Solids");
 		ObjMgr->AddObject(new Solids(L"Painting/Solids/Small.png", Vec2(4200, 420 + (i * 69))), "Solids");
+	}
+	for (int i = 0; i < 15; i++)
+	{
+		ObjMgr->AddObject(new Solids(L"Painting/Solids/long.png", Vec2(141 + (i * 282), 702)), "Solids");
 	}
 	for (int i = 0; i < 15; i++)
 	{

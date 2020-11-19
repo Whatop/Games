@@ -93,7 +93,6 @@ Player::Player()
 	m_Soul_Right->m_Visible = false;
 	m_Soul_Down->m_Visible = false;
 	m_Soul_Up->m_Visible = false;
-	Camera::GetInst()->Follow(this);
 }
 //-10 3590 333 560
 Player::~Player()
@@ -173,7 +172,9 @@ void Player::Move(float deltaTime, float Time)
 
 void Player::Update(float deltaTime, float Time)
 {
-	if (m_scene != scene::battlescene && m_Position.x>200)
+	if (m_Position.x < 270)
+		Camera::GetInst()->SetPos(270);
+	else if (m_scene != scene::battlescene)
 		Camera::GetInst()->Follow(this);
 
 	Left = false;
