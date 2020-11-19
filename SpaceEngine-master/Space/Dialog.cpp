@@ -4,7 +4,8 @@
 Dialog::Dialog(Vec2 Pos)
 {
 	m_Dialog = Sprite::Create(L"Painting/Dialog/Dialog.png");
-	m_Dialog->SetPosition(Pos.x, Pos.y);
+	m_Dialog->SetParent(this);
+	SetPosition(Pos);
 }
 
 Dialog::~Dialog()
@@ -26,4 +27,8 @@ void Dialog::Render()
 
 void Dialog::OnCollision(Object* other)
 {
+	//if (m_Tag == "Player")
+	//{
+	//		ObjMgr->RemoveObject(this);
+	//}
 }

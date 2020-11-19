@@ -44,8 +44,16 @@ void ObjectMgr::CollisionCheak(Object* obj, const std::string tag)
 			RECT rc;
 			if (IntersectRect(&rc, &obj->m_Collision, &iter->m_Collision))
 			{
+				obj->m_isCollision = true;
+				iter->m_isCollision = true;
+
 				obj->OnCollision(iter);
 				iter->OnCollision(obj);
+			}
+			else
+			{
+				obj->m_isCollision = false;
+				iter->m_isCollision = false;
 			}
 		}
 	}
@@ -77,20 +85,10 @@ void ObjectMgr::Render()
 
 	for (const auto& iter : m_Objects)
 	{
+		if (iter->m_Tag == "UI")
+			iter->m_Layer = 100;
 		(iter)->Render();
 	}
-}
-
-Object* ObjectMgr::FindObject(const std::string tag)
-{
-	for (auto& iter : m_Objects)
-	{
-		if (iter->m_Tag == tag)
-		{
-			return iter;
-		}
-	}
-	return nullptr;
 }
 
 void ObjectMgr::AddObject(Object* obj, const std::string tag)

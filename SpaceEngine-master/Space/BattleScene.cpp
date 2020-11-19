@@ -22,13 +22,9 @@ void BattleScene::Init()
 	SceneDirector::GetInst()->SetScene(scene::battlescene);
 	ObjMgr->DeleteObject("sans");
 	ObjMgr->DeleteObject("Dialog");
-	m_BG = Sprite::Create(L"Painting/Map/BossBattle.png",COLORKEY_PURPLE);
-	m_BG->SetScale(1.3f, 1.3f);
-	m_BG->SetPosition(PlayerPos.x-415,PlayerPos.y -300);
-
-	m_Frame = Sprite::Create(L"Painting/Map/Battle.png",COLORKEY_BALCK);
-	m_Frame->SetPosition(45, 325);
-	ObjMgr->AddObject(m_Frame, "Frame");
+	m_BG = Sprite::Create(L"Painting/Map/BattleBG.png", COLORKEY_BALCK);
+	m_BG->SetPosition(0,0);
+	ObjMgr->AddObject(m_BG, "Frame");
 	//m_StartLine = new LineMgr();
 	//m_StartLine->Init(10, true);
 	//m_StartLine->SetColor(D3DXCOLOR(255, 255, 23, 255));

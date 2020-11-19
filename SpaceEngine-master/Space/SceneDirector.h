@@ -2,6 +2,7 @@
 enum class scene
 {
 	mainscene,
+	dialogscene,
 	battlescene,
 	none
 };

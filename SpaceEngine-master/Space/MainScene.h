@@ -2,7 +2,6 @@
 class MainScene : public Scene
 {
 	Sprite* m_BG;
-	Sprite* m_Pillar;
 
 	TextMgr* m_Text;
 	Vec2 PlayerPos;

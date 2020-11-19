@@ -6,6 +6,9 @@ private:
 	Matrix mTrans;
 	Matrix mScale;
 	Matrix mWorld;
+
+	float ptime;
+	float m_Pos;
 public:
 	Camera();
 	~Camera();

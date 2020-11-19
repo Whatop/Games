@@ -10,7 +10,7 @@ public:
 	Vec2 Pos;
 
 	float m_Speed;
-
+	bool one;
 	void Move();
 
 	void Update(float deltaTime, float Time);

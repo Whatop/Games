@@ -51,15 +51,15 @@ void Sprite::Render()
 {
 	if (m_Parent)
 	{
-		SetRect(&m_Parent->m_Collision, m_Parent->m_Position.x, m_Parent->m_Position.y,
-			m_Parent->m_Position.x + m_Size.x / 2, m_Parent->m_Position.y + m_Size.y / 2);
+		SetRect(&m_Parent->m_Collision, m_Parent->m_Position.x - m_Size.x/2, m_Parent->m_Position.y - m_Size.y,
+			m_Parent->m_Position.x + m_Size.x, m_Parent->m_Position.y + m_Size.y/2);
 
 		m_Parent->m_Size = m_Size;
 	}
 	else
 	{
-		SetRect(&m_Collision, m_Position.x, m_Position.y,
-			m_Position.x + m_Size.x / 2, m_Position.y + m_Size.y / 2);
+		SetRect(&m_Collision, m_Position.x - m_Size.x, m_Position.y - m_Size.y,
+			m_Position.x + m_Size.x, m_Position.y + m_Size.y);
 	}
 
 	Camera::GetInst()->Render();
