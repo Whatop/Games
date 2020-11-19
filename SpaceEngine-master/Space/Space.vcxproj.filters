@@ -22,25 +22,22 @@
     <Filter Include="FrameWork\Core">
       <UniqueIdentifier>{94381774-e408-4df3-a1f3-2ae46f6c1ee3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Scene">
-      <UniqueIdentifier>{6a0b488c-024d-464b-b7e5-e43bc432ea1d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Object\Sans">
       <UniqueIdentifier>{7847ace4-2ca7-4110-9c21-f4261bfffc70}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Object\Player">
       <UniqueIdentifier>{41f2fe5b-8f3d-4a1d-bf8a-b8aa74423199}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Object\Interaction">
+      <UniqueIdentifier>{f5ec3b74-7972-47d7-a329-111cbc6a43d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Scene">
+      <UniqueIdentifier>{6a0b488c-024d-464b-b7e5-e43bc432ea1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Space.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="App.cpp">
       <Filter>FrameWork\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>FrameWork\Core</Filter>
@@ -105,19 +102,34 @@
     <ClCompile Include="sans.cpp">
       <Filter>Game\Object\Sans</Filter>
     </ClCompile>
-    <ClCompile Include="Dialog.cpp">
+    <ClCompile Include="BattleScene.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="BattleScene.cpp">
+    <ClCompile Include="Pillar.cpp">
+      <Filter>Game\Object\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Chest.cpp">
+      <Filter>Game\Object\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="Save.cpp">
+      <Filter>Game\Object\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="Space.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Solids.cpp">
+      <Filter>Game\Object\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog.cpp">
+      <Filter>Game\Object\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
       <Filter>FrameWork\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>FrameWork\Core</Filter>
@@ -185,11 +197,26 @@
     <ClInclude Include="sans.h">
       <Filter>Game\Object\Sans</Filter>
     </ClInclude>
-    <ClInclude Include="Dialog.h">
-      <Filter>Game\Object\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="BattleScene.h">
       <Filter>Game\Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Pillar.h">
+      <Filter>Game\Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Game\Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Chest.h">
+      <Filter>Game\Object\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="Save.h">
+      <Filter>Game\Object\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="Solids.h">
+      <Filter>Game\Object\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog.h">
+      <Filter>Game\Object\Interaction</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

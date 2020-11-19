@@ -1,5 +1,12 @@
 #pragma once
-
+enum class Status
+{
+	LEFT,
+	DOWN,
+	RIGHT,
+	UP,
+	NONE
+};
 class Object
 {
 public:
@@ -10,17 +17,20 @@ public:
 	Vec2 m_Size;
 	Vec2 m_RotationCenter;
 	Vec2 m_ScaleCenter;
+	Vec2 m_Vertex[5];
 
 	float m_Radius;
 	float m_Rotation;
 
 	bool m_Destroy;
 	RECT m_Collision;
-	Vec2 m_Vertex[2];
+
 	bool m_Visible;
+	bool m_isCollision;
 
 	int m_Layer;
 	std::string m_Tag;
+
 public:
 	Object();
 	~Object();

@@ -23,6 +23,7 @@ bool App::Init(int width, int height, bool windowMode)
 		return false;
 
 	Time = 0.0f;
+	//Game::GetInst()->Init();
 	return true;
 }
 

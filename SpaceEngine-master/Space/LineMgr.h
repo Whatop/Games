@@ -3,6 +3,7 @@ class LineMgr
 {
 	LPD3DXLINE m_pLine;
 	D3DXCOLOR m_Color;
+	D3DXMATRIX m_Mat;
 public:
 	LineMgr();
 	~LineMgr();

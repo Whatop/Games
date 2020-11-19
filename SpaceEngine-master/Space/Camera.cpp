@@ -15,8 +15,8 @@ void Camera::Init()
 	m_Position = Vec2(0, 0);
 	m_Scale = Vec2(1.f, 1.f);
 	Follow(nullptr);
-	m_MaxMapSize = Vec2(0, 0);
-	m_MinMapSize = Vec2(0, 0);
+	ptime = 0;
+	m_Pos = 0;
 }
 
 void Camera::Translate()
@@ -33,11 +33,16 @@ void Camera::Follow(Object* obj)
 			m_Position.x = obj->m_Position.x - App::GetInst()->m_Width / 2;
 			m_Position.y = 0;
 		}
-		else
+		if (SceneDirector::GetInst()->m_scene == scene::dialogscene)
 		{
-
+			m_Position.x = obj->m_Position.x + m_Pos - App::GetInst()->m_Width / 2 ;
+			m_Position.y = 0;
+			ptime += dt;
+			if (ptime > 2 && ptime < 7)
+				m_Pos += (70 * dt);
 		}
 	}
+	
 }
 
 void Camera::Update(float deltaTime, float time)

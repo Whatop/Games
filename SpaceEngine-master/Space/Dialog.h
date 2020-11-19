@@ -1,7 +1,7 @@
 #pragma once
 class Dialog : public Object
 {
-public:
+private:
 	Sprite* m_Dialog;
 public:
 	Dialog(Vec2 Pos);

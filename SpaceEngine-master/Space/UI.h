@@ -1,11 +1,10 @@
 #pragma once
 class UI : public Singleton<UI>
 {
-	Sprite* m_Time;
-	Sprite* m_PlayerFrame;
-	Sprite* m_HpBar;
-	Sprite* m_1Up;
-
+	Sprite* m_Curtain;
+	Sprite* m_Pillar;
+	TextMgr* m_Text;
+	Vec2 PlayerPos;
 public:
 	UI();
 	~UI();
