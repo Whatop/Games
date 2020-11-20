@@ -30,6 +30,7 @@ void sans::Update(float deltaTime, float Time)
 void sans::Render()
 {
 	m_ColBox->Render();
+
 }
 
 void sans::OnCollision(Object* other)

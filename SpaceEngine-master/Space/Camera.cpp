@@ -45,6 +45,8 @@ void Camera::Follow(Object* obj)
 			ptime += dt;
 			if (ptime > 2 && ptime < 7)
 				m_Pos += (70 * dt);
+
+			//m_Pos의 총 증가 값은 350
 		}
 	}
 	

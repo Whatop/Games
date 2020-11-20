@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Pillar.h"
+#include "Text_Bubbles.h"
 
 Pillar::Pillar(Vec2 Pos)
 {
@@ -9,6 +10,7 @@ Pillar::Pillar(Vec2 Pos)
 	m_Pos = 0;
 	ptime = 0;
 	SetPosition(Pos);
+
 }
 
 Pillar::~Pillar()
@@ -29,8 +31,14 @@ void Pillar::Update(float deltaTime, float Time)
 	if (SceneDirector::GetInst()->m_scene == scene::dialogscene)
 	{
 		ptime += dt;
-		if(ptime > 2 && ptime < 7)
-		m_Pos -= (70 * dt);
+		if (ptime > 2 && ptime < 7) {
+			m_Pos -= (70 * dt);
+		}
+		else if(a==false)
+		{
+			ObjMgr->AddObject(new Text_Bubbles(Vec2(2175, 800)), "Chet");
+			a = true;
+		}
 	}
 }
 

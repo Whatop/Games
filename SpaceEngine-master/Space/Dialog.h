@@ -3,6 +3,7 @@ class Dialog : public Object
 {
 private:
 	Sprite* m_Dialog;
+	TextMgr* m_Text;
 public:
 	Dialog(Vec2 Pos);
 	~Dialog();

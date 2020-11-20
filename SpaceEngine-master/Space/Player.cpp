@@ -3,6 +3,7 @@
 #include "MainScene.h"
 #include "BattleScene.h"
 #include "sans.h"
+#include "Text_Bubbles.h"
 
 Player::Player()
 {
@@ -86,13 +87,19 @@ Player::Player()
 	Right = false;
 	Left = false;
 
-	//m_red->m_Visible = false;
+	m_red->m_Visible = false;
 	m_blue->m_Visible = false;
 	m_Soul_ColBox->m_Visible = false;
 	m_Soul_Left->m_Visible = false;
 	m_Soul_Right->m_Visible = false;
 	m_Soul_Down->m_Visible = false;
 	m_Soul_Up->m_Visible = false;
+
+	m_ColBox->m_Visible = false;
+	m_Left->m_Visible = false;
+	m_Right->m_Visible = false;
+	m_Down->m_Visible = false;
+	m_Up->m_Visible = false;
 }
 //-10 3590 333 560
 Player::~Player()
@@ -245,6 +252,7 @@ void Player::OnCollision(Object* other)
 		{
 			SceneDirector::GetInst()->SetScene(scene::dialogscene);
 			ObjMgr->DeleteObject("Dialog");
+
 		}
 	}
 

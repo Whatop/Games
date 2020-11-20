@@ -126,6 +126,9 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Text_Bubbles.cpp">
+      <Filter>Game\Object\Interaction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -216,6 +219,9 @@
       <Filter>Game\Object\Interaction</Filter>
     </ClInclude>
     <ClInclude Include="Dialog.h">
+      <Filter>Game\Object\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="Text_Bubbles.h">
       <Filter>Game\Object\Interaction</Filter>
     </ClInclude>
   </ItemGroup>

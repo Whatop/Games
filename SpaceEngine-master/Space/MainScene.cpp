@@ -24,10 +24,10 @@ void MainScene::Init()
 	m_BG->SetPosition(0, 0);
 
 	ObjMgr->AddObject(new Chest(Vec2(210, 560)), "Chest");
-	ObjMgr->AddObject(new Save(Vec2(30, 560)), "Save");
 	ObjMgr->AddObject(new Player, "Player");
+	ObjMgr->AddObject(new Save(Vec2(30, 560)), "Save");
 	ObjMgr->AddObject(new sans(Vec2(0, -200)), "sans");
-	ObjMgr->AddObject(new Dialog(Vec2(2480, 450)), "Dialog");
+	ObjMgr->AddObject(new Dialog(Vec2(2490, 450)), "Dialog");
 
 	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 344)), "Solids");
 	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 702)), "Solids");
