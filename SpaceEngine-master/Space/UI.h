@@ -9,6 +9,11 @@ public:
 	UI();
 	~UI();
 
+	float ztime;
+	float ptime;
+	bool a;
+	bool b;
+	float m_Pos;
 	void Init();
 	void Release();
 

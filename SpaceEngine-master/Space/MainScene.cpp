@@ -36,7 +36,6 @@ void MainScene::Init()
 	m_Text->Init(32, true, false, L"Determination Mono");
 	m_Text->SetColor(255, 255, 255, 255);
 
-	Game::GetInst()->CreateUI();
 	//486 343+72
 	for (int i = 0; i < 4; i++)
 	{
@@ -60,6 +59,7 @@ void MainScene::Init()
 		} 
 	}
 	ObjMgr->AddObject(new Pillar(Vec2(386, 0)), "Pillar");
+	Game::GetInst()->CreateUI();
 }
 void MainScene::Release()
 {
@@ -76,4 +76,5 @@ void MainScene::Render()
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y) + "\n" + std::to_string(dt) + "  " + std::to_string(gt), 500, 0);
 	Renderer::GetInst()->GetSprite()->End();
+	
 }

@@ -11,7 +11,6 @@ public:
 	float m_Speed;
 	float m_Pos;
 	float ptime;
-	bool a;
 	void Update(float deltaTime, float Time);
 	void Render();
 	void OnCollision(Object* other);

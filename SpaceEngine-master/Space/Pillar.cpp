@@ -34,11 +34,7 @@ void Pillar::Update(float deltaTime, float Time)
 		if (ptime > 2 && ptime < 7) {
 			m_Pos -= (70 * dt);
 		}
-		else if(a==false)
-		{
-			ObjMgr->AddObject(new Text_Bubbles(Vec2(2175, 800)), "Chet");
-			a = true;
-		}
+		
 	}
 }
 
