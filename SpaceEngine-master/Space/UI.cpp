@@ -19,8 +19,10 @@ void UI::Init()
 	ptime = 0;
 	m_Pos = 0;
 	a = false;
+	b = false;
+	c = false;
 	m_Text = new TextMgr();
-	m_Text->Init(75, true, false, L"Determination Mono");
+	m_Text->Init(65, true, true, L"굴림");
 	m_Text->SetColor(255, 255, 255, 255);
 }
 
@@ -49,12 +51,13 @@ void UI::Update()
 		if (ztime > 2)
 			a = true;
 	}
-	if (a == true)
+	if (a == true && c==false)
 	{
-		ObjMgr->AddObject(new Text_Bubbles(Vec2(2175, 1080)), "UI");
+		ObjMgr->AddObject(new Text_Bubbles(Vec2(2175, 1080)), "Chet");
 		m_Curtain->m_Tag = "UI";
 		a = false;
 		b = true;
+		c = true;
 	}
 	}
 }
@@ -63,7 +66,8 @@ void UI::Render()
 {
 	m_Curtain->Render();
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-	if(b==true)
-	m_Text->print(" *  그냥 본론으로 \n    들어가자구.", 630, 760);
+	if (b == true) {
+		m_Text->print(" *  그냥 본론으로 \n     들어가자구.", 630, 760);
+	}
 	Renderer::GetInst()->GetSprite()->End();
 }

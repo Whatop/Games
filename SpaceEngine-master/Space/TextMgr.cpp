@@ -9,6 +9,7 @@ TextMgr::TextMgr()
 	m_FontRect.left = 0;
 	m_FontRect.right = 1920;
 	m_FontRect.bottom = 1080;
+	m_Scale = Vec2(1.f, 1.f);
 
 	m_pFont = NULL;
 	m_Angle = 0;
@@ -47,7 +48,8 @@ int TextMgr::print(const std::string& str, int x, int y)
 	m_FontRect.left = x;
 
 	Vec2 rCenter = Vec2((float)x, (float)y);
-	D3DXMatrixTransformation2D(&m_wMat, NULL, 0.0f, NULL, &rCenter, m_Angle, NULL);
+	Vec2 sCenter = Vec2((float)x, (float)y);
+	D3DXMatrixTransformation2D(&m_wMat, &sCenter, 0.0f, &m_Scale, &rCenter, m_Angle, NULL);
 	Renderer::GetInst()->GetSprite()->SetTransform(&m_wMat);
 	return m_pFont->DrawTextA(Renderer::GetInst()->GetSprite(), str.c_str(), -1, &m_FontRect, DT_LEFT, m_Color);
 }
@@ -55,6 +57,12 @@ int TextMgr::print(const std::string& str, int x, int y)
 void TextMgr::SetColor(int a, int r, int g, int b)
 {
 	m_Color = D3DCOLOR_ARGB(a, r, g, b);
+}
+
+void TextMgr::SetScale(float x, float y)
+{
+	m_Scale.x = x;
+	m_Scale.y = y;
 }
 
 void TextMgr::Release()

@@ -6,6 +6,7 @@ Dialog::Dialog(Vec2 Pos)
 	m_Dialog = Sprite::Create(L"Painting/Dialog/Dialog.png");
 	m_Dialog->SetParent(this);
 	SetPosition(Pos);
+	m_Dialog->A = 0;
 
 	m_Text = new TextMgr();
 	m_Text->Init(32, true, false, L"Determination Mono");

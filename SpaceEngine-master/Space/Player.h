@@ -16,15 +16,7 @@ public:
 
 	Status m_Status;
 
-	Sprite* m_red;
-	Sprite* m_blue;
 	scene m_scene;
-
-	Sprite* m_Soul_ColBox;
-	Sprite* m_Soul_Left;
-	Sprite* m_Soul_Right;
-	Sprite* m_Soul_Up;
-	Sprite* m_Soul_Down;
 
 	LineMgr* m_Line;
 public:
@@ -39,8 +31,6 @@ public:
 	bool Left;
 	bool Up;
 	bool Down;
-
-	void SetDirection();
 
 	void Move(float deltaTime, float Time);
 

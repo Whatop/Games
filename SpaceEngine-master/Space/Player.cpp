@@ -4,6 +4,8 @@
 #include "BattleScene.h"
 #include "sans.h"
 #include "Text_Bubbles.h"
+#include "UI.h"
+#include "Heart.h"
 
 Player::Player()
 {
@@ -53,26 +55,7 @@ Player::Player()
 	m_Up->G = 0;
 
 
-	m_red = Sprite::Create(L"Painting/Soul/red.png", COLORKEY_BALCK);
-	m_red->m_Position = m_Position;
 
-	m_blue = Sprite::Create(L"Painting/Soul/blue.png", COLORKEY_BALCK);
-	m_blue->m_Position = m_Position;
-
-	m_Soul_ColBox = Sprite::Create(L"Painting/Soul/ColBox.png", COLORKEY_BALCK); //다른 이름으로 설정하고 새로운 판정 만들기
-	m_Soul_ColBox->m_Position = m_Position;
-
-	m_Soul_Left = Sprite::Create(L"Painting/Soul/Left.png", COLORKEY_BALCK);
-	m_Soul_Left->m_Position = m_Position;
-
-	m_Soul_Right = Sprite::Create(L"Painting/Soul/Right.png", COLORKEY_BALCK);
-	m_Soul_Right->m_Position = m_Position;
-
-	m_Soul_Up = Sprite::Create(L"Painting/Soul/Up.png", COLORKEY_BALCK);
-	m_Soul_Up->m_Position = m_Position;
-
-	m_Soul_Down = Sprite::Create(L"Painting/Soul/Down.png", COLORKEY_BALCK);
-	m_Soul_Down->m_Position = m_Position;
 
 	m_Line = new LineMgr();
 	m_Line->Init(1, true);
@@ -86,14 +69,6 @@ Player::Player()
 	Down = false;
 	Right = false;
 	Left = false;
-
-	m_red->m_Visible = false;
-	m_blue->m_Visible = false;
-	m_Soul_ColBox->m_Visible = false;
-	m_Soul_Left->m_Visible = false;
-	m_Soul_Right->m_Visible = false;
-	m_Soul_Down->m_Visible = false;
-	m_Soul_Up->m_Visible = false;
 
 	m_ColBox->m_Visible = false;
 	m_Left->m_Visible = false;
@@ -167,14 +142,19 @@ void Player::Move(float deltaTime, float Time)
 			m_Player->Update(deltaTime, Time);
 		}
 	}
-	if (SceneDirector::GetInst()->m_scene == scene::dialogscene)//대화
+	else if (SceneDirector::GetInst()->m_scene == scene::dialogscene)//대화
 	{
 		if (m_Status != Status::NONE && m_Player->m_CurrentFrame % 2 != 0)
 		{
 			m_Player->Update(deltaTime, Time);
 		}
 	}
-	//영혼 만들기
+	else if (SceneDirector::GetInst()->m_scene == scene::battlescene)//전투
+	{
+
+	}
+	//영혼 분리
+	//판정 바꾸기
 }
 
 void Player::Update(float deltaTime, float Time)
@@ -201,6 +181,23 @@ void Player::Update(float deltaTime, float Time)
 	{
 		SceneDirector::GetInst()->ChangeScene(new BattleScene());
 	}
+	if (INPUT->GetKey('Z') == KeyState::DOWN)
+	{
+		if (UI::GetInst()->b == true) {
+			ObjMgr->DeleteObject("Chet");
+			UI::GetInst()->b = false;
+			ObjMgr->AddObject(new Heart(Vec2(m_Position.x + m_Player->m_Size.x / 2,m_Position.y+m_Player->m_Size.y/2)), "Heart");
+			SceneDirector::GetInst()->ChangeScene(new BattleScene());
+		}
+	}
+	else if (INPUT->GetKey('X') == KeyState::DOWN)
+	{
+
+	}
+	else if (INPUT->GetKey('C') == KeyState::DOWN)
+	{
+
+	}
 
 	Move(deltaTime, Time);
 
@@ -210,14 +207,6 @@ void Player::Update(float deltaTime, float Time)
 	m_Up->m_Position = Vec2(m_Position.x+30, m_Position.y + m_ColBox->m_Size.y+4);
 	m_Down->m_Position = Vec2(m_Position.x+30, m_ColBox-> m_Position.y + m_ColBox->m_Size.y);
 
-	m_red->m_Position = Vec2(m_Position.x + 17, m_Position.y + 10);
-	m_blue->m_Position = Vec2(m_Position.x, m_Position.y);
-
-	m_Soul_ColBox->m_Position = Vec2(m_Position.x, m_Position.y);
-	m_Soul_Up->m_Position = Vec2(m_Position.x, m_Position.y);
-	m_Soul_Down->m_Position = Vec2(m_Position.x, m_Position.y);
-	m_Soul_Left->m_Position = Vec2(m_Position.x, m_Position.y);
-	m_Soul_Right->m_Position = Vec2(m_Position.x, m_Position.y);
 	m_Player->SetVertex();
 
 }
@@ -233,14 +222,6 @@ void Player::Render()
 	m_Up->Render();
 	m_Down->Render();
 
-	m_red->Render();
-	m_blue->Render();
-
-	m_Soul_ColBox->Render();
-	m_Soul_Up->Render();
-	m_Soul_Left->Render();
-	m_Soul_Right->Render();
-	m_Soul_Down->Render();
 }
 
 void Player::OnCollision(Object* other)

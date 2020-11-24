@@ -129,6 +129,9 @@
     <ClCompile Include="Text_Bubbles.cpp">
       <Filter>Game\Object\Interaction</Filter>
     </ClCompile>
+    <ClCompile Include="Heart.cpp">
+      <Filter>Game\Object\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Text_Bubbles.h">
       <Filter>Game\Object\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="Heart.h">
+      <Filter>Game\Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

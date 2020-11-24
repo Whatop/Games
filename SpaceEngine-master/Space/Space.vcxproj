@@ -28,6 +28,7 @@
     <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Heart.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LineMgr.cpp" />
     <ClCompile Include="MainScene.cpp" />
@@ -63,6 +64,7 @@
     <ClInclude Include="Dialog.h" />
     <ClInclude Include="EffectMgr.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Heart.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LineMgr.h" />
     <ClInclude Include="MainScene.h" />

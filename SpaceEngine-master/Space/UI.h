@@ -13,6 +13,7 @@ public:
 	float ptime;
 	bool a;
 	bool b;
+	bool c;
 	float m_Pos;
 	void Init();
 	void Release();

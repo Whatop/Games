@@ -11,7 +11,8 @@ Text_Bubbles::Text_Bubbles(Vec2 Pos)
 	m_Expression = Sprite::Create(L"Painting/sans/sans_head.png");
 	m_Expression->m_Position = m_Position;
 
-
+	m_Text_Bubbles->m_Tag = "Chet";
+	m_Expression->m_Tag = "Chet";
 
 }
 

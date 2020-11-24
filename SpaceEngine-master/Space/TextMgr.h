@@ -6,6 +6,7 @@ private:
 	LPD3DXFONT m_pFont;
 	RECT m_FontRect;
 	Matrix m_wMat;
+	Vec2 m_Scale;
 
 public:
 	TextMgr();
@@ -17,6 +18,7 @@ public:
 	int print(const std::string& str, int x, int y);
 
 	void SetColor(int a, int r, int g, int b);
+	void SetScale(float x,float y);
 
 	void Release();
 };

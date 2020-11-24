@@ -19,7 +19,12 @@ Pillar::~Pillar()
 
 void Pillar::Update(float deltaTime, float Time)
 {
-	for (auto& iter : ObjMgr->m_Objects)
+	if (SceneDirector::GetInst()->m_scene == scene::battlescene)//ÀüÅõ
+		m_Pillar->A = 0;
+	else
+		m_Pillar->A = 255;
+
+		for (auto& iter : ObjMgr->m_Objects)
 	{
 		if (iter->m_Tag == "Player")
 			Pos = iter->m_Position;
