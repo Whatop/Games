@@ -9,7 +9,8 @@ Heart::Heart(Vec2 Pos)
 	m_red = Sprite::Create(L"Painting/Soul/red.png", COLORKEY_BALCK);
 	m_red->SetParent(this);
 	SetPosition(Pos);
-
+	stime = 0;
+	a = false;
 }
 
 Heart::~Heart()
@@ -18,10 +19,42 @@ Heart::~Heart()
 
 void Heart::Update(float deltaTime, float Time)
 {
-	if (SceneDirector::GetInst()->m_scene == scene::battlescene)//전투
-		m_red->A = 255;
-	else
-		m_red->A = 255;
+
+	if (a == false) {
+		stime += dt;
+		if (stime >= 0.15f && stime <= 0.2f)
+			m_red->A = 0;
+
+		if (stime >= 0.25f && stime <= 0.3f)
+			m_red->A = 255;
+
+		if (stime >= 0.35f && stime <= 0.4f)
+			m_red->A = 0;
+
+		if (stime >= 0.45f && stime <= 0.5f)
+			m_red->A = 255;
+
+		if (stime >= 0.55f && stime <= 0.6f)
+			a = true;
+		
+	}
+
+	if (a == true) {
+		mtime += dt;
+		if (SceneDirector::GetInst()->m_scene == scene::battlescene)//전투
+			m_red->A = 255;
+		else
+			m_red->A = 255;
+
+		Vec2 A, B;
+		A = m_Position;
+		B = Vec2(2800, 680);
+		A -= B;
+		D3DXVec2Normalize(&Dir, &A);
+
+		if (mtime >= 0.f&& mtime<=0.65f)
+			Translate(-Dir.x * 500*dt, -Dir.y * 500*dt);
+	}
 
 	if (m_Color == Player_Color::RED) {
 		m_red->R = 255;

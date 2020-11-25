@@ -14,7 +14,6 @@ UI::~UI()
 void UI::Init()
 {
 	m_Curtain = Sprite::Create(L"Painting/Map/Layer.png",COLORKEY_WHITE);
-	m_Curtain->m_Layer = 1;
 	ztime = 0;
 	ptime = 0;
 	m_Pos = 0;
@@ -24,6 +23,7 @@ void UI::Init()
 	m_Text = new TextMgr();
 	m_Text->Init(65, true, true, L"±¼¸²");
 	m_Text->SetColor(255, 255, 255, 255);
+	ObjMgr->AddObject(m_Curtain, "UI");
 }
 
 void UI::Release()
@@ -37,7 +37,7 @@ void UI::Update()
 		if (iter->m_Tag == "Player")
 			PlayerPos = iter->m_Position;
 	}
-	m_Curtain->m_Position = Vec2(PlayerPos.x, PlayerPos.y);
+	//m_Curtain->m_Position = Vec2(PlayerPos.x, PlayerPos.y);
 	if (SceneDirector::GetInst()->m_scene == scene::dialogscene)
 	{
 		ptime += dt;
