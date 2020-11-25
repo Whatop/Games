@@ -105,9 +105,6 @@
     <ClCompile Include="BattleScene.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Pillar.cpp">
-      <Filter>Game\Object\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Chest.cpp">
       <Filter>Game\Object\Interaction</Filter>
     </ClCompile>
@@ -131,6 +128,9 @@
     </ClCompile>
     <ClCompile Include="Heart.cpp">
       <Filter>Game\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Pillar.cpp">
+      <Filter>Game\Object\Interaction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,9 +206,6 @@
     <ClInclude Include="BattleScene.h">
       <Filter>Game\Object\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Pillar.h">
-      <Filter>Game\Object\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Game\Object\Scene</Filter>
     </ClInclude>
@@ -229,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Heart.h">
       <Filter>Game\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Pillar.h">
+      <Filter>Game\Object\Interaction</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

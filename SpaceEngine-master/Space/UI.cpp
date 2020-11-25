@@ -21,7 +21,7 @@ void UI::Init()
 	b = false;
 	c = false;
 	m_Text = new TextMgr();
-	m_Text->Init(65, true, true, L"±¼¸²");
+	m_Text->Init(65, true, false, L"±¼¸²");
 	m_Text->SetColor(255, 255, 255, 255);
 	ObjMgr->AddObject(m_Curtain, "UI");
 }

@@ -19,10 +19,10 @@ Pillar::~Pillar()
 
 void Pillar::Update(float deltaTime, float Time)
 {
-	if (SceneDirector::GetInst()->m_scene == scene::battlescene)//ÀüÅõ
-		m_Pillar->A = 0;
-	else
+	if (SceneDirector::GetInst()->m_scene == scene::dialogscene || SceneDirector::GetInst()->m_scene == scene::mainscene)
 		m_Pillar->A = 255;
+	else
+		m_Pillar->A = 0;
 
 		for (auto& iter : ObjMgr->m_Objects)
 	{

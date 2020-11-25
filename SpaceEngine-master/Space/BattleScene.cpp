@@ -24,11 +24,13 @@ void BattleScene::Init()
 	ObjMgr->DeleteObject("Dialog");
 	m_BG = Sprite::Create(L"Painting/Map/BattleBG.png", COLORKEY_BALCK);
 	m_BG->SetPosition(0,0);
-	ObjMgr->AddObject(m_BG, "Frame");
+	//ObjMgr->AddObject(m_BG, "Frame");
 	//m_StartLine = new LineMgr();
 	//m_StartLine->Init(10, true);
 	//m_StartLine->SetColor(D3DXCOLOR(255, 255, 23, 255));
+	if (SceneDirector::GetInst()->m_scene == scene::start) {
 
+	}
 }
 
 void BattleScene::Release()

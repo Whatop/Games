@@ -44,7 +44,7 @@ void Heart::Update(float deltaTime, float Time)
 		if (SceneDirector::GetInst()->m_scene == scene::battlescene)//ÀüÅõ
 			m_red->A = 255;
 		else
-			m_red->A = 255;
+			m_red->A = 0;
 
 		Vec2 A, B;
 		A = m_Position;
@@ -52,8 +52,15 @@ void Heart::Update(float deltaTime, float Time)
 		A -= B;
 		D3DXVec2Normalize(&Dir, &A);
 
-		if (mtime >= 0.f&& mtime<=0.65f)
-			Translate(-Dir.x * 500*dt, -Dir.y * 500*dt);
+		if (mtime >= 0.f && mtime <= 0.55f)
+		{
+			Translate(-Dir.x * 700 * dt, -Dir.y * 700 * dt);
+		}
+		else {
+			atime += dt;
+			if (atime >= 0.2f && atime <= 1.3f)
+				SceneDirector::GetInst()->SetScene(scene::start);
+		}
 	}
 
 	if (m_Color == Player_Color::RED) {

@@ -17,6 +17,7 @@ public:
 
 	float stime;
 	float mtime;
+	float atime;
 	void Update(float deltaTime, float Time);
 	void Render();	
 	void OnCollision(Object* other);
