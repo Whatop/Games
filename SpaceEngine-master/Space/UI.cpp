@@ -42,7 +42,7 @@ void UI::Update()
 	{
 		ptime += dt;
 		if (ptime > 2 && ptime < 7) {
-			m_Pos -= (70 * dt);
+			m_Pos -= (71 * dt);
 		}
 		
 	if (m_Pos <= -350 && a == false)
@@ -54,7 +54,6 @@ void UI::Update()
 	if (a == true && c==false)
 	{
 		ObjMgr->AddObject(new Text_Bubbles(Vec2(2175, 1080)), "Chet");
-		m_Curtain->m_Tag = "UI";
 		a = false;
 		b = true;
 		c = true;

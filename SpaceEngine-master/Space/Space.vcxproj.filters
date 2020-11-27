@@ -120,9 +120,6 @@
     <ClCompile Include="Dialog.cpp">
       <Filter>Game\Object\Interaction</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Game\Object\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Text_Bubbles.cpp">
       <Filter>Game\Object\Interaction</Filter>
     </ClCompile>
@@ -131,6 +128,9 @@
     </ClCompile>
     <ClCompile Include="Pillar.cpp">
       <Filter>Game\Object\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,9 +206,6 @@
     <ClInclude Include="BattleScene.h">
       <Filter>Game\Object\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Game\Object\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Chest.h">
       <Filter>Game\Object\Interaction</Filter>
     </ClInclude>
@@ -229,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Pillar.h">
       <Filter>Game\Object\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
