@@ -14,7 +14,7 @@ void BattleScene::Init()
 {
 	for (auto& iter : ObjMgr->m_Objects)
 	{
-		if (iter->m_Tag == "Player")
+		if (iter->m_Tag == "Heart")
 		{
 			PlayerPos = iter->m_Position;
 		}
@@ -22,8 +22,6 @@ void BattleScene::Init()
 	SceneDirector::GetInst()->SetScene(scene::battlescene);
 	ObjMgr->DeleteObject("sans");
 	ObjMgr->DeleteObject("Dialog");
-	m_BG = Sprite::Create(L"Painting/Map/BattleBG.png", COLORKEY_BALCK);
-	m_BG->SetPosition(0,0);
 	//ObjMgr->AddObject(m_BG, "Frame");
 	//m_StartLine = new LineMgr();
 	//m_StartLine->Init(10, true);
@@ -45,5 +43,5 @@ void BattleScene::Update(float deltaTime, float time)
 void BattleScene::Render()
 {
 	//m_StartLine->DrawLine(m_BG->m_Vertex, 3);
-	m_BG->Render();
+	//m_BG->Render();
 }

@@ -52,13 +52,13 @@ void Heart::Update(float deltaTime, float Time)
 		A -= B;
 		D3DXVec2Normalize(&Dir, &A);
 
-		if (mtime >= 0.f && mtime <= 0.55f)
+		if (mtime >= 0.f && mtime <= 0.45f)
 		{
-			Translate(-Dir.x * 700 * dt, -Dir.y * 700 * dt);
+			Translate(-Dir.x * 800 * dt, -Dir.y * 800 * dt);
 		}
 		else {
 			atime += dt;
-			if (atime >= 0.2f && atime <= 1.3f)
+			if (atime >= 0.4f && atime <= 1.3f)
 				SceneDirector::GetInst()->SetScene(scene::start);
 		}
 	}
