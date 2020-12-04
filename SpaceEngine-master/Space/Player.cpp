@@ -6,6 +6,7 @@
 #include "Text_Bubbles.h"
 #include "UI.h"
 #include "Heart.h"
+#include "TestScene.h"
 
 Player::Player()
 {
@@ -149,12 +150,7 @@ void Player::Move(float deltaTime, float Time)
 			m_Player->Update(deltaTime, Time);
 		}
 	}
-	else if (SceneDirector::GetInst()->m_scene == scene::battlescene)//전투
-	{
-
-	}
-	//영혼 분리
-	//판정 바꾸기
+	//영혼 분리완료
 }
 
 void Player::Update(float deltaTime, float Time)
@@ -187,7 +183,8 @@ void Player::Update(float deltaTime, float Time)
 			ObjMgr->DeleteObject("Chet");
 			UI::GetInst()->b = false;
 			ObjMgr->AddObject(new Heart(Vec2(m_Position.x + m_Player->m_Size.x / 2-11,m_Position.y+m_Player->m_Size.y/2)), "Heart");
-			SceneDirector::GetInst()->ChangeScene(new BattleScene());
+			//SceneDirector::GetInst()->ChangeScene(new BattleScene());
+			SceneDirector::GetInst()->ChangeScene(new TestScene());
 		}
 	}
 	else if (INPUT->GetKey('X') == KeyState::DOWN)

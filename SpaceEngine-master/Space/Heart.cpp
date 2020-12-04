@@ -11,6 +11,8 @@ Heart::Heart(Vec2 Pos)
 	SetPosition(Pos);
 	stime = 0;
 	a = false;
+	m_Hp = 92;
+	m_Speed = 450;
 }
 
 Heart::~Heart()
@@ -41,7 +43,8 @@ void Heart::Update(float deltaTime, float Time)
 
 	if (a == true) {
 		mtime += dt;
-		if (SceneDirector::GetInst()->m_scene == scene::battlescene)//전투
+		if (SceneDirector::GetInst()->m_scene == scene::battlescene ||//전투
+			SceneDirector::GetInst()->m_scene == scene::testscene)//
 			m_red->A = 255;
 		else
 			m_red->A = 0;
@@ -59,11 +62,12 @@ void Heart::Update(float deltaTime, float Time)
 		else {
 			atime += dt;
 			if (atime >= 0.4f && atime <= 1.3f)
-				SceneDirector::GetInst()->SetScene(scene::start);
+				SceneDirector::GetInst()->SetScene(scene::testscene);
+			Move();
 		}
 	}
 
-	if (m_Color == Player_Color::RED) {
+	if (m_Color == Soul_Color::RED) {
 		m_red->R = 255;
 		m_red->G = 0;
 		m_red->B = 0;
@@ -73,7 +77,6 @@ void Heart::Update(float deltaTime, float Time)
 		m_red->G = 3;
 		m_red->B = 198;
 	}
-
 }
 
 void Heart::Render()
@@ -83,4 +86,45 @@ void Heart::Render()
 
 void Heart::OnCollision(Object* other)
 {
+}
+
+void Heart::Move()
+{
+	if (m_Color == Soul_Color::RED) {
+		if (INPUT->GetKey('W') == KeyState::PRESS)
+		{
+			m_Position.y -= m_Speed * dt;
+		}
+		if (INPUT->GetKey('S') == KeyState::PRESS)
+		{
+			m_Position.y += m_Speed * dt;
+		}
+		if (INPUT->GetKey('A') == KeyState::PRESS)
+		{
+			m_Position.x -= m_Speed * dt;
+		}
+		if (INPUT->GetKey('D') == KeyState::PRESS)
+		{
+			m_Position.x += m_Speed * dt;
+		}
+	}
+	else if (m_Color == Soul_Color::BULE) //점프 만들기
+	{
+		if (INPUT->GetKey('W') == KeyState::PRESS)
+		{
+			m_Position.y -= m_Speed * dt;
+		}
+		if (INPUT->GetKey('S') == KeyState::PRESS)
+		{
+			m_Position.y += m_Speed * dt;
+		}
+		if (INPUT->GetKey('A') == KeyState::PRESS)
+		{
+			m_Position.x -= m_Speed * dt;
+		}
+		if (INPUT->GetKey('D') == KeyState::PRESS)
+		{
+			m_Position.x += m_Speed * dt;
+		}
+	}
 }

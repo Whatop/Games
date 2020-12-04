@@ -22,12 +22,14 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="BattleScene.cpp" />
+    <ClCompile Include="Bones.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GasterBlaster.cpp" />
     <ClCompile Include="Heart.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LineMgr.cpp" />
@@ -49,6 +51,7 @@
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="TextMgr.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Text_Bubbles.cpp" />
@@ -58,12 +61,14 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="BattleScene.h" />
+    <ClInclude Include="Bones.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="Dialog.h" />
     <ClInclude Include="EffectMgr.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GasterBlaster.h" />
     <ClInclude Include="Heart.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LineMgr.h" />
@@ -83,6 +88,7 @@
     <ClInclude Include="SoundMgr.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TestScene.h" />
     <ClInclude Include="TextMgr.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Text_Bubbles.h" />

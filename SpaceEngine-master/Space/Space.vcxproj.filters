@@ -34,6 +34,9 @@
     <Filter Include="Game\Object\Scene">
       <UniqueIdentifier>{6a0b488c-024d-464b-b7e5-e43bc432ea1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Object\Sans\Attack">
+      <UniqueIdentifier>{c92192cb-4bab-4df4-aa73-714a38421db7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -132,6 +135,15 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Game\Object\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Bones.cpp">
+      <Filter>Game\Object\Sans\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="GasterBlaster.cpp">
+      <Filter>Game\Object\Sans\Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -229,6 +241,15 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Game\Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Bones.h">
+      <Filter>Game\Object\Sans\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="GasterBlaster.h">
+      <Filter>Game\Object\Sans\Attack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

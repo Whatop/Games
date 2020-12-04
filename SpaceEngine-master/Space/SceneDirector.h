@@ -4,6 +4,7 @@ enum class scene
 	mainscene,
 	dialogscene,
 	battlescene,
+	testscene,
 	start,
 	end,
 	none
