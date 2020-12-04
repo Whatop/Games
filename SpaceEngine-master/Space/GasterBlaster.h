@@ -10,6 +10,7 @@ class GasterBlaster : public Object
 	bool ntRange;
 
 	float lifeTime;
+	float rTime;
 public:
 	GasterBlaster(Vec2 Pos);
 	~GasterBlaster();

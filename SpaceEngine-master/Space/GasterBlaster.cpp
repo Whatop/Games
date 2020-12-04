@@ -6,8 +6,8 @@ GasterBlaster::GasterBlaster(Vec2 Pos)// Å©±â : È¦ÂßÇÑ, Áß°£, Å«
 {
 	m_GBlaster = new Animation();
 	m_GBlaster->SetParent(this);
-	m_GBlaster->Init(0.1f, true);
-	m_GBlaster->AddContinueFrame(L"Painting/sans/Attack/gasterblaster", 1, 6, COLORKEY_GASTER);
+	m_GBlaster->Init(0.11f, true);
+	m_GBlaster->AddContinueFrame(L"Painting/sans/Attack/gasterblaster", 1, 12, COLORKEY_GASTER);
 
 	m_ColBox = Sprite::Create(L"Painting/sans/Attack/gasterblaster1.png");
 	m_ColBox->SetParent(this);
@@ -27,12 +27,13 @@ GasterBlaster::GasterBlaster(Vec2 Pos)// Å©±â : È¦ÂßÇÑ, Áß°£, Å«
 	A -= B;
 	D3DXVec2Normalize(&C, &A);
 	m_Rotation = atan2(C.x, -C.y);
+
 	lifeTime = 0;
+	rTime = 0;
 	//·£´ýÇÑ À§Ä¡ Á¶Á¤
 	//m_Position.x = x - App::GetInst()->m_Width / 2;
 
-	int randomx = rand() % 1920;
-	int randomy = rand() % 1080;
+	
 }
 
 GasterBlaster::~GasterBlaster()
@@ -41,18 +42,31 @@ GasterBlaster::~GasterBlaster()
 
 void GasterBlaster::Update(float deltaTime, float Time)
 {
-	//if()
-
-	if (m_GBlaster->m_CurrentFrame != 5 || ntRange)
-		m_GBlaster->Update(deltaTime, Time);
-	else
-	{
-		lifeTime += dt;
-		m_Speed += 110;
-		Translate(-C.x * -m_Speed * dt, -C.y * -m_Speed * dt);
-		if (lifeTime > 5)
-			ObjMgr->RemoveObject(this);
-	}	
+	rTime += dt;
+	if (rTime < 0.4f) {
+		m_Speed += 24;
+		int randomx = rand() % 1920;
+		int randomy = rand() % 1080;
+		Vec2 location(randomx, randomy);
+		D3DXVec2Normalize(&location, &A);
+		m_Rotation = atan2(location.x, -location.y);
+		Translate(-location.x * m_Speed * dt, -location.y * m_Speed * dt);
+	}
+	else {
+		if (m_GBlaster->m_CurrentFrame < 6/* || ntRange*/) {
+			m_GBlaster->Update(deltaTime, Time);
+			m_Speed = 500;
+		}
+		else
+		{
+			lifeTime += dt;
+			m_Speed += 110;
+			Translate(-C.x * -m_Speed * dt, -C.y * -m_Speed * dt);
+			if (lifeTime > 5)
+				ObjMgr->RemoveObject(this);
+		}
+	}
+	
 }
 
 void GasterBlaster::Render()

@@ -1,8 +1,10 @@
 #pragma once
 class TestScene : public Scene
 {
-	float rtime;
 	TextMgr* m_Text;
+	float rtime;
+	float randomx;
+	float randomy;
 public:
 	TestScene();
 	~TestScene();

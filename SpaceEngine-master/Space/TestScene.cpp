@@ -27,14 +27,32 @@ void TestScene::Release()
 void TestScene::Update(float deltaTime, float time)
 {
 	rtime += dt;
-	if (rtime >= 5) {
-		int randomx = rand() % 1920;//범위 밖으로
-		int randomy = rand() % 1080;
-		std::cout << " 생성완료 " << std::endl;
-		ObjMgr->AddObject(new GasterBlaster(INPUT->GetMousePos()), "GasterBlaster");
+	if (rtime >= 0.8f) {
+		int random = rand() % 5;
+		if (random==1){//범위 왼쪽
+			randomx = rand() % -320 + -100;
+			randomy = rand() % 1280 + -100;
+			std::cout << random << ":  왼쪽 " << std::endl;
+		}
+		else if(random == 2){//범위 오른쪽
+			randomx = rand() % 320 + 2120;
+			randomy = rand() % 1280 + -100;
+			std::cout << random << ":  오른쪽 " << std::endl;
+		}
+		else if (random == 3) {//범위 위
+			randomx = rand() % 2220 + -100;
+			randomy = rand() % -320 + -100;
+			std::cout << random << ":  위 " << std::endl;
+		}
+		else if (random == 4) {//범위 아래
+			randomx = rand() % 2220 + -100;
+			randomy = rand() % 320 + 1180;
+			std::cout << random << ":  아래 " << std::endl;
+		}
+		ObjMgr->AddObject(new GasterBlaster(Vec2(randomx, randomy)), "GasterBlaster");
 		rtime = 0;
 	}
-	std::cout << "테스트룸 리스폰 쿨타임 : "<<rtime << std::endl;
+	
 }
 
 void TestScene::Render()
