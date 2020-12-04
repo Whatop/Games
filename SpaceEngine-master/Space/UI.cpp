@@ -59,6 +59,11 @@ void UI::Update()
 		c = true;
 	}
 	}
+	if (SceneDirector::GetInst()->m_scene == scene::mainscene||
+		SceneDirector::GetInst()->m_scene == scene::dialogscene)
+		m_Curtain->A = 255;
+	else
+		m_Curtain->A = 0;
 }
 
 void UI::Render()

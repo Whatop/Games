@@ -1,11 +1,10 @@
 #pragma once
-class TestScene : public Scene
+class GameOver : public Scene
 {
-	float rtime;
-	TextMgr* m_Text;
+	Sprite* m_BG;
 public:
-	TestScene();
-	~TestScene();
+	GameOver();
+	~GameOver();
 
 	void Init();
 	void Release();
@@ -13,3 +12,4 @@ public:
 	void Update(float deltaTime, float time);
 	void Render();
 };
+

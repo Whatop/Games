@@ -29,6 +29,7 @@
     <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GasterBlaster.cpp" />
     <ClCompile Include="Heart.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -68,6 +69,7 @@
     <ClInclude Include="Dialog.h" />
     <ClInclude Include="EffectMgr.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="GasterBlaster.h" />
     <ClInclude Include="Heart.h" />
     <ClInclude Include="Input.h" />

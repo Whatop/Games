@@ -181,6 +181,8 @@ void Player::Update(float deltaTime, float Time)
 	{
 		if (UI::GetInst()->b == true) {
 			ObjMgr->DeleteObject("Chet");
+			ObjMgr->DeleteObject("Chest");
+			ObjMgr->DeleteObject("Save");
 			UI::GetInst()->b = false;
 			ObjMgr->AddObject(new Heart(Vec2(m_Position.x + m_Player->m_Size.x / 2-11,m_Position.y+m_Player->m_Size.y/2)), "Heart");
 			//SceneDirector::GetInst()->ChangeScene(new BattleScene());

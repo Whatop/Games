@@ -61,8 +61,11 @@ void Heart::Update(float deltaTime, float Time)
 		}
 		else {
 			atime += dt;
-			if (atime >= 0.4f && atime <= 1.3f)
+			if (atime >= 0.4f && atime <= 1.3f) {
 				SceneDirector::GetInst()->SetScene(scene::testscene);
+				m_Position.x = 1920 / 2;
+				Camera::GetInst()->Init();
+			}
 			Move();
 		}
 	}
