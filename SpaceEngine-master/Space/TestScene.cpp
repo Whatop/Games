@@ -30,18 +30,18 @@ void TestScene::Update(float deltaTime, float time)
 	if (rtime >= 0.8f) {
 		int random = rand() % 5;
 		if (random==1){//범위 왼쪽
-			randomx = rand() % -320 + -100;
-			randomy = rand() % 1280 + -100;
+			randomx = rand() % -320 + -200;
+			randomy = rand() % 1380 + -200;
 			std::cout << random << ":  왼쪽 " << std::endl;
 		}
 		else if(random == 2){//범위 오른쪽
 			randomx = rand() % 320 + 2120;
-			randomy = rand() % 1280 + -100;
+			randomy = rand() % 1380 + -200;
 			std::cout << random << ":  오른쪽 " << std::endl;
 		}
 		else if (random == 3) {//범위 위
 			randomx = rand() % 2220 + -100;
-			randomy = rand() % -320 + -100;
+			randomy = rand() % -320 + -200;
 			std::cout << random << ":  위 " << std::endl;
 		}
 		else if (random == 4) {//범위 아래
