@@ -5,7 +5,8 @@ class Bones : public Object
 
 public:
 	Bones();
-	Bones(std::string type, std::string size, std::string arrow);
+
+	Bones(std::string type, std::string size, bool );
 	~Bones();
 
 	void Update(float deltaTime, float Time);

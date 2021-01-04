@@ -1,6 +1,7 @@
 #pragma once
 class TestScene : public Scene
 {
+	LineMgr* m_Line;
 	TextMgr* m_Text;
 	float rtime;
 	float randomx;

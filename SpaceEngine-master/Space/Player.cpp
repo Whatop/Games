@@ -55,9 +55,6 @@ Player::Player()
 	m_Up->R = 0;
 	m_Up->G = 0;
 
-
-
-
 	m_Line = new LineMgr();
 	m_Line->Init(1, true);
 	m_Line->SetColor(D3DXCOLOR(255, 255, 255, 255));
