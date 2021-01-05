@@ -5,7 +5,7 @@ public:
 	SoundMgr();
 	~SoundMgr();
 
-	void Play(const WCHAR* pFileName, bool loop);
+	DWORD LoadWAV(HWND hWnd, LPCTSTR lpszWave);
 	void Stop();
 };
 

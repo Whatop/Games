@@ -25,7 +25,8 @@ inline void SafeDelete(T*& x);
 #include<string>
 #include<sstream>
 #include<cmath>
-#include<mmsystem.h>
+#include<mmsystem.h> 
+#include <fmod.h>
 //
 
 #include"Singleton.h"
