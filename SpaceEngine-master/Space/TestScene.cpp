@@ -12,6 +12,7 @@ TestScene::~TestScene()
 
 void TestScene::Init()
 {
+	SoundMgr::Init();
 	SceneDirector::GetInst()->SetScene(scene::testscene);
 	rtime = 0; 
 	m_Text = new TextMgr();
@@ -21,15 +22,19 @@ void TestScene::Init()
 	//m_Line = new LineMgr();
 	//m_Line->Init(4, true);
 	//m_Line->SetColor(D3DXCOLOR(255, 255, 255, 255));
-	
+
+	m_TSBgm = new SoundMgr("Sound/TestRoom.mp3", false);
+	m_TSBgm->play();
 }
 
 void TestScene::Release()
 {
+	m_TSBgm->Release();
 }
 
 void TestScene::Update(float deltaTime, float time)
 {
+	//m_bgm->Update();
 	//rtime += dt;
 	//if (rtime >= 0.8f) {
 	//	int random = rand() % 5;
@@ -57,7 +62,7 @@ void TestScene::Update(float deltaTime, float time)
 	//	rtime = 0;
 	//}
 	//m_Player->SetVertex();
-
+	m_TSBgm->Update(deltaTime, time);
 }
 
 void TestScene::Render()

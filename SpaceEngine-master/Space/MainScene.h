@@ -5,8 +5,9 @@ class MainScene : public Scene
 
 	TextMgr* m_Text;
 	Vec2 PlayerPos;
-	
-public:
+	SoundMgr* m_test1;
+	SoundMgr* m_test2;
+public:	
 	MainScene();
 	~MainScene();
 

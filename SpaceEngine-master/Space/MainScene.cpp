@@ -60,6 +60,8 @@ void MainScene::Init()
 	}
 	ObjMgr->AddObject(new Pillar(Vec2(386, 0)), "Pillar");
 	Game::GetInst()->CreateUI();
+
+	
 }
 void MainScene::Release()
 {

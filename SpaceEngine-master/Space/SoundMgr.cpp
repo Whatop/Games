@@ -1,51 +1,85 @@
 #include "stdafx.h"
 #include "SoundMgr.h"
 
+FMOD_SYSTEM* SoundMgr::g_sound_system;
 
 SoundMgr::SoundMgr()
 {
 }
 
+SoundMgr::SoundMgr(const char* path, bool loop) {
+    if (loop) {
+        FMOD_System_CreateSound(g_sound_system, path, FMOD_LOOP_NORMAL, 0, &m_sound);
+    }
+    else {
+        FMOD_System_CreateSound(g_sound_system, path, FMOD_DEFAULT, 0, &m_sound);
+    }
 
-SoundMgr::~SoundMgr()
-{
+    m_channel = nullptr;
+    m_volume = SOUND_DEFAULT;
 }
 
-DWORD SoundMgr::LoadWAV(HWND hWnd, LPCTSTR lpszWave)
-{
-	MCI_OPEN_PARMS      mciOpen; //파일을 로드
-	MCI_PLAY_PARMS       mciPlay; //파일을 재생
-	MCI_STATUS_PARMS   mciStatus; //파일의 상
-	//WCHAR szFullPath[256] = L"../Sound/";
-	//lstrcatW(szFullPath, pFileName);
-
-	UINT wDeviceID = 0;
-	DWORD Result;
-
-
-	mciOpenParms.lpstrDeviceType = L"WaveAudio";
-
-	//WaveAudio 대신 MPEGVideo를 사용하면 mp3 형식을 재생합니다.
-
-
-	mciOpenParms.lpstrElementName = lpszWave;
-
-	Result = mciSendCommand(wDeviceID, MCI_OPEN, MCI_OPEN_TYPE | MCI_OPEN_ELEMENT, (DWORD)(LPVOID)&mciOpenParms);
-
-	if (Result)
-		return Result;
-
-	wDeviceID = mciOpenParms.wDeviceID;
-
-	mciPlayParms.dwCallback = (DWORD)hWnd;
-
-	if (Result)
-		return Result;
-
-
-	return 0;
+SoundMgr::~SoundMgr() {
+    FMOD_Sound_Release(m_sound);
 }
-void SoundMgr::Stop()
-{
-	PlaySound(nullptr, NULL, SND_ASYNC);
+
+
+void SoundMgr::Init() {
+    FMOD_System_Create(&g_sound_system);
+    FMOD_System_Init(g_sound_system, 32, FMOD_INIT_NORMAL, NULL);
+
+}
+
+void SoundMgr::Release() {
+    FMOD_System_Close(g_sound_system);
+    FMOD_System_Release(g_sound_system);
+
+}
+
+
+void SoundMgr::play() {
+    FMOD_System_PlaySound(g_sound_system, m_sound, NULL, false, &m_channel);
+
+}
+
+void SoundMgr::pause() {
+    FMOD_Channel_SetPaused(m_channel, true);
+
+}
+
+void SoundMgr::resume() {
+    FMOD_Channel_SetPaused(m_channel, false);
+
+}
+
+void SoundMgr::stop() {
+    FMOD_Channel_Stop(m_channel);
+
+}
+
+void SoundMgr::volumeUp() {
+    if (m_volume < SOUND_MAX) {
+        m_volume += SOUND_WEIGHT;
+    }
+
+    FMOD_Channel_SetVolume(m_channel, m_volume);
+
+}
+
+void SoundMgr::volumeDown() {
+    if (m_volume > SOUND_MIN) {
+        m_volume -= SOUND_WEIGHT;
+    }
+
+    FMOD_Channel_SetVolume(m_channel, m_volume);
+
+}
+
+
+void SoundMgr::Update(float deltaTime, float Time) {
+    FMOD_Channel_IsPlaying(m_channel, &m_bool);
+
+    if (m_bool) {
+        FMOD_System_Update(g_sound_system);
+    }
 }

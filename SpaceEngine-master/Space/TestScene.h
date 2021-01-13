@@ -3,6 +3,7 @@ class TestScene : public Scene
 {
 	LineMgr* m_Line;
 	TextMgr* m_Text;
+	SoundMgr* m_TSBgm;
 	float rtime;
 	float randomx;
 	float randomy;

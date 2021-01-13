@@ -37,6 +37,9 @@
     <Filter Include="Game\Object\Sans\Attack">
       <UniqueIdentifier>{c92192cb-4bab-4df4-aa73-714a38421db7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{04f4aafb-3ea5-4a96-aca2-135dd29db1e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">

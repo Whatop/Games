@@ -32,8 +32,8 @@ GasterBlaster::GasterBlaster(Vec2 Pos)// Å©±â : È¦ÂßÇÑ, Áß°£, Å«
 	rTime = 0;
 	//·£´ýÇÑ À§Ä¡ Á¶Á¤
 	//m_Position.x = x - App::GetInst()->m_Width / 2;
-
-	
+	m_gasterblaster = new SoundMgr("Sound/TestRoom.mp3", false);
+	m_gasterblaster->play();
 }
 
 GasterBlaster::~GasterBlaster()
@@ -66,7 +66,7 @@ void GasterBlaster::Update(float deltaTime, float Time)
 				ObjMgr->RemoveObject(this);
 		}
 	}
-	
+	m_gasterblaster->Update(deltaTime,Time);
 }
 
 void GasterBlaster::Render()
