@@ -96,6 +96,11 @@
     <ClInclude Include="Text_Bubbles.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Sound\gasterblaster.mp3" />
+    <Media Include="Sound\MEGALOVANIA.mp3" />
+    <Media Include="Sound\TestRoom.mp3" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{84023D14-0320-4383-99EC-9633D9D73D76}</ProjectGuid>

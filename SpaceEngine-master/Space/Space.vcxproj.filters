@@ -261,4 +261,15 @@
       <Filter>Game\Object\Scene</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Sound\gasterblaster.mp3">
+      <Filter>Sound</Filter>
+    </Media>
+    <Media Include="Sound\TestRoom.mp3">
+      <Filter>Sound</Filter>
+    </Media>
+    <Media Include="Sound\MEGALOVANIA.mp3">
+      <Filter>Sound</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

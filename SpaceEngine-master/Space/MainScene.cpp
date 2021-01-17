@@ -10,7 +10,7 @@
 #include "Solids.h"
 
 MainScene::MainScene()
-{
+{		
 }
 
 MainScene::~MainScene()

@@ -7,6 +7,9 @@ class TestScene : public Scene
 	float rtime;
 	float randomx;
 	float randomy;
+	int Count;
+	int direction;
+	bool one;
 public:
 	TestScene();
 	~TestScene();

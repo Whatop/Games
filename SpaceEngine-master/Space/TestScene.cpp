@@ -23,44 +23,42 @@ void TestScene::Init()
 	//m_Line->Init(4, true);
 	//m_Line->SetColor(D3DXCOLOR(255, 255, 255, 255));
 
-	m_TSBgm = new SoundMgr("Sound/TestRoom.mp3", false);
+	m_TSBgm = new SoundMgr("Sound/MEGALOVANIA.mp3", true);
 	m_TSBgm->play();
+	m_TSBgm->volumeDown();
+	//Count = 10 보통 마지막은 안쏨
+	//Count = 12 빠름 마지막은 안씀
+	Count = 10;
+	direction = 1;
+	one = false;
 }
-
+	
 void TestScene::Release()
 {
 	m_TSBgm->Release();
 }
 
-void TestScene::Update(float deltaTime, float time)
+void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 {
-	//m_bgm->Update();
-	//rtime += dt;
-	//if (rtime >= 0.8f) {
-	//	int random = rand() % 5;
-	//	if (random==1){//범위 왼쪽
-	//		randomx = rand() % -320 + -200;
-	//		randomy = rand() % 1380 + -200;
-	//		std::cout << random << ":  왼쪽 " << std::endl;
-	//	}
-	//	else if(random == 2){//범위 오른쪽
-	//		randomx = rand() % 320 + 2120;
-	//		randomy = rand() % 1380 + -200;
-	//		std::cout << random << ":  오른쪽 " << std::endl;
-	//	}
-	//	else if (random == 3) {//범위 위
-	//		randomx = rand() % 2220 + -100;
-	//		randomy = rand() % -320 + -200;
-	//		std::cout << random << ":  위 " << std::endl;
-	//	}
-	//	else if (random == 4) {//범위 아래
-	//		randomx = rand() % 2220 + -100;
-	//		randomy = rand() % 320 + 1180;
-	//		std::cout << random << ":  아래 " << std::endl;
-	//	}
-	//	ObjMgr->AddObject(new GasterBlaster(Vec2(randomx, randomy)), "GasterBlaster");
-	//	rtime = 0;
-	//}
+	rtime += dt;
+	//빠르게 11번 보통 9번 
+	if (rtime >= 1 ) {// direction < Count  조건 추가 
+
+			if (direction % 2 != 0) {
+				randomx = 300;
+				std::cout << ":  왼쪽 " << std::endl;
+				direction++;
+			}
+			else {
+				randomx = 1600;
+				std::cout << ":  오른쪽 " << std::endl;
+				direction++;
+			}
+				
+			ObjMgr->AddObject(new GasterBlaster(Vec2(randomx, -400), direction), "GasterBlaster");
+		rtime = 0;
+	}
+	
 	//m_Player->SetVertex();
 	m_TSBgm->Update(deltaTime, time);
 }
