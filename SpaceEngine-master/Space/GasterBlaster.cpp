@@ -77,7 +77,7 @@ void GasterBlaster::Update(float deltaTime, float Time)
 		else {
 			
 			if (m_Rotation > D3DXToRadian(-90))
-				m_Rotation += D3DXToRadian(-3); 
+				m_Rotation += D3DXToRadian(-3);		
 			else 
 				m_Rotation = D3DXToRadian(-90);	
 		}
