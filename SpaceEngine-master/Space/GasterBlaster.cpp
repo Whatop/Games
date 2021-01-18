@@ -46,7 +46,7 @@ void GasterBlaster::Update(float deltaTime, float Time)
 {
 	rTime += dt;
 	if (m_Position.y <= Pos.y) { //내 위치 정해진 위치보다 커지면 꺼짐
-		int random = rand() % 1 + 3;
+		int random = rand() % 3+1;
 
 		if (random == 1) {
 			Pos.y = 1080 / 2;
@@ -68,8 +68,8 @@ void GasterBlaster::Update(float deltaTime, float Time)
 		//Translate(-C.x * m_Speed * dt, -C.y * m_Speed * dt);
 
 		if (m_direction % 2 != 0) {
-			if (m_Rotation > D3DXToRadian(90))
-				m_Rotation += D3DXToRadian(2);
+			if (m_Rotation < D3DXToRadian(90))
+				m_Rotation += D3DXToRadian(3);
 			else
 				m_Rotation = D3DXToRadian(90);
 	
@@ -77,11 +77,11 @@ void GasterBlaster::Update(float deltaTime, float Time)
 		else {
 			
 			if (m_Rotation > D3DXToRadian(-90))
-				m_Rotation += D3DXToRadian(-2); 
+				m_Rotation += D3DXToRadian(-3); 
 			else 
 				m_Rotation = D3DXToRadian(-90);	
 		}
-		m_Position.y += 800 * dt;
+		m_Position.y += 1600 * dt;
 
 	}
 	else {
@@ -91,10 +91,15 @@ void GasterBlaster::Update(float deltaTime, float Time)
 		}
 		else
 		{
-			lifeTime += dt;
+			if (m_direction % 2 != 0) 
+				m_Position.x -= m_Speed * dt;
+			
+			else
+				m_Position.x += m_Speed * dt;
+				
 			m_Speed += 110;
-			Translate(-C.x * -m_Speed * dt, -C.y * -m_Speed * dt);
-			if (lifeTime > 5)
+			lifeTime += dt;
+			if (lifeTime > 5)   
 				ObjMgr->RemoveObject(this);
 		}
 	}
