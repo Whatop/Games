@@ -150,6 +150,9 @@
     <ClCompile Include="GameOver.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Laser.cpp">
+      <Filter>Game\Object\Sans\Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -259,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="GameOver.h">
       <Filter>Game\Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Laser.h">
+      <Filter>Game\Object\Sans\Attack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -33,6 +33,7 @@
     <ClCompile Include="GasterBlaster.cpp" />
     <ClCompile Include="Heart.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Laser.cpp" />
     <ClCompile Include="LineMgr.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="GasterBlaster.h" />
     <ClInclude Include="Heart.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Laser.h" />
     <ClInclude Include="LineMgr.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="Object.h" />
