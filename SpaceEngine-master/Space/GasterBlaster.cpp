@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GasterBlaster.h"
+#include "Laser.h"
 
 GasterBlaster::GasterBlaster(Vec2 SpawnPos, int direction)// Å©±â : È¦ÂßÇÑ, Áß°£, Å«
 									  // Á¾·ù : ·£´ýÀ§Ä¡¼ÒÈ¯, ¿ÞÂÊ¿À¸¥ÂÊ °¡·Î
@@ -10,9 +11,9 @@ GasterBlaster::GasterBlaster(Vec2 SpawnPos, int direction)// Å©±â : È¦ÂßÇÑ, Áß°£
 	m_GBlaster = new Animation();
 	m_GBlaster->SetParent(this);
 	m_GBlaster->Init(0.15f, true);
-	m_GBlaster->AddContinueFrame(L"Painting/sans/Attack/GasterBlaster/gasterblaster", 1, 12, COLORKEY_GASTER);
+	m_GBlaster->AddContinueFrame(L"Painting/sans/Attack/GasterBlaster/gasterblaster", 1, 20, COLORKEY_GASTER);
 
-	m_ColBox = Sprite::Create(L"Painting/sans/Attack/gasterblaster1.png");
+	m_ColBox = Sprite::Create(L"Painting/sans/Attack/GasterBlaster/gasterblaster1.png");
 	m_ColBox->SetParent(this);
 	SetPosition(SpawnPos);
 	//A = SpawnPos;
@@ -85,23 +86,27 @@ void GasterBlaster::Update(float deltaTime, float Time)
 
 	}
 	else {
-		if (m_GBlaster->m_CurrentFrame < 6) {
-			m_GBlaster->Update(deltaTime, Time);
-			m_Speed = 500;
+		if (m_GBlaster->m_CurrentFrame == 4) {
+			ObjMgr->AddObject(new Laser(Vec2(m_Position.x,m_Position.y),m_Rotation), "Laser");
 		}
-		else
-		{
-			if (m_direction % 2 != 0) 
-				m_Position.x -= m_Speed * dt;
-			
-			else
+		if (m_GBlaster->m_CurrentFrame >= 8) {
+
+			if (m_direction % 2 != 0)
 				m_Position.x += m_Speed * dt;
-				
+
+			else
+				m_Position.x -= m_Speed * dt;
+
 			m_Speed += 110;
+
 			lifeTime += dt;
-			if (lifeTime > 5)   
+			if (lifeTime > 8)
 				ObjMgr->RemoveObject(this);
 		}
+		if (m_GBlaster->m_CurrentFrame < 20) {
+			m_GBlaster->Update(deltaTime, Time);
+		}
+		
 	}
 	m_gasterblaster->Update(deltaTime,Time);
 }

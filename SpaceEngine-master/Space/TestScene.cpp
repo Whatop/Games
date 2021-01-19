@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "TestScene.h"
 #include "GasterBlaster.h"
+#include "Laser.h"
 
 TestScene::TestScene()
 {
@@ -42,7 +43,7 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 {
 	rtime += dt;
 	//빠르게 11번 보통 9번 
-	if (rtime >= 1 ) {// direction < Count  조건 추가 
+	if (rtime >= 2 ) {// direction < Count  조건 추가 
 
 			if (direction % 2 != 0) {
 				randomx = 300;

@@ -4,8 +4,9 @@ class Laser : public Object
 	Animation* m_Laser;
 	Sprite* m_ColBox;
 
+	float Add;
 public:
-	Laser();
+	Laser(Vec2 Pos, float Rotation);
 	~Laser();
 
 	void Update(float deltaTime, float Time);

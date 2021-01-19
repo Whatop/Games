@@ -8,7 +8,6 @@
 #include "Chest.h"
 #include "Save.h"
 #include "Solids.h"
-
 MainScene::MainScene()
 {		
 }
