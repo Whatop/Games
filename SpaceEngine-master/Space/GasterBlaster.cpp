@@ -14,7 +14,6 @@ GasterBlaster::GasterBlaster(Vec2 SpawnPos, int direction)// Å©±â : È¦ÂßÇÑ, Áß°£
 	m_GBlaster->AddContinueFrame(L"Painting/sans/Attack/GasterBlaster/gasterblaster", 1, 20, COLORKEY_GASTER);
 
 	m_ColBox = Sprite::Create(L"Painting/sans/Attack/GasterBlaster/gasterblaster1.png");
-	m_ColBox->SetParent(this);
 	SetPosition(SpawnPos);
 	//A = SpawnPos;
 	m_direction = direction;
@@ -81,6 +80,7 @@ void GasterBlaster::Update(float deltaTime, float Time)
 				m_Rotation += D3DXToRadian(-3);		
 			else 
 				m_Rotation = D3DXToRadian(-90);	
+	
 		}
 		m_Position.y += 1600 * dt;
 

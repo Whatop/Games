@@ -31,15 +31,15 @@ Matrix Object::GetMatrix()
 
 	if (m_Tag != "UI" || m_Tag != "Chet")
 	{
-		RotCenter.x = -Camera::GetInst()->m_Position.x + m_RotationCenter.x;
-		RotCenter.y = -Camera::GetInst()->m_Position.y + m_RotationCenter.y;
+		RotCenter.x = -Camera::GetInst()->m_Position.x + m_RotationCenter.x + m_Size.x / 2;
+		RotCenter.y = -Camera::GetInst()->m_Position.y + m_RotationCenter.y + m_Size.y / 2;
 
-		ScaleCenter.x = -Camera::GetInst()->m_Position.x + m_ScaleCenter.x;
-		ScaleCenter.y = -Camera::GetInst()->m_Position.y + m_ScaleCenter.y;
+		ScaleCenter.x = -Camera::GetInst()->m_Position.x + m_ScaleCenter.x + m_Size.x / 2;
+		ScaleCenter.y = -Camera::GetInst()->m_Position.y + m_ScaleCenter.y + m_Size.y / 2;
 	}
 	D3DXMatrixTransformation2D(&m_wMat, &ScaleCenter, 0, &m_Scale, &RotCenter, m_Rotation, &m_Position);
 
-	if (m_Parent)
+	if (m_Parent)	
 		m_wMat *= m_Parent->GetMatrix();
 
 	return m_wMat;
