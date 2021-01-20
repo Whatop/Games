@@ -5,8 +5,11 @@ class Laser : public Object
 	Sprite* m_ColBox;
 
 	float Add;
+	int m_direction;
+	float m_Speed;
+	float rTime;
 public:
-	Laser(Vec2 Pos, float Rotation);
+	Laser(Vec2 Pos, float Rotation, int direction);
 	~Laser();
 
 	void Update(float deltaTime, float Time);

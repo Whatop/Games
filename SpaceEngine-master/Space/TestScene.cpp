@@ -15,7 +15,7 @@ void TestScene::Init()
 {
 	SoundMgr::Init();
 	SceneDirector::GetInst()->SetScene(scene::testscene);
-	rtime = 0; 
+	rtime = 0;
 	m_Text = new TextMgr();
 	m_Text->Init(32, true, false, L"Determination Mono");
 	m_Text->SetColor(255, 255, 255, 255);
@@ -33,7 +33,7 @@ void TestScene::Init()
 	direction = 1;
 	one = false;
 }
-	
+
 void TestScene::Release()
 {
 	m_TSBgm->Release();
@@ -43,23 +43,20 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 {
 	rtime += dt;
 	//빠르게 11번 보통 9번 
-	if (rtime >= 2 ) {// direction < Count  조건 추가 
+	if (rtime >= 2) {// direction < Count  조건 추가 
 
-			if (direction % 2 != 0) {
-				randomx = 300;
-				std::cout << ":  왼쪽 " << std::endl;
-				direction++;
-			}
-			else {
-				randomx = 1600;
-				std::cout << ":  오른쪽 " << std::endl;
-				direction++;
-			}
-				
-			ObjMgr->AddObject(new GasterBlaster(Vec2(randomx, -400), direction), "GasterBlaster");
+		if (direction % 2 != 0) {
+			randomx = 300;
+		}
+		else {
+			randomx = 1600;
+		}
+
+		ObjMgr->AddObject(new GasterBlaster(Vec2(randomx, -400), direction), "GasterBlaster");
+		direction++;
 		rtime = 0;
 	}
-	
+
 	//m_Player->SetVertex();
 	m_TSBgm->Update(deltaTime, time);
 }

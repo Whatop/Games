@@ -14,6 +14,8 @@ class GasterBlaster : public Object
 	int m_direction;
 	float lifeTime;
 	float rTime;
+	int random;
+	bool one;
 public:
 	GasterBlaster(Vec2 Pos, int direction);
 	~GasterBlaster();

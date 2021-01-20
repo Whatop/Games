@@ -2,7 +2,7 @@
 #include "Laser.h"
 #include "GasterBlaster.h"
 
-Laser::Laser(Vec2 Pos,float Rotation) //각도를 구해서 그 방향으로 쏘기 
+Laser::Laser(Vec2 Pos, float Rotation, int direction) //각도를 구해서 그 방향으로 쏘기 
 //본체가 5프레임 일때 1프레임
 //본체가 6프레임 일때 2프레임
 //본체가 7프레임 일때 3프레임
@@ -23,16 +23,19 @@ Laser::Laser(Vec2 Pos,float Rotation) //각도를 구해서 그 방향으로 쏘기
 {
 	m_Laser = new Animation();
 	m_Laser->SetParent(this);
-	m_Laser->Init(0.15f, true);
-	m_Laser->AddContinueFrame(L"Painting/sans/Attack/Laser/Gasterblaster", 0, 7, COLORKEY_WHITE);
-	
+	m_Laser->Init(0.2f, true);
+	m_Laser->AddContinueFrame(L"Painting/sans/Attack/Laser/Gasterblaster", 0, 7);
+
 	//m_ColBox = Sprite::Create(L"Painting/sans/Attack/gasterblaster1.png"); 추가해야될것
 	//m_ColBox->SetParent(this);
 	m_Rotation = Rotation + D3DXToRadian(90);
-
+	m_direction = direction;
 
 	m_Laser->A = 255;
 	SetPosition(Pos);
+
+	m_Speed = 500;
+	rTime = 0;
 }
 
 Laser::~Laser()
@@ -41,12 +44,29 @@ Laser::~Laser()
 
 void Laser::Update(float deltaTime, float Time)
 {
+	rTime += dt;
 	m_Laser->Update(deltaTime, Time);
-	m_Laser->A -= 200 * dt;
+	m_Laser->A -= 110 * dt;
 
 	if (m_Laser->A <= 0) {
 		ObjMgr->RemoveObject(this);
 	}
+
+	if (rTime >= 0.65f) {
+		if (m_direction % 2 != 0)
+		{
+			if (m_Position.x > -400)
+				m_Position.x -= m_Speed * dt;
+		}
+
+		else {
+			if (m_Position.x < -1200)
+			m_Position.x += m_Speed * dt; 
+			std::cout << m_Position.x << std::endl;
+		}
+		m_Speed += 50;
+	}
+	
 }
 
 void Laser::Render()
