@@ -19,6 +19,7 @@ public:
 	scene m_scene;
 
 	LineMgr* m_Line;
+	Interaction m_Move;
 public:
 	Player();
 	~Player();
@@ -31,6 +32,10 @@ public:
 	bool Left;
 	bool Up;
 	bool Down;
+
+	bool Chest;
+	bool Save;
+	bool State;
 
 	void Move(float deltaTime, float Time);
 

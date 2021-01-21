@@ -7,6 +7,7 @@
 #include "UI.h"
 #include "Heart.h"
 #include "TestScene.h"
+#include "Interaction1.h"
 
 Player::Player()
 {
@@ -82,7 +83,7 @@ Player::~Player()
 
 void Player::Move(float deltaTime, float Time)
 {
-	if (SceneDirector::GetInst()->m_scene == scene::mainscene) // 플레이어 상태일때
+	if (SceneDirector::GetInst()->m_scene == scene::mainscene && m_Move != Interaction::NONE) // 플레이어 상태일때
 	{
 		if (INPUT->GetKey('W') == KeyState::PRESS)
 		{
@@ -161,6 +162,8 @@ void Player::Update(float deltaTime, float Time)
 	Up = false;
 	Right = false;
 	Down = false;
+	Save = false;
+	Chest = false;
 
 	ObjMgr->CollisionCheak(this, "Chest");
 	ObjMgr->CollisionCheak(this, "Solids");
@@ -176,6 +179,16 @@ void Player::Update(float deltaTime, float Time)
 	}
 	if (INPUT->GetKey('Z') == KeyState::DOWN)
 	{
+		if (Save == true) {
+			ObjMgr->AddObject(new Interaction1(Vec2(m_Position.x, m_Position.y - 500), "Save"),"Interaction");
+			m_Move = Interaction::NONE;
+		}
+		if (Chest == true) {
+			ObjMgr->AddObject(new Interaction1(Vec2(m_Position.x, m_Position.y - 500), "Chest"), "Interaction");
+			m_Move = Interaction::NONE;
+		}
+
+
 		if (UI::GetInst()->b == true) {
 			ObjMgr->DeleteObject("Chet");
 			ObjMgr->DeleteObject("Chest");
@@ -188,7 +201,7 @@ void Player::Update(float deltaTime, float Time)
 	}
 	else if (INPUT->GetKey('X') == KeyState::DOWN)
 	{
-
+	
 	}
 	else if (INPUT->GetKey('C') == KeyState::DOWN)
 	{
@@ -241,19 +254,23 @@ void Player::OnCollision(Object* other)
 			if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
 			{
 				Left = true;
+				Chest = true;
 			}
 			else if (IntersectRect(&rc, &m_Right->m_Collision, &other->m_Collision))
 			{
 				Right = true;
+				Chest = true;
 			}
 			if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
 			{
 				Down = true;
 				Left = false;
+				Chest = true;
 			}
 			else if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
 			{
 				Up = true;
+				Chest = true;
 			}
 		}
 	}
@@ -288,20 +305,25 @@ void Player::OnCollision(Object* other)
 			if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
 			{
 				Left = true;
+				Save = true;
 			}
 			else if (IntersectRect(&rc, &m_Right->m_Collision, &other->m_Collision))
 			{
 				Right = true;
+				Save = true;
 			}
 			if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
 			{
 				Down = true;
 				Left = false;
+				Save = true;
 			}
 			else if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
 			{
 				Up = true;
+				Save = true;
 			}
 		}
+	
 	}
 }
