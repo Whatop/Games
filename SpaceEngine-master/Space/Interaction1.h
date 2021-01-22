@@ -6,8 +6,8 @@ class Interaction1 : public Object
 	Animation* m_State;
 	Animation* m_Chest;
 	Animation* m_Interaction;
-	Interaction m_Move;
 public:
+	float delayTime;
 	Interaction1(Vec2 Pos,std::string string);
 	~Interaction1();
 

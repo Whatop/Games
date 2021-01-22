@@ -9,12 +9,16 @@ enum class scene
 	end,
 	none
 };
-
+enum class Interaction {
+	MOVE,
+	NONE
+};
 class SceneDirector : public Singleton<SceneDirector>
 {
 	Scene* m_CurrentScene;
 public:
 	scene m_scene;
+	Interaction m_Move;
 	SceneDirector();
 	~SceneDirector();
 

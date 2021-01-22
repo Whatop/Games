@@ -7,10 +7,7 @@ enum class Status
 	UP,
 	NONE
 };
-enum class Interaction {
-	MOVE,
-	NONE
-};
+
 class Object
 {
 public:

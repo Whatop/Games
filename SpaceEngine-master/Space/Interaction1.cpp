@@ -27,7 +27,8 @@ Interaction1::Interaction1(Vec2 Pos,std::string string)
 		m_Interaction = m_State;
 	}
 	SetPosition(Pos);
-	m_Interaction->m_CurrentFrame = 0;
+	m_Interaction->m_CurrentFrame = 1;
+	delayTime = 0;
 }
 
 Interaction1::~Interaction1()
@@ -37,27 +38,39 @@ Interaction1::~Interaction1()
 
 void Interaction1::Update(float deltaTime, float Time)
 {
+	delayTime += dt;
+	std::cout << delayTime << std::endl;
 	if (INPUT->GetKey(VK_LEFT)== KeyState::DOWN) {
 		m_Interaction->m_CurrentFrame = 1;
 	}
-	else if (INPUT->GetKey(VK_RIGHT) == KeyState::DOWN&& m_Interaction->m_CurrentFrame == 1) {
+	else if (INPUT->GetKey(VK_RIGHT) == KeyState::DOWN&& m_Interaction->m_CurrentFrame == 1 ) {
 		m_Interaction->m_CurrentFrame = 2;
 	}
-
-	if (m_Interaction->m_CurrentFrame == 1) {
-	 if (INPUT->GetKey('Z') == KeyState::DOWN) {
-		m_Interaction->m_CurrentFrame = 3;
+	else if (m_Interaction->m_CurrentFrame == 1){
+			if (INPUT->GetKey('Z') == KeyState::DOWN&&delayTime>0.3f) {//이것은 꼼수 Z눌렀을때 3으로 바로넘어가서 제한걸어놓음
+				m_Interaction->m_CurrentFrame = 3;
+		}
 	}
+	else if (m_Interaction->m_CurrentFrame == 3) {
+		if (INPUT->GetKey('Z') == KeyState::DOWN && delayTime > 0.3f) {//이것은 꼼수 Z눌렀을때 3으로 바로넘어가서 제한걸어놓음
+			ObjMgr->RemoveObject(this);
+			SceneDirector::GetInst()->m_Move = Interaction::MOVE;
+		}
 	}
 	else if (INPUT->GetKey('X') == KeyState::DOWN) {
 		ObjMgr->RemoveObject(this);
-		m_Move = Interaction::MOVE;
+		SceneDirector::GetInst()->m_Move = Interaction::MOVE;
 	}
 
 	if (m_Interaction->m_CurrentFrame == 2) {
 		if (INPUT->GetKey(VK_RETURN) == KeyState::DOWN) {
 			ObjMgr->RemoveObject(this);
-			m_Move = Interaction::MOVE;
+			SceneDirector::GetInst()->m_Move = Interaction::MOVE;
+		}
+	}
+	else if (m_Interaction->m_CurrentFrame == 1) {
+		if (INPUT->GetKey(VK_RETURN) == KeyState::DOWN) {
+			m_Interaction->m_CurrentFrame = 3;
 		}
 	}
 

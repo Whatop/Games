@@ -19,7 +19,6 @@ public:
 	scene m_scene;
 
 	LineMgr* m_Line;
-	Interaction m_Move;
 public:
 	Player();
 	~Player();
