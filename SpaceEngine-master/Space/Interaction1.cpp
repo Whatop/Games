@@ -27,6 +27,7 @@ Interaction1::Interaction1(Vec2 Pos,std::string string)
 		m_Interaction = m_State;
 	}
 	SetPosition(Pos);
+	m_Interaction->m_CurrentFrame = 0;
 }
 
 Interaction1::~Interaction1()
@@ -42,16 +43,21 @@ void Interaction1::Update(float deltaTime, float Time)
 	else if (INPUT->GetKey(VK_RIGHT) == KeyState::DOWN&& m_Interaction->m_CurrentFrame == 1) {
 		m_Interaction->m_CurrentFrame = 2;
 	}
-	else if (INPUT->GetKey('Z') == KeyState::DOWN) {
+
+	if (m_Interaction->m_CurrentFrame == 1) {
+	 if (INPUT->GetKey('Z') == KeyState::DOWN) {
 		m_Interaction->m_CurrentFrame = 3;
+	}
 	}
 	else if (INPUT->GetKey('X') == KeyState::DOWN) {
 		ObjMgr->RemoveObject(this);
+		m_Move = Interaction::MOVE;
 	}
 
 	if (m_Interaction->m_CurrentFrame == 2) {
 		if (INPUT->GetKey(VK_RETURN) == KeyState::DOWN) {
 			ObjMgr->RemoveObject(this);
+			m_Move = Interaction::MOVE;
 		}
 	}
 
