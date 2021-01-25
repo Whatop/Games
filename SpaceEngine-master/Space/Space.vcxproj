@@ -104,6 +104,7 @@
     <Media Include="Sound\gasterblaster.mp3" />
     <Media Include="Sound\MEGALOVANIA.mp3" />
     <Media Include="Sound\TestRoom.mp3" />
+    <Media Include="Sound\Word\Word2.mp3" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

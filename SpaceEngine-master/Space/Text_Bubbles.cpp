@@ -11,8 +11,9 @@ Text_Bubbles::Text_Bubbles(Vec2 Pos)
 
 	m_Expression = Sprite::Create(L"Painting/sans/sans_head.png");
 	m_Expression->m_Position = m_Position;
-	m_RText = new SoundMgr("Sound/Word/Word1.mp3", false);
+	m_RText = new SoundMgr("Sound/Word/Word2.mp3", false);
 	m_RText->play();
+	m_RText->volumeDown();
 }
 
 Text_Bubbles::~Text_Bubbles()

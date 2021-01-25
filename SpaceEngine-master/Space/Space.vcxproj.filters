@@ -283,5 +283,8 @@
     <Media Include="Sound\MEGALOVANIA.mp3">
       <Filter>Sound</Filter>
     </Media>
+    <Media Include="Sound\Word\Word2.mp3">
+      <Filter>Sound</Filter>
+    </Media>
   </ItemGroup>
 </Project>
