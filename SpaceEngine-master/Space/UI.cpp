@@ -71,7 +71,7 @@ void UI::Update()
 	else
 		m_Curtain->A = 0;
 
-	if (d == true) {
+	if (d) {
 		Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 		textTime += dt;
 		if (textTime > 0.1)
@@ -114,5 +114,6 @@ void UI::Update()
 void UI::Render()
 {
 	m_Curtain->Render();
+	if(d)
 	Renderer::GetInst()->GetSprite()->End();
 }
