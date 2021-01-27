@@ -63,9 +63,9 @@ void UI::Update()
 			c = true;
 			d = true;
 		}
-	
+
 	}
-	if (SceneDirector::GetInst()->m_scene == scene::mainscene||
+	if (SceneDirector::GetInst()->m_scene == scene::mainscene ||
 		SceneDirector::GetInst()->m_scene == scene::dialogscene)
 		m_Curtain->A = 255;
 	else
@@ -104,10 +104,10 @@ void UI::Update()
 			UpdateText = " *   그냥 본론으로 \n      들어가";
 		if (textTime > 1.5)
 			UpdateText = " *   그냥 본론으로 \n      들어가자";
-		if (textTime > 1.6) {
+		if (textTime > 1.6)
 			UpdateText = " *   그냥 본론으로 \n      들어가자구.";
-		}
-			m_Text->print(UpdateText, 630, 760);
+
+		m_Text->print(UpdateText, 630, 760);
 	}
 }
 
@@ -116,4 +116,5 @@ void UI::Render()
 	m_Curtain->Render();
 	if(d)
 	Renderer::GetInst()->GetSprite()->End();
+
 }

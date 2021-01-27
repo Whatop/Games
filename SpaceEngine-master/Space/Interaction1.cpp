@@ -16,7 +16,7 @@ Interaction1::Interaction1(Vec2 Pos,std::string string)
 		m_Chest = new Animation();
 		m_Chest->SetParent(this);
 		m_Chest->Init(1, false);
-		m_Chest->AddContinueFrame(L"Painting/Chest", 0, 2);
+		m_Chest->AddContinueFrame(L"Painting/Chest", 0, 3);
 		m_Interaction = m_Chest;
 	}
 	else if (string == "Stat" || string == "stat") {
