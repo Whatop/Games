@@ -27,7 +27,7 @@ void MainScene::Init()
 	ObjMgr->AddObject(new Save(Vec2(30, 560)), "Save");
 	ObjMgr->AddObject(new sans(Vec2(0, -200)), "sans");
 	ObjMgr->AddObject(new Dialog(Vec2(2490, 350)), "Dialog");
-
+	//test
 	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 344)), "Solids");
 	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 702)), "Solids");
 
