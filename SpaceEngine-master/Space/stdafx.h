@@ -10,19 +10,23 @@ typedef struct D3DXMATRIX Matrix;
 template<class T>
 inline void SafeDelete(T*& x);
 
-#include<Windows.h>
 #include<stdio.h>
-#include<iostream>
-#include<d3d9.h>
-#include<d3dx9.h>
-#include<map>
-#include<list>
-#include<ctime>
-#include<vector>
 #include<string>
 #include<sstream>
+
+#include<d3d9.h>
+#include<d3dx9.h>
+#include<Windows.h>
+
+#include<map>
+#include<list>
+#include<vector>
+
+#include<ctime>
+#include<iostream>
 #include<cmath>
 #include<mmsystem.h> 
+
 #include <fmod.h>
 //
 
