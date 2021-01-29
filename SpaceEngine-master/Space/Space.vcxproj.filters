@@ -93,9 +93,6 @@
     <ClCompile Include="MainScene.cpp">
       <Filter>Game\Object\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game\Mgrs</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Game\Object\Player</Filter>
     </ClCompile>
@@ -156,6 +153,9 @@
     <ClCompile Include="Interaction1.cpp">
       <Filter>Game\Object\Interaction</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game\Object\Interaction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -212,9 +212,6 @@
     <ClInclude Include="MainScene.h">
       <Filter>Game\Object\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game\Mgrs</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Game\Object\Player</Filter>
     </ClInclude>
@@ -270,6 +267,9 @@
       <Filter>Game\Object\Sans\Attack</Filter>
     </ClInclude>
     <ClInclude Include="Interaction1.h">
+      <Filter>Game\Object\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
       <Filter>Game\Object\Interaction</Filter>
     </ClInclude>
   </ItemGroup>

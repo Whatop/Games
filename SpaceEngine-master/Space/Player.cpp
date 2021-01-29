@@ -179,12 +179,12 @@ void Player::Update(float deltaTime, float Time)
 	}
 	if (INPUT->GetKey('Z') == KeyState::DOWN)
 	{
-		if (Save&& SceneDirector::GetInst()->m_Move != Interaction::NONE) {//이렇게 제한 안걸어놓으면 계속생성되서 문제임
+		if (Save && SceneDirector::GetInst()->m_Move != Interaction::NONE) {//이렇게 제한 안걸어놓으면 계속생성되서 문제임
 																			       //사실 간단하게 Object뺴고 Singleton 쓰면되는대 귀찮음
 			ObjMgr->AddObject(new Interaction1(Vec2(m_Position.x-300, m_Position.y - 300), "Save"),"Interaction");
 			SceneDirector::GetInst()->m_Move = Interaction::NONE;
 		}
-		if (Chest) {
+		if (Chest && SceneDirector::GetInst()->m_Move != Interaction::NONE) {
 			ObjMgr->AddObject(new Interaction1(Vec2(m_Position.x-600, m_Position.y-400), "Chest"), "Interaction");
 			SceneDirector::GetInst()->m_Move = Interaction::NONE;
 		}
