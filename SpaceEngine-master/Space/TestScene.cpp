@@ -2,6 +2,9 @@
 #include "TestScene.h"
 #include "GasterBlaster.h"
 #include "Laser.h"
+#include "Bones.h"
+#include "Platform.h"
+
 
 TestScene::TestScene()
 {
@@ -31,7 +34,11 @@ void TestScene::Init()
 	//Count = 12 빠름 마지막은 안씀
 	Count = 10;
 	direction = 1;
+	test = 1;
+	rtime = 0;
+	btime = 0;
 	one = false;
+	std::cout << "----------테스트룸입장----------" << std::endl;
 }
 
 void TestScene::Release()
@@ -42,6 +49,7 @@ void TestScene::Release()
 void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 {
 	rtime += dt;
+	btime += dt;
 	//빠르게 11번 보통 9번 
 	if (rtime >= 2) {// direction < Count  조건 추가 
 
@@ -56,9 +64,26 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 		direction++;
 		rtime = 0;
 	}
+	if (btime >= 1) {// direction < Count  조건 추가 
+		//(Vec2 Pos,std::string color, std::string size, int
+		ObjMgr->AddObject(new Bones(Vec2(-100,100),"while","small", _right), "Bone");
+		ObjMgr->AddObject(new Bones(Vec2(-100,300),"while","middle",_right), "Bone");
+		ObjMgr->AddObject(new Bones(Vec2(-100,500),"while","big",_right), "Bone");
+		ObjMgr->AddObject(new Bones(Vec2(-100,700),"while","long", _right), "Bone");
+		ObjMgr->AddObject(new Bones(Vec2(1920/2,-100),"while","lie", _down), "Bone");
 
-	//m_Player->SetVertex();
-	m_TSBgm->Update(deltaTime, time);
+		ObjMgr->AddObject(new Bones(Vec2(2020, 100), "blue", "small", _left), "BuleBone");
+		ObjMgr->AddObject(new Bones(Vec2(2020, 300), "blue", "middle", _left), "BuleBone");
+		ObjMgr->AddObject(new Bones(Vec2(2020, 500), "blue", "big", _left), "BuleBone");
+		ObjMgr->AddObject(new Bones(Vec2(2020, 700), "blue", "long", _left), "BuleBone");
+		ObjMgr->AddObject(new Bones(Vec2(1920 / 2, 1180), "blue", "lie", _up), "BuleBone");
+
+		ObjMgr->AddObject(new Platform(Vec2(2020 / 2, 1180), _up), "BuleBone");
+		direction++;
+		btime = 0;
+	}
+		//m_Player->SetVertex();
+		m_TSBgm->Update(deltaTime, time);
 }
 
 void TestScene::Render()

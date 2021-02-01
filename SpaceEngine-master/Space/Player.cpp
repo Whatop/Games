@@ -194,6 +194,9 @@ void Player::Update(float deltaTime, float Time)
 			ObjMgr->DeleteObject("Chet");
 			ObjMgr->DeleteObject("Chest");
 			ObjMgr->DeleteObject("Save");
+			ObjMgr->DeleteObject("sans");
+			ObjMgr->DeleteObject("Solids");
+			ObjMgr->DeleteObject("Pillar");
 			UI::GetInst()->b = false;
 			UI::GetInst()->d = false;
 			ObjMgr->AddObject(new Heart(Vec2(m_Position.x + m_Player->m_Size.x / 2-11,m_Position.y+m_Player->m_Size.y/2)), "Heart");

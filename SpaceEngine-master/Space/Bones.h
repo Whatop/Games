@@ -2,9 +2,11 @@
 class Bones : public Object
 {
 	Sprite* m_Bones;
-
+	int m_direction;
+	float m_Speed;
+	float dtime;
 public:
-	Bones(Vec2 Pos,std::string type, std::string size, bool );
+	Bones(Vec2 Pos,std::string type, std::string size, int);
 	~Bones();
 
 	void Update(float deltaTime, float Time);

@@ -13,6 +13,12 @@ enum class Interaction {
 	MOVE,
 	NONE
 };
+
+#define _left 0
+#define _right 1
+#define _up 2
+#define _down 3
+
 class SceneDirector : public Singleton<SceneDirector>
 {
 	Scene* m_CurrentScene;

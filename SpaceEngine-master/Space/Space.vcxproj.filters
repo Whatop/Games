@@ -156,6 +156,9 @@
     <ClCompile Include="Game.cpp">
       <Filter>Game\Object\Interaction</Filter>
     </ClCompile>
+    <ClCompile Include="Platform.cpp">
+      <Filter>Game\Object\Sans\Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -271,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game\Object\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform.h">
+      <Filter>Game\Object\Sans\Attack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

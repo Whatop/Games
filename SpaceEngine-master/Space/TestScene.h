@@ -5,10 +5,12 @@ class TestScene : public Scene
 	TextMgr* m_Text;
 	SoundMgr* m_TSBgm;
 	float rtime;
+	float btime;
 	float randomx;
 	float randomy;
 	int Count;
 	int direction;
+	int test;
 	bool one;
 public:
 	TestScene();
