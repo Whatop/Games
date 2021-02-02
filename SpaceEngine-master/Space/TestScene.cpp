@@ -66,19 +66,19 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 	}
 	if (btime >= 1) {// direction < Count  조건 추가 
 		//(Vec2 Pos,std::string color, std::string size, int
-		ObjMgr->AddObject(new Bones(Vec2(-100,100),"while","small", _right), "Bone");
-		ObjMgr->AddObject(new Bones(Vec2(-100,300),"while","middle",_right), "Bone");
-		ObjMgr->AddObject(new Bones(Vec2(-100,500),"while","big",_right), "Bone");
-		ObjMgr->AddObject(new Bones(Vec2(-100,700),"while","long", _right), "Bone");
-		ObjMgr->AddObject(new Bones(Vec2(1920/2,-100),"while","lie", _down), "Bone");
+		ObjMgr->AddObject(new Bones(Vec2(-100,100),"blue","small", _right), "BlueBone");
+		ObjMgr->AddObject(new Bones(Vec2(-100,300),"blue","middle",_right), "BlueBone");
+		ObjMgr->AddObject(new Bones(Vec2(-100,500),"blue","big",_right), "BlueBone");
+		ObjMgr->AddObject(new Bones(Vec2(-100,700),"blue","long", _right), "BlueBone");
+		ObjMgr->AddObject(new Bones(Vec2(1920/2,-100),"blue","lie", _down), "BlueBone");
 
-		ObjMgr->AddObject(new Bones(Vec2(2020, 100), "blue", "small", _left), "BuleBone");
-		ObjMgr->AddObject(new Bones(Vec2(2020, 300), "blue", "middle", _left), "BuleBone");
-		ObjMgr->AddObject(new Bones(Vec2(2020, 500), "blue", "big", _left), "BuleBone");
-		ObjMgr->AddObject(new Bones(Vec2(2020, 700), "blue", "long", _left), "BuleBone");
-		ObjMgr->AddObject(new Bones(Vec2(1920 / 2, 1180), "blue", "lie", _up), "BuleBone");
+		ObjMgr->AddObject(new Bones(Vec2(2020, 100), "blue", "small", _left), "BlueBone");
+		ObjMgr->AddObject(new Bones(Vec2(2020, 300), "blue", "middle", _left), "BlueBone");
+		ObjMgr->AddObject(new Bones(Vec2(2020, 500), "blue", "big", _left), "BlueBone");
+		ObjMgr->AddObject(new Bones(Vec2(2020, 700), "blue", "long", _left), "BlueBone");
+		ObjMgr->AddObject(new Bones(Vec2(1920 / 2, 1180), "blue", "lie", _up), "BlueBone");
 
-		ObjMgr->AddObject(new Platform(Vec2(2020 / 2, 1180), _up), "BuleBone");
+		ObjMgr->AddObject(new Platform(Vec2(2020 / 2, 1180), _up), "Platform");
 		direction++;
 		btime = 0;
 	}
@@ -89,7 +89,8 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 void TestScene::Render()
 {
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y) + "\n" + std::to_string(dt) + "  " + std::to_string(gt), 500, 0);
+	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y)
+		+ "\n" + std::to_string(dt) + "  " + std::to_string(gt), 500, 0);
 	Renderer::GetInst()->GetSprite()->End();
 
 	//m_Line->DrawLine(m_Vertex, 5);

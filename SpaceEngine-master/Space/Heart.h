@@ -15,13 +15,16 @@ enum class Soul_Movement {
 class Heart : public Object
 {
 	Sprite* m_red;
+	Sprite* m_ColBox;
 	Soul_Color m_Color;
 	Soul_Movement m_Move;
 	bool a;
 	Vec2 Dir;
+	SoundMgr* m_Bgm;
 
 	float m_Speed;
 	int m_Hp;
+	TextMgr* m_Text;
 public:
 	Heart(Vec2 Pos);
 	~Heart();

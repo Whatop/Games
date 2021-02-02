@@ -7,12 +7,22 @@ Heart::Heart(Vec2 Pos)
 	//blue R 8 G 3 B 198
 
 	m_red = Sprite::Create(L"Painting/Soul/red.png", COLORKEY_BALCK);
-	m_red->SetParent(this);
+	m_ColBox = Sprite::Create(L"Painting/Soul/ColBox.png");
+	m_ColBox->SetParent(this);
 	SetPosition(Pos);
 	stime = 0;
 	a = false;
 	m_Hp = 92;
 	m_Speed = 450;
+	m_Text = new TextMgr();
+	m_Text->Init(60, true, false, L"Determination Mono");
+	m_Text->SetColor(255, 255, 255, 255);
+	m_Move = Soul_Movement::NONE;
+	m_red->m_Tag = "NONE";
+
+	m_Bgm = new SoundMgr("Sound/MEGALOVANIA.mp3", false);
+	m_Bgm->play();
+	m_Bgm->volumeDown();
 }
 
 Heart::~Heart()
@@ -21,7 +31,6 @@ Heart::~Heart()
 
 void Heart::Update(float deltaTime, float Time)
 {
-
 	if (a == false) {
 		stime += dt;
 		if (stime >= 0.15f && stime <= 0.2f)
@@ -80,35 +89,49 @@ void Heart::Update(float deltaTime, float Time)
 		m_red->G = 3;
 		m_red->B = 198;
 	}
+	m_red->SetPosition(m_Position.x-m_ColBox->m_Size.x/2, m_Position.y- m_ColBox->m_Size.y/2);
+	m_Bgm->Update(deltaTime, Time);
 }
 
-void Heart::Render()
-{
-	m_red->Render();
-}
-
-void Heart::OnCollision(Object* other)
-{
-}
 
 void Heart::Move()
 {
 	if (m_Color == Soul_Color::RED) {
 		if (INPUT->GetKey('W') == KeyState::PRESS)
 		{
+			m_Move = Soul_Movement::UP;
 			m_Position.y -= m_Speed * dt;
+		}
+		if (INPUT->GetKey('W') == KeyState::UP)
+		{
+			m_Move = Soul_Movement::NONE;
 		}
 		if (INPUT->GetKey('S') == KeyState::PRESS)
 		{
+			m_Move == Soul_Movement::DOWN;
 			m_Position.y += m_Speed * dt;
+		}
+		if (INPUT->GetKey('S') == KeyState::UP)
+		{
+			m_Move = Soul_Movement::NONE;
 		}
 		if (INPUT->GetKey('A') == KeyState::PRESS)
 		{
+			m_Move = Soul_Movement::LEFT;
 			m_Position.x -= m_Speed * dt;
+		}
+		if (INPUT->GetKey('A') == KeyState::UP)
+		{
+			m_Move = Soul_Movement::NONE;
 		}
 		if (INPUT->GetKey('D') == KeyState::PRESS)
 		{
+			m_Move = Soul_Movement::RIGHT;
 			m_Position.x += m_Speed * dt;
+		}
+		if (INPUT->GetKey('D') == KeyState::UP)
+		{
+			m_Move = Soul_Movement::NONE;
 		}
 	}
 	else if (m_Color == Soul_Color::BULE) //점프 만들기
@@ -129,5 +152,24 @@ void Heart::Move()
 		{
 			m_Position.x += m_Speed * dt;
 		}
+	}
+}
+
+void Heart::Render()
+{
+	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
+	m_Text->print(std::to_string(m_Hp), 1500, 1000);
+	Renderer::GetInst()->GetSprite()->End();
+	m_red->Render();
+	m_ColBox->Render();
+}
+
+void Heart::OnCollision(Object* other)
+{
+	if (other->m_Tag == "BlueBone" && m_Move != Soul_Movement::NONE) {
+		m_Hp -= 1;
+	}
+	if (other->m_Tag == "Bone") {
+		m_Hp -= 1;
 	}
 }

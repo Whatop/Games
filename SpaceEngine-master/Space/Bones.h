@@ -2,6 +2,7 @@
 class Bones : public Object
 {
 	Sprite* m_Bones;
+	Sprite* m_ColBox;
 	int m_direction;
 	float m_Speed;
 	float dtime;

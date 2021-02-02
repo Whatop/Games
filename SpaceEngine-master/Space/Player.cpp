@@ -89,7 +89,6 @@ void Player::Move(float deltaTime, float Time)
 		{
 			m_Player = m_Player_Up;
 			m_Status = Status::UP;
-
 			
 			if (!Up) {
 				m_Position.y -= m_Speed * dt;
@@ -101,7 +100,6 @@ void Player::Move(float deltaTime, float Time)
 		{
 			m_Player = m_Player_Down;
 			m_Status = Status::DOWN;
-
 		
 			if (!Down) {
 				m_Position.y += m_Speed * dt;
@@ -113,7 +111,6 @@ void Player::Move(float deltaTime, float Time)
 		{
 			m_Player = m_Player_Left;
 			m_Status = Status::LEFT;
-
 			
 			if (!Left && m_Position.x > 10) {
 				m_Position.x -= m_Speed * dt;
@@ -126,7 +123,6 @@ void Player::Move(float deltaTime, float Time)
 		{
 			m_Player = m_Player_Right;
 			m_Status = Status::RIGHT;
-
 
 			if (!Right) {
 				m_Position.x += m_Speed * dt;
@@ -199,7 +195,7 @@ void Player::Update(float deltaTime, float Time)
 			ObjMgr->DeleteObject("Pillar");
 			UI::GetInst()->b = false;
 			UI::GetInst()->d = false;
-			ObjMgr->AddObject(new Heart(Vec2(m_Position.x + m_Player->m_Size.x / 2-11,m_Position.y+m_Player->m_Size.y/2)), "Heart");
+			ObjMgr->AddObject(new Heart(Vec2(m_Position.x + m_Player->m_Size.x / 2-11,m_Position.y+m_Player->m_Size.y/2)), "Soul");
 			//SceneDirector::GetInst()->ChangeScene(new BattleScene());
 			SceneDirector::GetInst()->ChangeScene(new TestScene());
 		}
@@ -208,7 +204,7 @@ void Player::Update(float deltaTime, float Time)
 	{
 	
 	}
-	else if (INPUT->GetKey('C') == KeyState::DOWN)
+	 else if (INPUT->GetKey('C') == KeyState::DOWN)
 	{
 
 	}
