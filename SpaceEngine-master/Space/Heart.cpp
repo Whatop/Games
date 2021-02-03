@@ -6,10 +6,10 @@ Heart::Heart(Vec2 Pos)
 	//red R 255 G - B -
 	//blue R 8 G 3 B 198
 
-	m_red = Sprite::Create(L"Painting/Soul/red.png", COLORKEY_BALCK);
-	m_ColBox = Sprite::Create(L"Painting/Soul/ColBox.png");
+	m_red = Sprite::Create(L"Painting/Soul/red.png");
 	m_red->SetParent(this);
 	SetPosition(Pos);
+	m_ColBox = Sprite::Create(L"Painting/Soul/ColBox.png");
 	stime = 0;
 	a = false;
 	m_Hp = 92;
@@ -18,8 +18,6 @@ Heart::Heart(Vec2 Pos)
 	m_Text->Init(60, true, false, L"Determination Mono");
 	m_Text->SetColor(255, 255, 255, 255);
 	m_Move = Soul_Movement::RIGHT;
-	m_ColBox->m_Tag = "ColBox";
-
 	//m_Bgm = new SoundMgr("Sound/MEGALOVANIA.mp3", false);
 	//m_Bgm->play();
 	//m_Bgm->volumeDown();
@@ -56,11 +54,11 @@ void Heart::Update(float deltaTime, float Time)
 
 	if (a == true) {
 		mtime += dt;
-		if (SceneDirector::GetInst()->m_scene == scene::battlescene ||//전투
-			SceneDirector::GetInst()->m_scene == scene::testscene)//
-			m_red->A = 255;
-		else
-			m_red->A = 0;
+		//if (SceneDirector::GetInst()->m_scene == scene::battlescene ||//전투
+		//	SceneDirector::GetInst()->m_scene == scene::testscene)//
+		//	m_red->A = 255;
+		//else
+			//m_red->A = 0;
 
 		Vec2 A, B;
 		A = m_Position;
@@ -172,14 +170,11 @@ void Heart::OnCollision(Object* other)
 {
 	if (other->m_Tag == "BlueBone" && m_Move != Soul_Movement::NONE) {
 		RECT rc;
-		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
+		if (IntersectRect(&rc, &m_Collision, &other->m_Collision)) {
 			m_Hp -= 1;
 		}
 	}
 	if (other->m_Tag == "Bone") {
-		RECT rc;
-		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
 			m_Hp -= 1;
-		}
 	}
 }

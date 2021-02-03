@@ -49,17 +49,19 @@ Sprite* Sprite::Create(std::wstring fileName, D3DCOLOR ColorKey)
 
 void Sprite::Render()
 {
+	
 	if (m_Parent)
 	{
-		SetRect(&m_Parent->m_Collision, m_Parent->m_Position.x - m_Size.x / 2, m_Parent->m_Position.y - m_Size.y,
-			m_Parent->m_Position.x + m_Size.x, m_Parent->m_Position.y + m_Size.y);
-
+		if (m_Parent->m_Tag == "Soul" ||m_Parent->m_Tag == "Bone" || m_Parent->m_Tag == "BlueBone" || m_Parent->m_Tag == "GasterBlaster" || m_Parent->m_Tag == "Platform")
+		{
+			SetRect(&m_Parent->m_Collision, m_Parent->m_Position.x - m_Size.x/2, m_Parent->m_Position.y - m_Size.y/2,
+											m_Parent->m_Position.x + m_Size.x/2 , m_Parent->m_Position.y + m_Size.y/2);
+		}
+		else{
+			SetRect(&m_Parent->m_Collision, m_Parent->m_Position.x - m_Size.x / 2, m_Parent->m_Position.y - m_Size.y,
+				m_Parent->m_Position.x + m_Size.x, m_Parent->m_Position.y + m_Size.y);
+		}
 		m_Parent->m_Size = m_Size;
-	}
-	else if (m_Tag=="ColBox")
-	{
-		SetRect(&m_Collision, m_Position.x - m_Size.x / 2, m_Position.y - m_Size.y / 2,
-			m_Position.x + m_Size.x / 2, m_Position.y + m_Size.y / 2);
 	}
 	else
 	{
@@ -69,15 +71,20 @@ void Sprite::Render()
 	Camera::GetInst()->Render();
 	m_pSp->Begin(D3DXSPRITE_ALPHABLEND);
 
+	Matrix transForm = Camera::GetInst()->GetWorld() * GetMatrix();
 	if (m_Tag == "UI")
-		m_pSp->SetTransform(&GetMatrix());
+		transForm = GetMatrix();
 	else
-		m_pSp->SetTransform(&(Camera::GetInst()->GetWorld() * GetMatrix()));
+		transForm = Camera::GetInst()->GetWorld() * GetMatrix();
+
+	m_pSp->SetTransform(&transForm);
+
+	D3DXVECTOR3 center = D3DXVECTOR3(m_Size.x / 2, m_Size.y / 2, 0);
 
 	if (m_Visible == false)
-		m_pSp->Draw(m_Texture->GetTexture(), &m_Rect, &D3DXVECTOR3(0, 0, 0), 0, D3DCOLOR_ARGB(0, R, G, B));
+		m_pSp->Draw(m_Texture->GetTexture(), &m_Rect, &center, 0, D3DCOLOR_ARGB(0, R, G, B));
 	else
-		m_pSp->Draw(m_Texture->GetTexture(), &m_Rect, &D3DXVECTOR3(0, 0, 0), 0, D3DCOLOR_ARGB(A, R, G, B));
+		m_pSp->Draw(m_Texture->GetTexture(), &m_Rect, &center, 0, D3DCOLOR_ARGB(A, R, G, B));
 
 	m_pSp->End();
 }
