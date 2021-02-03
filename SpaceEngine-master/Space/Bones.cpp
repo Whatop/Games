@@ -41,6 +41,7 @@ Bones::Bones(Vec2 Pos, std::string color, std::string size, int direction)
 	m_direction = direction;
 	m_Speed = 500.f;//속도설정 빠름 보통 해놀까?
 	dtime = 0.f;
+	std::cout << color << size << "x :" << m_ColBox->m_Size.x << "y :" << m_Size.y << std::endl;
 }
 
 Bones::~Bones()
@@ -49,6 +50,7 @@ Bones::~Bones()
 
 void Bones::Update(float deltaTime, float Time)
 {
+	
 	ObjMgr->CollisionCheak(this, "Soul");
 	dtime += dt;
 	if (m_direction == _left) {
