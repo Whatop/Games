@@ -6,7 +6,6 @@ Pillar::Pillar(Vec2 Pos)
 {
 	m_Pillar = Sprite::Create(L"Painting/Map/Last_Pillars.png", COLORKEY_WHITE);//따로 기둥을 만들어서 움직이게
 	m_Pillar->SetParent(this);
-	m_Pillar->SetScale(1, 1);
 	m_Pos = 0;
 	ptime = 0;
 	SetPosition(Pos);
@@ -31,7 +30,7 @@ void Pillar::Update(float deltaTime, float Time)
 	}
 	
 	if(Pos.x>270)
-	SetPosition(386+200-Pos.x*0.75f + m_Pos , 0);
+	SetPosition(386+200-Pos.x*0.75f + m_Pos , 720/2);
 
 	if (SceneDirector::GetInst()->m_scene == scene::dialogscene)
 	{

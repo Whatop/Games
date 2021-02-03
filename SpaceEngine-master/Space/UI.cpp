@@ -23,6 +23,7 @@ void UI::Init()
 	m_Text = new TextMgr();
 	m_Text->Init(65, true, false, L"굴림");
 	m_Text->SetColor(255, 255, 255, 255);
+	m_Curtain->SetPosition(0, 700);
 	ObjMgr->AddObject(m_Curtain, "UI");
 	textTime = 0;
 	UpdateText = " *  ";
@@ -106,8 +107,8 @@ void UI::Update()
 			UpdateText = " *   그냥 본론으로 \n      들어가자";
 		if (textTime > 1.6)
 			UpdateText = " *   그냥 본론으로 \n      들어가자구.";
-
-		m_Text->print(UpdateText, 630, 760);
+		
+		m_Text->print(UpdateText, 0, 7602);
 	}
 }
 

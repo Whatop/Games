@@ -19,7 +19,7 @@ void MainScene::Init()
 {
 	SceneDirector::GetInst()->SetScene(scene::mainscene);
 	m_BG = Sprite::Create(L"Painting/Map/Last_Corridor.png");
-	m_BG->SetPosition(0, 0);
+	m_BG->SetPosition(4200/2, 720/2);
 
 	ObjMgr->AddObject(new Chest(Vec2(210, 560)), "Chest");
 	ObjMgr->AddObject(new Player, "Player");
@@ -27,7 +27,7 @@ void MainScene::Init()
 	ObjMgr->AddObject(new sans(Vec2(0, -200)), "sans");
 	ObjMgr->AddObject(new Dialog(Vec2(2490, 350)), "Dialog");
 	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 344)), "Solids");
-	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 702)), "Solids");
+	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 702/2)), "Solids");
 
 	m_Text = new TextMgr();
 	m_Text->Init(32, true, false, L"Determination Mono");
@@ -55,7 +55,7 @@ void MainScene::Init()
 			ObjMgr->AddObject(new Solids(L"Painting/Solids/Small.png", Vec2((a + (i * 69)), 343 + 73)), "Solids");
 		} 
 	}
-	ObjMgr->AddObject(new Pillar(Vec2(386, 0)), "Pillar");
+	ObjMgr->AddObject(new Pillar(Vec2(386, 720/2)), "Pillar");
 	Game::GetInst()->CreateUI();
 }
 void MainScene::Release()
