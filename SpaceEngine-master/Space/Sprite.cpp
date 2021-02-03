@@ -51,17 +51,21 @@ void Sprite::Render()
 {
 	if (m_Parent)
 	{
-		SetRect(&m_Parent->m_Collision, m_Parent->m_Position.x - m_Size.x/2, m_Parent->m_Position.y - m_Size.y,
-			m_Parent->m_Position.x + m_Size.x, m_Parent->m_Position.y + m_Size.y/2);
+		SetRect(&m_Parent->m_Collision, m_Parent->m_Position.x - m_Size.x / 2, m_Parent->m_Position.y - m_Size.y,
+			m_Parent->m_Position.x + m_Size.x, m_Parent->m_Position.y + m_Size.y);
 
 		m_Parent->m_Size = m_Size;
 	}
+	else if (m_Tag=="ColBox")
+	{
+		SetRect(&m_Collision, m_Position.x - m_Size.x / 2, m_Position.y - m_Size.y / 2,
+			m_Position.x + m_Size.x / 2, m_Position.y + m_Size.y / 2);
+	}
 	else
 	{
-		SetRect(&m_Collision, m_Position.x - m_Size.x, m_Position.y - m_Size.y,
-			m_Position.x + m_Size.x, m_Position.y + m_Size.y);
+		SetRect(&m_Collision, m_Position.x - m_Size.x / 2, m_Position.y - m_Size.y / 2,
+			m_Position.x + m_Size.x / 2, m_Position.y + m_Size.y / 2);
 	}
-
 	Camera::GetInst()->Render();
 	m_pSp->Begin(D3DXSPRITE_ALPHABLEND);
 

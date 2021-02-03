@@ -14,6 +14,7 @@ GasterBlaster::GasterBlaster(Vec2 SpawnPos, int direction)// Å©±â : È¦ÂßÇÑ, Áß°£
 	m_GBlaster->AddContinueFrame(L"Painting/sans/Attack/GasterBlaster/gasterblaster", 1, 20, COLORKEY_GASTER);
 
 	m_ColBox = Sprite::Create(L"Painting/sans/Attack/GasterBlaster/gasterblaster1.png");
+	m_ColBox->m_Tag = "GColBox";
 	SetPosition(SpawnPos);
 	//A = SpawnPos;
 	m_direction = direction;

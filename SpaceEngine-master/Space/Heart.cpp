@@ -8,7 +8,7 @@ Heart::Heart(Vec2 Pos)
 
 	m_red = Sprite::Create(L"Painting/Soul/red.png", COLORKEY_BALCK);
 	m_ColBox = Sprite::Create(L"Painting/Soul/ColBox.png");
-	m_ColBox->SetParent(this);
+	m_red->SetParent(this);
 	SetPosition(Pos);
 	stime = 0;
 	a = false;
@@ -17,12 +17,12 @@ Heart::Heart(Vec2 Pos)
 	m_Text = new TextMgr();
 	m_Text->Init(60, true, false, L"Determination Mono");
 	m_Text->SetColor(255, 255, 255, 255);
-	m_Move = Soul_Movement::NONE;
-	m_red->m_Tag = "NONE";
+	m_Move = Soul_Movement::RIGHT;
+	m_ColBox->m_Tag = "ColBox";
 
-	m_Bgm = new SoundMgr("Sound/MEGALOVANIA.mp3", false);
-	m_Bgm->play();
-	m_Bgm->volumeDown();
+	//m_Bgm = new SoundMgr("Sound/MEGALOVANIA.mp3", false);
+	//m_Bgm->play();
+	//m_Bgm->volumeDown();
 }
 
 Heart::~Heart()
@@ -31,6 +31,10 @@ Heart::~Heart()
 
 void Heart::Update(float deltaTime, float Time)
 {
+	ObjMgr->CollisionCheak(this, "Bone");
+	ObjMgr->CollisionCheak(this, "BlueBone");
+	ObjMgr->CollisionCheak(this, "GasterBlaster");
+	ObjMgr->CollisionCheak(this, "Platform");
 	if (a == false) {
 		stime += dt;
 		if (stime >= 0.15f && stime <= 0.2f)
@@ -89,8 +93,8 @@ void Heart::Update(float deltaTime, float Time)
 		m_red->G = 3;
 		m_red->B = 198;
 	}
-	m_red->SetPosition(m_Position.x-m_ColBox->m_Size.x/2, m_Position.y- m_ColBox->m_Size.y/2);
-	m_Bgm->Update(deltaTime, Time);
+	m_ColBox->SetPosition(m_Position.x+(m_Size.x - m_ColBox->m_Size.x) / 2, m_Position.y+ (m_Size.y - m_ColBox->m_Size.y) / 2);
+	//m_Bgm->Update(deltaTime, Time);
 }
 
 
@@ -167,9 +171,15 @@ void Heart::Render()
 void Heart::OnCollision(Object* other)
 {
 	if (other->m_Tag == "BlueBone" && m_Move != Soul_Movement::NONE) {
-		m_Hp -= 1;
+		RECT rc;
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
+			m_Hp -= 1;
+		}
 	}
 	if (other->m_Tag == "Bone") {
-		m_Hp -= 1;
+		RECT rc;
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
+			m_Hp -= 1;
+		}
 	}
 }
