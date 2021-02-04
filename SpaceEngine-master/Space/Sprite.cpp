@@ -49,18 +49,11 @@ Sprite* Sprite::Create(std::wstring fileName, D3DCOLOR ColorKey)
 
 void Sprite::Render()
 {
-	
 	if (m_Parent)
 	{
-		if (m_Parent->m_Tag == "Soul" ||m_Parent->m_Tag == "Bone" || m_Parent->m_Tag == "BlueBone" || m_Parent->m_Tag == "GasterBlaster" || m_Parent->m_Tag == "Platform")
-		{
-			SetRect(&m_Parent->m_Collision, m_Parent->m_Position.x - m_Size.x/2, m_Parent->m_Position.y - m_Size.y/2,
-											m_Parent->m_Position.x + m_Size.x/2 , m_Parent->m_Position.y + m_Size.y/2);
-		}
-		else{
-			SetRect(&m_Parent->m_Collision, m_Parent->m_Position.x - m_Size.x / 2, m_Parent->m_Position.y - m_Size.y,
-				m_Parent->m_Position.x + m_Size.x, m_Parent->m_Position.y + m_Size.y);
-		}
+		SetRect(&m_Parent->m_Collision, m_Parent->m_Position.x - m_Size.x / 2, m_Parent->m_Position.y - m_Size.y / 2,
+			m_Parent->m_Position.x + m_Size.x / 2, m_Parent->m_Position.y + m_Size.y / 2);
+
 		m_Parent->m_Size = m_Size;
 	}
 	else
@@ -68,10 +61,12 @@ void Sprite::Render()
 		SetRect(&m_Collision, m_Position.x - m_Size.x / 2, m_Position.y - m_Size.y / 2,
 			m_Position.x + m_Size.x / 2, m_Position.y + m_Size.y / 2);
 	}
+
 	Camera::GetInst()->Render();
 	m_pSp->Begin(D3DXSPRITE_ALPHABLEND);
 
 	Matrix transForm = Camera::GetInst()->GetWorld() * GetMatrix();
+
 	if (m_Tag == "UI")
 		transForm = GetMatrix();
 	else

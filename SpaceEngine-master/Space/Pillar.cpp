@@ -30,12 +30,12 @@ void Pillar::Update(float deltaTime, float Time)
 	}
 	
 	if(Pos.x>270)
-	SetPosition(386+200-Pos.x*0.75f + m_Pos , 720/2);
+	SetPosition(2300+ 1300 -Pos.x*0.75f + m_Pos , 720/2);
 
 	if (SceneDirector::GetInst()->m_scene == scene::dialogscene)
 	{
 		ptime += dt;
-		if (ptime > 2 && ptime < 7) {
+		if (ptime > 2 && ptime < 6) {
 			m_Pos -= (70 * dt);
 		}
 		

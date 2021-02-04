@@ -14,7 +14,6 @@ GasterBlaster::GasterBlaster(Vec2 SpawnPos, int direction)// Å©±â : È¦ÂßÇÑ, Áß°£
 	m_GBlaster->AddContinueFrame(L"Painting/sans/Attack/GasterBlaster/gasterblaster", 1, 20, COLORKEY_GASTER);
 
 	m_ColBox = Sprite::Create(L"Painting/sans/Attack/GasterBlaster/gasterblaster1.png");
-	m_ColBox->m_Tag = "GColBox";
 	SetPosition(SpawnPos);
 	//A = SpawnPos;
 	m_direction = direction;
@@ -77,11 +76,11 @@ void GasterBlaster::Update(float deltaTime, float Time)
 	else {
 		if (m_GBlaster->m_CurrentFrame == 4) {
 			if (m_direction % 2 != 0 && one == false) {
-				ObjMgr->AddObject(new Laser(Vec2(m_Position.x -100, m_Position.y), m_Rotation, m_direction), "Laser");
+				ObjMgr->AddObject(new Laser(Vec2(m_Position.x, m_Position.y), m_Rotation, m_direction), "Laser");
 				one = true;
 			}
 			else if (m_direction % 2 == 0 && one == false) {
-				ObjMgr->AddObject(new Laser(Vec2(m_Position.x - 3320, m_Position.y), m_Rotation, m_direction), "Laser");
+				ObjMgr->AddObject(new Laser(Vec2(m_Position.x, m_Position.y), m_Rotation, m_direction), "Laser");
 				one = true;
 			}
 		}

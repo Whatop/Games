@@ -43,7 +43,7 @@ void Camera::Follow(Object* obj)
 			m_Position.x = obj->m_Position.x + m_Pos - App::GetInst()->m_Width / 2 ;
 			m_Position.y = 0;
 			ptime += dt;
-			if (ptime > 2 && ptime < 7)
+			if (ptime > 2 && ptime < 6)
 				m_Pos += (70 * dt);
 
 			//m_Pos의 총 증가 값은 350

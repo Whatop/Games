@@ -23,7 +23,7 @@ void UI::Init()
 	m_Text = new TextMgr();
 	m_Text->Init(65, true, false, L"굴림");
 	m_Text->SetColor(255, 255, 255, 255);
-	m_Curtain->SetPosition(0, 700);
+	m_Curtain->SetPosition(1920/2, 700/2);
 	ObjMgr->AddObject(m_Curtain, "UI");
 	textTime = 0;
 	UpdateText = " *  ";
@@ -35,7 +35,7 @@ void UI::Release()
 
 void UI::Update()
 {
-
+	std::cout << m_Pos << std::endl;
 	for (auto& iter : ObjMgr->m_Objects)
 	{
 		if (iter->m_Tag == "Player")
@@ -45,11 +45,11 @@ void UI::Update()
 	if (SceneDirector::GetInst()->m_scene == scene::dialogscene)
 	{
 		ptime += dt;
-		if (ptime > 2 && ptime < 7) {
+		if (ptime > 2 && ptime < 6) {
 			m_Pos -= (71 * dt);
 		}
 
-		if (m_Pos <= -350 && a == false)
+		if (m_Pos <= -280 && a == false)
 		{
 			ztime += dt;
 			if (ztime > 2)
@@ -58,7 +58,7 @@ void UI::Update()
 
 		if (a == true && c == false)
 		{
-			ObjMgr->AddObject(new Text_Bubbles(Vec2(2175, 1080)), "Chet");
+			ObjMgr->AddObject(new Text_Bubbles(Vec2(2750, 1265)), "Chet");
 			a = false;
 			b = true;
 			c = true;
@@ -75,40 +75,32 @@ void UI::Update()
 	if (d) {
 		Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 		textTime += dt;
-		if (textTime > 0.1)
-			UpdateText = " *   ㄱ";
-		if (textTime > 0.2)
-			UpdateText = " *   그ㄴ";
+		if (textTime > 0.25f)
+			UpdateText = " *   그";
 		if (textTime > 0.3)
-			UpdateText = " *   그냐";
-		if (textTime > 0.4)
 			UpdateText = " *   그냥 ";
-		if (textTime > 0.5)
-			UpdateText = " *   그냥 ㅂ";
-		if (textTime > 0.6)
-			UpdateText = " *   그냥 보";
-		if (textTime > 0.7)
+		if (textTime > 0.4)
 			UpdateText = " *   그냥 본";
-		if (textTime > 0.8)
-			UpdateText = " *   그냥 본로";
-		if (textTime > 0.9)
+		if (textTime > 0.5)
 			UpdateText = " *   그냥 본론";
-		if (textTime > 1.0)
+		if (textTime > 0.6)
 			UpdateText = " *   그냥 본론으";
-		if (textTime > 1.1)
+		if (textTime > 0.7)
 			UpdateText = " *   그냥 본론으로 \n.";
-		if (textTime > 1.2)
+		if (textTime > 0.9)
 			UpdateText = " *   그냥 본론으로 \n      들";
-		if (textTime > 1.3)
+		if (textTime > 1.2)
 			UpdateText = " *   그냥 본론으로 \n      들어";
 		if (textTime > 1.4)
 			UpdateText = " *   그냥 본론으로 \n      들어가";
 		if (textTime > 1.5)
 			UpdateText = " *   그냥 본론으로 \n      들어가자";
 		if (textTime > 1.6)
+			UpdateText = " *   그냥 본론으로 \n      들어가자구";
+		if (textTime > 1.7)
 			UpdateText = " *   그냥 본론으로 \n      들어가자구.";
 		
-		m_Text->print(UpdateText, 0, 7602);
+		m_Text->print(UpdateText, 600, 780);
 	}
 }
 

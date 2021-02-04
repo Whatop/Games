@@ -90,18 +90,18 @@ void Player::Move(float deltaTime, float Time)
 			m_Player = m_Player_Up;
 			m_Status = Status::UP;
 			
-			if (!Up) {
+			if (!Up && m_Position.y >= 420) {
 				m_Position.y -= m_Speed * dt;
 				if (m_Player->m_CurrentFrame % 2 == 0)
 					m_Player->Update(deltaTime, Time);
 			}
 			}
-		if (INPUT->GetKey('S') == KeyState::PRESS)
+		else if (INPUT->GetKey('S') == KeyState::PRESS)
 		{
 			m_Player = m_Player_Down;
 			m_Status = Status::DOWN;
 		
-			if (!Down) {
+			if (!Down && m_Position.y <= 615 + 75 / 2) {
 				m_Position.y += m_Speed * dt;
 				if (m_Player->m_CurrentFrame % 2 == 0)
 					m_Player->Update(deltaTime, Time);
@@ -109,29 +109,36 @@ void Player::Move(float deltaTime, float Time)
 		}
 		if (INPUT->GetKey('A') == KeyState::PRESS)
 		{
+
 			m_Player = m_Player_Left;
 			m_Status = Status::LEFT;
 			
-			if (!Left && m_Position.x > 10) {
+			if (!Left && m_Position.x > 40) {
 				m_Position.x -= m_Speed * dt;
 				if (m_Player->m_CurrentFrame % 2 == 0)
 					m_Player->Update(deltaTime, Time);
 
 			}
 		}
-		if (INPUT->GetKey('D') == KeyState::PRESS)
+		else if (INPUT->GetKey('D') == KeyState::PRESS)
 		{
-			m_Player = m_Player_Right;
+			m_Player = m_Player_Right;	
 			m_Status = Status::RIGHT;
 
-			if (!Right) {
+			if (!Right && m_Position.x < 4160) {
 				m_Position.x += m_Speed * dt;
 
 				if (m_Player->m_CurrentFrame % 2 == 0)
 					m_Player->Update(deltaTime, Time);
 			}
 		}
-
+		if (INPUT->GetKey(VK_SHIFT) == KeyState::PRESS)
+		{
+			m_Speed = 1000.f;
+		}
+		else {
+			m_Speed = 450.f;
+		}
 		if (m_Status != Status::NONE && m_Player->m_CurrentFrame % 2 != 0)
 		{
 			m_Player->Update(deltaTime, Time);
@@ -171,7 +178,16 @@ void Player::Update(float deltaTime, float Time)
 	}
 	if (INPUT->GetKey(VK_F2) == KeyState::DOWN)
 	{
-		SceneDirector::GetInst()->ChangeScene(new BattleScene());
+		ObjMgr->DeleteObject("Chet");
+		ObjMgr->DeleteObject("Chest");
+		ObjMgr->DeleteObject("Save");
+		ObjMgr->DeleteObject("sans");
+		ObjMgr->DeleteObject("Solids");
+		ObjMgr->DeleteObject("Pillar");
+		UI::GetInst()->b = false;
+		UI::GetInst()->d = false;
+		ObjMgr->AddObject(new Heart(Vec2(m_Position.x + m_Player->m_Size.x / 2 - 11, m_Position.y + m_Player->m_Size.y / 2)), "Soul");
+		SceneDirector::GetInst()->ChangeScene(new TestScene());
 	}
 	if (INPUT->GetKey('Z') == KeyState::DOWN)
 	{
@@ -211,11 +227,11 @@ void Player::Update(float deltaTime, float Time)
 
 	Move(deltaTime, Time);
 
-	m_ColBox->m_Position = Vec2(m_Position.x, m_Position.y + m_ColBox->m_Size.y+10);
-	m_Left->m_Position = Vec2(m_Position.x-5, m_ColBox->m_Position.y + 20);
-	m_Right->m_Position = Vec2(m_Position.x+ m_ColBox->m_Size.x, m_ColBox->m_Position.y+20);
-	m_Up->m_Position = Vec2(m_Position.x+30, m_Position.y + m_ColBox->m_Size.y+4);
-	m_Down->m_Position = Vec2(m_Position.x+30, m_ColBox-> m_Position.y + m_ColBox->m_Size.y);
+	m_ColBox->m_Position = Vec2(m_Position.x, m_Position.y + m_ColBox->m_Size.y/2);
+	m_Left->m_Position = Vec2(m_Position.x- m_ColBox->m_Size.x / 2, m_Position.y +25);
+	m_Right->m_Position = Vec2(m_Position.x+ m_ColBox->m_Size.x/2, m_Position.y+25);
+	m_Up->m_Position = Vec2(m_Position.x, m_Position.y);
+	m_Down->m_Position = Vec2(m_Position.x,m_Position.y + 50);
 
 	m_Player->SetVertex();
 
@@ -265,7 +281,6 @@ void Player::OnCollision(Object* other)
 			if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
 			{
 				Down = true;
-				Left = false;
 				Chest = true;
 			}
 			else if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
@@ -290,7 +305,6 @@ void Player::OnCollision(Object* other)
 			if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
 			{
 				Down = true;
-				Left = false;
 			}
 			else if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
 			{
@@ -305,18 +319,17 @@ void Player::OnCollision(Object* other)
 		{
 			if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
 			{
-				Left = true;
+				Right = true;
 				Save = true;
 			}
 			else if (IntersectRect(&rc, &m_Right->m_Collision, &other->m_Collision))
 			{
-				Right = true;
+				Left = true;
 				Save = true;
 			}
 			if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
 			{
 				Down = true;
-				Left = false;
 				Save = true;
 			}
 			else if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))

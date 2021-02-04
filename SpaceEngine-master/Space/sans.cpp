@@ -24,7 +24,7 @@ void sans::Update(float deltaTime, float Time)
 			Pos = iter->m_Position;
 	}
 	if (SceneDirector::GetInst()->m_scene == scene::dialogscene)
-		m_Position = Vec2(Pos.x + 450, Pos.y+2);
+		m_Position = Vec2(Pos.x + 420, Pos.y);
 }
 
 void sans::Render()

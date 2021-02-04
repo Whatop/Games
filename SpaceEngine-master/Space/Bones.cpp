@@ -48,12 +48,6 @@ Bones::~Bones()
 
 void Bones::Update(float deltaTime, float Time)
 {
-
-	std::cout << m_Collision.left << std::endl;//774
-	std::cout << m_Collision.right << std::endl;//1146
-	std::cout << m_Collision.top << std::endl;//1174
-	std::cout << m_Collision.bottom << std::endl;
-
 	dtime += dt;
 	if (m_direction == _left) {
 		m_Position.x -= m_Speed * dt;
@@ -69,7 +63,7 @@ void Bones::Update(float deltaTime, float Time)
 	}
 	if (dtime >= 5)
 		ObjMgr->RemoveObject(this);
-	m_Bones->SetPosition(m_Position.x+(m_Size.x-m_Bones->m_Size.x)/2, m_Position.y+ (m_Size.y - m_Bones->m_Size.y)/2);
+	m_Bones->SetPosition(m_Position.x, m_Position.y );
 	
 }
 
@@ -77,10 +71,6 @@ void Bones::Render()
 {
 	m_Bones->Render();
 	m_ColBox->Render();
-
-
-
-	
 }
 
 void Bones::OnCollision(Object* obj)

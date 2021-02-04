@@ -17,7 +17,7 @@ Heart::Heart(Vec2 Pos)
 	m_Text = new TextMgr();
 	m_Text->Init(60, true, false, L"Determination Mono");
 	m_Text->SetColor(255, 255, 255, 255);
-	m_Move = Soul_Movement::RIGHT;
+	m_Move = Soul_Movement::NONE;
 	//m_Bgm = new SoundMgr("Sound/MEGALOVANIA.mp3", false);
 	//m_Bgm->play();
 	//m_Bgm->volumeDown();
@@ -35,30 +35,30 @@ void Heart::Update(float deltaTime, float Time)
 	ObjMgr->CollisionCheak(this, "Platform");
 	if (a == false) {
 		stime += dt;
-		if (stime >= 0.15f && stime <= 0.2f)
+		if (stime > 0.1f)
 			m_red->A = 0;
 
-		if (stime >= 0.25f && stime <= 0.3f)
+		if (stime > 0.2f)
 			m_red->A = 255;
 
-		if (stime >= 0.35f && stime <= 0.4f)
+		if (stime > 0.3f)
 			m_red->A = 0;
 
-		if (stime >= 0.45f && stime <= 0.5f)
+		if (stime > 0.4f)
 			m_red->A = 255;
 
-		if (stime >= 0.55f && stime <= 0.6f)
+		if (stime > 0.5f)
+			m_red->A = 0;
+
+		if (stime > 0.6f)
+		{
+			m_red->A = 255;
 			a = true;
-		
+		}
 	}
 
-	if (a == true) {
+	else if (a == true) {
 		mtime += dt;
-		//if (SceneDirector::GetInst()->m_scene == scene::battlescene ||//ÀüÅõ
-		//	SceneDirector::GetInst()->m_scene == scene::testscene)//
-		//	m_red->A = 255;
-		//else
-			//m_red->A = 0;
 
 		Vec2 A, B;
 		A = m_Position;
@@ -73,8 +73,8 @@ void Heart::Update(float deltaTime, float Time)
 		else {
 			atime += dt;
 			if (atime >= 0.4f && atime <= 1.3f) {
-				SceneDirector::GetInst()->SetScene(scene::testscene);
 				m_Position.x = 1920 / 2;
+				SceneDirector::GetInst()->SetScene(scene::testscene);
 				Camera::GetInst()->Init();
 			}
 			Move();
@@ -91,7 +91,7 @@ void Heart::Update(float deltaTime, float Time)
 		m_red->G = 3;
 		m_red->B = 198;
 	}
-	m_ColBox->SetPosition(m_Position.x+(m_Size.x - m_ColBox->m_Size.x) / 2, m_Position.y+ (m_Size.y - m_ColBox->m_Size.y) / 2);
+	m_ColBox->SetPosition(m_Position.x, m_Position.y);
 	//m_Bgm->Update(deltaTime, Time);
 }
 
@@ -170,11 +170,14 @@ void Heart::OnCollision(Object* other)
 {
 	if (other->m_Tag == "BlueBone" && m_Move != Soul_Movement::NONE) {
 		RECT rc;
-		if (IntersectRect(&rc, &m_Collision, &other->m_Collision)) {
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
 			m_Hp -= 1;
 		}
 	}
 	if (other->m_Tag == "Bone") {
+		RECT rc;
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
 			m_Hp -= 1;
+		}
 	}
 }

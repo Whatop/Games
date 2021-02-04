@@ -23,7 +23,7 @@ Text_Bubbles::~Text_Bubbles()
 void Text_Bubbles::Update(float deltaTime, float Time)
 {
 	m_RText->Update(deltaTime, Time);
-	m_Expression->m_Position = Vec2(m_Position.x + m_Expression->m_Size.x/2,m_Position.y + m_Expression->m_Size.y/2-20);
+	m_Expression->m_Position = Vec2(m_Position.x-500,m_Position.y);
 }
 
 void Text_Bubbles::Render()

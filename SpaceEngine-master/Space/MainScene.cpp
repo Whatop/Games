@@ -21,41 +21,41 @@ void MainScene::Init()
 	m_BG = Sprite::Create(L"Painting/Map/Last_Corridor.png");
 	m_BG->SetPosition(4200/2, 720/2);
 
-	ObjMgr->AddObject(new Chest(Vec2(210, 560)), "Chest");
+	ObjMgr->AddObject(new Chest(Vec2(245, 605)), "Chest");
 	ObjMgr->AddObject(new Player, "Player");
-	ObjMgr->AddObject(new Save(Vec2(30, 560)), "Save");
+	ObjMgr->AddObject(new Save(Vec2(70, 605)), "Save");
 	ObjMgr->AddObject(new sans(Vec2(0, -200)), "sans");
-	ObjMgr->AddObject(new Dialog(Vec2(2490, 350)), "Dialog");
-	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 344)), "Solids");
-	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 702/2)), "Solids");
+	ObjMgr->AddObject(new Dialog(Vec2(2530, 450)), "Dialog");
+	//ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 344)), "Solids");
+//	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 702/2)), "Solids");
 
 	m_Text = new TextMgr();
 	m_Text->Init(32, true, false, L"Determination Mono");
 	m_Text->SetColor(255, 255, 255, 255);
 
 	//486 343+72
-	for (int i = 0; i < 4; i++)
+	/*for (int i = 0; i < 4; i++)
 	{
-		ObjMgr->AddObject(new Solids(L"Painting/Solids/Small.png", Vec2(-69, 420 + (i * 69))), "Solids");
-		ObjMgr->AddObject(new Solids(L"Painting/Solids/Small.png", Vec2(4200, 420 + (i * 69))), "Solids");
+		ObjMgr->AddObject(new Solids(L"Painting/Solids/Small.png", Vec2(-69/2, 420 + (i * 70)+43)), "Solids");
+		ObjMgr->AddObject(new Solids(L"Painting/Solids/Small.png", Vec2(4200+69/2, 420 + (i * 70)+43)), "Solids");
 	}
 	for (int i = 0; i < 15; i++)
 	{
-		ObjMgr->AddObject(new Solids(L"Painting/Solids/long.png", Vec2(141 + (i * 282), 702)), "Solids");
+		ObjMgr->AddObject(new Solids(L"Painting/Solids/long.png", Vec2(141 + (i * 282), 710+75/2)), "Solids");
 	}
 	for (int i = 0; i < 15; i++)
 	{
-		ObjMgr->AddObject(new Solids(L"Painting/Solids/long.png", Vec2(141 + (i * 282), 344)), "Solids");
-	}
+		ObjMgr->AddObject(new Solids(L"Painting/Solids/long.png", Vec2(141 + (i * 282), 355+ 75 / 2)), "Solids");
+	}*/
 	for (int d = 0; d < 8; d++) //8¹ø
 	{
 		int a = 490+(d*420);
 		for (int i = 0; i < 3; i++)
 		{
-			ObjMgr->AddObject(new Solids(L"Painting/Solids/Small.png", Vec2((a + (i * 69)), 343 + 73)), "Solids");
+			ObjMgr->AddObject(new Solids(L"Painting/Solids/Small.png", Vec2((a + (i * 69)+37), 343 + 122)), "Solids");
 		} 
 	}
-	ObjMgr->AddObject(new Pillar(Vec2(386, 720/2)), "Pillar");
+	ObjMgr->AddObject(new Pillar(Vec2(2300+1100, 720/2)), "Pillar");
 	Game::GetInst()->CreateUI();
 }
 void MainScene::Release()
