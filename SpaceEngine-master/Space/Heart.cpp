@@ -18,9 +18,8 @@ Heart::Heart(Vec2 Pos)
 	m_Text->Init(60, true, false, L"Determination Mono");
 	m_Text->SetColor(255, 255, 255, 255);
 	m_Move = Soul_Movement::NONE;
-	//m_Bgm = new SoundMgr("Sound/MEGALOVANIA.mp3", false);
-	//m_Bgm->play();
-	//m_Bgm->volumeDown();
+	m_Start = new SoundMgr("Sound/Start.mp3", false);
+	m_Start->play();
 }
 
 Heart::~Heart()
@@ -29,6 +28,7 @@ Heart::~Heart()
 
 void Heart::Update(float deltaTime, float Time)
 {
+	m_Start->Update(deltaTime, Time);
 	ObjMgr->CollisionCheak(this, "Bone");
 	ObjMgr->CollisionCheak(this, "BlueBone");
 	ObjMgr->CollisionCheak(this, "GasterBlaster");
@@ -92,7 +92,6 @@ void Heart::Update(float deltaTime, float Time)
 		m_red->B = 198;
 	}
 	m_ColBox->SetPosition(m_Position.x, m_Position.y);
-	//m_Bgm->Update(deltaTime, Time);
 }
 
 

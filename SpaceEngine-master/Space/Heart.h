@@ -21,6 +21,7 @@ class Heart : public Object
 	bool a;
 	Vec2 Dir;
 	SoundMgr* m_Bgm;
+	SoundMgr* m_Start;
 
 	float m_Speed;
 	int m_Hp;

@@ -18,6 +18,7 @@ Text_Bubbles::Text_Bubbles(Vec2 Pos)
 
 Text_Bubbles::~Text_Bubbles()
 {
+	m_RText->Release();
 }
 
 void Text_Bubbles::Update(float deltaTime, float Time)
