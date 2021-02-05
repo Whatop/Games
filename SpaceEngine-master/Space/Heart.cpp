@@ -20,37 +20,42 @@ Heart::Heart(Vec2 Pos)
 	m_Move = Soul_Movement::NONE;
 	m_Start = new SoundMgr("Sound/Start.mp3", false);
 	m_Start->play();
+	m_Start->volumeUp();
+	m_Start->volumeUp();
 }
 
 Heart::~Heart()
 {
+	m_Start->Release();
 }
 
 void Heart::Update(float deltaTime, float Time)
 {
-	m_Start->Update(deltaTime, Time);
 	ObjMgr->CollisionCheak(this, "Bone");
 	ObjMgr->CollisionCheak(this, "BlueBone");
 	ObjMgr->CollisionCheak(this, "GasterBlaster");
 	ObjMgr->CollisionCheak(this, "Platform");
+	//가블 레이저는 레이저에서 처리함
+	m_Start->Update(deltaTime, Time);
+
 	if (a == false) {
 		stime += dt;
-		if (stime > 0.1f)
+		if (stime > 0.15f)
 			m_red->A = 0;
 
-		if (stime > 0.2f)
+		if (stime > 0.25f)
 			m_red->A = 255;
 
-		if (stime > 0.3f)
+		if (stime > 0.35f)
 			m_red->A = 0;
 
-		if (stime > 0.4f)
+		if (stime > 0.45f)
 			m_red->A = 255;
 
-		if (stime > 0.5f)
+		if (stime > 0.55f)
 			m_red->A = 0;
 
-		if (stime > 0.6f)
+		if (stime > 0.65f)
 		{
 			m_red->A = 255;
 			a = true;
@@ -62,7 +67,7 @@ void Heart::Update(float deltaTime, float Time)
 
 		Vec2 A, B;
 		A = m_Position;
-		B = Vec2(2800, 680);
+		B = Vec2(m_Position.x + App::GetInst()->m_Width / 2, 1080/2);
 		A -= B;
 		D3DXVec2Normalize(&Dir, &A);
 
@@ -73,9 +78,7 @@ void Heart::Update(float deltaTime, float Time)
 		else {
 			atime += dt;
 			if (atime >= 0.4f && atime <= 1.3f) {
-				m_Position.x = 1920 / 2;
 				SceneDirector::GetInst()->SetScene(scene::testscene);
-				Camera::GetInst()->Init();
 			}
 			Move();
 		}
@@ -92,6 +95,10 @@ void Heart::Update(float deltaTime, float Time)
 		m_red->B = 198;
 	}
 	m_ColBox->SetPosition(m_Position.x, m_Position.y);
+	if (m_limit > 10) {
+		m_Hp += 1;
+		m_limit = 0;
+	}
 }
 
 
@@ -159,7 +166,7 @@ void Heart::Move()
 void Heart::Render()
 {
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-	m_Text->print(std::to_string(m_Hp), 1500, 1000);
+	m_Text->print(std::to_string(m_Hp), 1600, 800);
 	Renderer::GetInst()->GetSprite()->End();
 	m_red->Render();
 	m_ColBox->Render();
@@ -177,6 +184,19 @@ void Heart::OnCollision(Object* other)
 		RECT rc;
 		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
 			m_Hp -= 1;
+		}
+	}
+	if (other->m_Tag == "GasterBlaster") {
+		RECT rc;
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
+			m_Hp -= 1;
+		}
+	}
+	if (other->m_Tag == "Laser") {
+		RECT rc;
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
+			m_Hp -= 1; 
+			m_limit += 1;
 		}
 	}
 }

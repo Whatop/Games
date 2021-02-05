@@ -25,6 +25,7 @@ class Heart : public Object
 
 	float m_Speed;
 	int m_Hp;
+	int m_limit;
 	TextMgr* m_Text;
 public:
 	Heart(Vec2 Pos);

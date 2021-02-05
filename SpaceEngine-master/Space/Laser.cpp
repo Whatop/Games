@@ -22,17 +22,19 @@ Laser::Laser(Vec2 Pos, float Rotation, int direction) //각도를 구해서 그 방향으�
 
 {
 	m_Laser = new Animation();
-	m_Laser->SetParent(this);
 	m_Laser->Init(0.2f, true);
 	m_Laser->AddContinueFrame(L"Painting/sans/Attack/Laser/Gasterblaster", 0, 7);
+	
+	m_ColBox = Sprite::Create(L"Painting/sans/Attack/Laser/ColBox.png");
+	m_ColBox->SetParent(this);
 
-	//m_ColBox = Sprite::Create(L"Painting/sans/Attack/gasterblaster1.png"); 추가해야될것
-	//m_ColBox->SetParent(this);
 	m_Rotation = Rotation + D3DXToRadian(90);
 	m_direction = direction;
 
-	m_Laser->A = 255;
+	m_ColBox->A = 0;
+
 	SetPosition(Pos);
+	m_Laser->SetPosition(Pos);
 
 	m_Speed = 500;
 	rTime = 0;
@@ -47,6 +49,8 @@ void Laser::Update(float deltaTime, float Time)
 	rTime += dt;
 	m_Laser->Update(deltaTime, Time);
 	m_Laser->A -= 110 * dt;
+	if(m_Laser->m_CurrentFrame>=3&& m_Laser->m_CurrentFrame <= 5)
+	ObjMgr->CollisionCheak(this, "Soul");
 
 	if (m_Laser->A <= 0) {
 		ObjMgr->RemoveObject(this);
@@ -55,23 +59,23 @@ void Laser::Update(float deltaTime, float Time)
 	if (rTime >= 0.65f) {
 		if (m_direction % 2 != 0)
 		{
-			if (m_Position.x > -400)
+			if (m_Position.x > 1940)
 				m_Position.x -= m_Speed * dt;
 		}
 
 		else {
-			if (m_Position.x < -1200)
+			if (m_Position.x < 3600)
 			m_Position.x += m_Speed * dt; 
-			std::cout << m_Position.x << std::endl;
 		}
 		m_Speed += 50;
 	}
-	
+	m_Laser->SetPosition(m_Position);
 }
 
 void Laser::Render()
 {
 	m_Laser->Render();
+	m_ColBox->Render();
 }
 
 void Laser::OnCollision(Object obj)

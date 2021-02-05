@@ -50,38 +50,45 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 {
 	rtime += dt;
 	btime += dt;
-	//빠르게 11번 보통 9번 
-	if (rtime >= 1) {// direction < Count  조건 추가 
+	//빠르게 11번 보통 9번
+	int random = rand() % 2 + 1;
+	if (random == 1) {
+		if (rtime >= 3.f && direction < Count) {//   조건 추가 
 
-		if (direction % 2 != 0) {
-			randomx = 300;
+			if (direction % 2 != 0) {
+				randomx = 2080;
+			}
+			else {
+				randomx = 3480;
+			}
+
+			ObjMgr->AddObject(new GasterBlaster(Vec2(randomx, -400), direction), "GasterBlaster");
+			ObjMgr->AddObject(new GasterBlaster(Vec2(randomx, -400), direction), "GasterBlaster");
+			direction++;
+			rtime = 0;
 		}
-		else {
-			randomx = 1600;
+	}
+	if (random == 3) {
+		if (btime >= 31) {// direction < Count  조건 추가 
+			//(Vec2 Pos,std::string color, std::string size, int
+			//ObjMgr->AddObject(new Bones(Vec2(-100,100),"while","small", _right), "Bone");
+			//ObjMgr->AddObject(new Bones(Vec2(-100,300),"while","middle",_right), "Bone");
+			//ObjMgr->AddObject(new Bones(Vec2(-100,500),"while","big",_right), "Bone");
+			//ObjMgr->AddObject(new Bones(Vec2(-100,700),"while","long", _right), "Bone");
+			//ObjMgr->AddObject(new Bones(Vec2(1920/2,-100),"while","lie", _down), "Bone");
+
+			//ObjMgr->AddObject(new Bones(Vec2(2020, 100), "while", "small", _left), "Bone");
+			//ObjMgr->AddObject(new Bones(Vec2(2020, 300), "while", "middle", _left), "Bone");
+			//ObjMgr->AddObject(new Bones(Vec2(2020, 500), "while", "big", _left), "Bone");
+			//ObjMgr->AddObject(new Bones(Vec2(2020, 700), "while", "long", _left), "Bone");
+			ObjMgr->AddObject(new Bones(Vec2(1920 / 2, 1180), "while", "lie", _up), "Bone");
+
+			//ObjMgr->AddObject(new Platform(Vec2(2020 / 2, 1180), _up), "Platform");
+			direction++;
+			btime = 0;
 		}
-
-		ObjMgr->AddObject(new GasterBlaster(Vec2(randomx, -400), direction), "GasterBlaster");
-		direction++;
-		rtime = 0;
 	}
-	if (btime >=31) {// direction < Count  조건 추가 
-		//(Vec2 Pos,std::string color, std::string size, int
-		//ObjMgr->AddObject(new Bones(Vec2(-100,100),"while","small", _right), "Bone");
-		//ObjMgr->AddObject(new Bones(Vec2(-100,300),"while","middle",_right), "Bone");
-		//ObjMgr->AddObject(new Bones(Vec2(-100,500),"while","big",_right), "Bone");
-		//ObjMgr->AddObject(new Bones(Vec2(-100,700),"while","long", _right), "Bone");
-		//ObjMgr->AddObject(new Bones(Vec2(1920/2,-100),"while","lie", _down), "Bone");
-
-		//ObjMgr->AddObject(new Bones(Vec2(2020, 100), "while", "small", _left), "Bone");
-		//ObjMgr->AddObject(new Bones(Vec2(2020, 300), "while", "middle", _left), "Bone");
-		//ObjMgr->AddObject(new Bones(Vec2(2020, 500), "while", "big", _left), "Bone");
-		//ObjMgr->AddObject(new Bones(Vec2(2020, 700), "while", "long", _left), "Bone");
-		ObjMgr->AddObject(new Bones(Vec2(1920 / 2, 1180), "while", "lie", _up), "Bone");
-
-		//ObjMgr->AddObject(new Platform(Vec2(2020 / 2, 1180), _up), "Platform");
-		direction++;
-		btime = 0;
-	}
+	
 		//m_Player->SetVertex();
 		m_TSBgm->Update(deltaTime, time);
 }

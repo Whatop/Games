@@ -35,7 +35,6 @@ void UI::Release()
 
 void UI::Update()
 {
-	std::cout << m_Pos << std::endl;
 	for (auto& iter : ObjMgr->m_Objects)
 	{
 		if (iter->m_Tag == "Player")

@@ -10,16 +10,14 @@ GasterBlaster::GasterBlaster(Vec2 SpawnPos, int direction)// Å©±â : È¦ÂßÇÑ, Áß°£
 {
 	m_GBlaster = new Animation();
 	m_GBlaster->SetParent(this);
-	m_GBlaster->Init(0.15f, true);
+	m_GBlaster->Init(0.14f, true);
 	m_GBlaster->AddContinueFrame(L"Painting/sans/Attack/GasterBlaster/gasterblaster", 1, 20, COLORKEY_GASTER);
 
-	m_ColBox = Sprite::Create(L"Painting/sans/Attack/GasterBlaster/gasterblaster1.png");
 	SetPosition(SpawnPos);
 	//A = SpawnPos;
 	m_direction = direction;
 
 	m_Speed = 500.f;
-	m_ColBox->A = 0;
 
 	lifeTime = 0;
 	rTime = 0;
@@ -29,18 +27,11 @@ GasterBlaster::GasterBlaster(Vec2 SpawnPos, int direction)// Å©±â : È¦ÂßÇÑ, Áß°£
 	m_gasterblaster->volumeUp();
 	m_gasterblaster->volumeUp();
 	m_Rotation = D3DXToRadian(0);
-	random = rand() % 3 + 1;
-
-	if (random == 1) {
-		Pos.y = 1080 / 2;
-	}
-	else if (random == 2) {
-		Pos.y = 1080 / 2 + 150;
-	}
-	else if (random == 3) {
-		Pos.y = 1080 / 2 + 300;
-	}
+	random = rand() % 900 + 200;
+	//if(random%200==0)
+	Pos.y = random;
 }
+	
 
 GasterBlaster::~GasterBlaster()
 {
@@ -76,11 +67,11 @@ void GasterBlaster::Update(float deltaTime, float Time)
 	else {
 		if (m_GBlaster->m_CurrentFrame == 4) {
 			if (m_direction % 2 != 0 && one == false) {
-				ObjMgr->AddObject(new Laser(Vec2(m_Position.x, m_Position.y), m_Rotation, m_direction), "Laser");
+				ObjMgr->AddObject(new Laser(Vec2(m_Position.x+1600, m_Position.y), m_Rotation, m_direction), "Laser");
 				one = true;
 			}
 			else if (m_direction % 2 == 0 && one == false) {
-				ObjMgr->AddObject(new Laser(Vec2(m_Position.x, m_Position.y), m_Rotation, m_direction), "Laser");
+				ObjMgr->AddObject(new Laser(Vec2(m_Position.x-1600, m_Position.y), m_Rotation, m_direction), "Laser");
 				one = true;
 			}
 		}
@@ -109,7 +100,6 @@ void GasterBlaster::Update(float deltaTime, float Time)
 void GasterBlaster::Render()
 {
 	m_GBlaster->Render();
-	m_ColBox->Render();
 }
 
 void GasterBlaster::OnCollision(Object* obj)
