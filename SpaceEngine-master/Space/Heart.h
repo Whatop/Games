@@ -10,7 +10,8 @@ enum class Soul_Movement {
 	DOWN,
 	RIGHT,
 	LEFT,
-	NONE
+	JUMP,
+	NONE																							
 };
 class Heart : public Object
 {
@@ -21,11 +22,22 @@ class Heart : public Object
 	bool a;
 	Vec2 Dir;
 	SoundMgr* m_Bgm;
-	SoundMgr* m_Start;
-
+	SoundMgr* m_Start																																										;
+	Vec2 Pos;
 	float m_Speed;
 	int m_Hp;
 	int m_limit;
+
+	float m_JumpTime;
+	float m_JumpPower;
+	float m_JumpAccel;
+	float m_PrevAccel;
+	float m_JumpLate;
+
+	bool m_isFall;
+	bool m_isGround;
+
+
 	TextMgr* m_Text;
 public:
 	Heart(Vec2 Pos);
@@ -38,6 +50,7 @@ public:
 	void Render();	
 	void OnCollision(Object* other);
 
+	void Gravity();
 	void Move();
 };
 

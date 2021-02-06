@@ -22,6 +22,13 @@ Heart::Heart(Vec2 Pos)
 	m_Start->play();
 	m_Start->volumeUp();
 	m_Start->volumeUp();
+
+	m_JumpPower = 75.f; 
+	m_JumpTime = 0;
+	m_JumpAccel = 0.f;
+	m_PrevAccel = 0.f;
+	m_JumpLate = 0.f;
+
 }
 
 Heart::~Heart()
@@ -95,7 +102,7 @@ void Heart::Update(float deltaTime, float Time)
 		m_red->B = 198;
 	}
 	m_ColBox->SetPosition(m_Position.x, m_Position.y);
-	if (m_limit > 10) {
+	if (m_limit > 20) {
 		m_Hp += 1;
 		m_limit = 0;
 	}
@@ -144,23 +151,71 @@ void Heart::Move()
 	}
 	else if (m_Color == Soul_Color::BULE) //점프 만들기
 	{
-		if (INPUT->GetKey('W') == KeyState::PRESS)
+		if (INPUT->GetKey('W') == KeyState::PRESS && m_Move != Soul_Movement::JUMP && m_JumpLate <= 0.f)
 		{
-			m_Position.y -= m_Speed * dt;
+			m_JumpTime = 0;
+			m_Move = Soul_Movement::JUMP;
 		}
-		if (INPUT->GetKey('S') == KeyState::PRESS)
+		if (m_Move == Soul_Movement::JUMP)
 		{
-			m_Position.y += m_Speed * dt;
-		}
-		if (INPUT->GetKey('A') == KeyState::PRESS)
-		{
-			m_Position.x -= m_Speed * dt;
-		}
-		if (INPUT->GetKey('D') == KeyState::PRESS)
-		{
-			m_Position.x += m_Speed * dt;
+			static float minus;
+
+			m_PrevAccel = m_JumpAccel;
+
+			m_JumpAccel = ((-9.8f) / 2 * m_JumpTime * m_JumpTime) + (m_JumpPower * m_JumpTime);
+			m_JumpTime += dt * 20.f;
+			m_Position.y = Pos.y - m_JumpAccel;
+
+			if (m_PrevAccel > m_JumpAccel)
+			{
+				m_isFall = true;
+			}
+
+			if (m_JumpAccel < 0.f)
+			{
+				minus = m_JumpAccel;
+			}
+			if (m_JumpAccel >= 0.f)
+			{
+				if (INPUT->GetKey('A') == KeyState::PRESS)
+				{
+					m_Position.x -= m_Speed * dt;
+				}
+				else if (INPUT->GetKey('D') == KeyState::PRESS)
+				{
+					m_Position.x += m_Speed * dt;
+				}
+			}
+			if (m_JumpAccel < 0.f || (m_isFall && m_isGround))
+			{
+				m_PrevAccel = 0.f;
+				m_JumpLate = 0.1f;
+				m_Move = Soul_Movement::JUMP;
+				m_Position.y += minus;
+			}
+			if (INPUT->GetKey('A') == KeyState::PRESS)
+			{
+				m_Position.x -= m_Speed * dt;
+			}
+			else if (INPUT->GetKey('D') == KeyState::PRESS)
+			{
+				m_Position.x += m_Speed * dt;
+			}
 		}
 	}
+}
+
+void Heart::Gravity()
+{
+	static float vy = 0;
+	vy += 9.8f * dt;
+
+	if (!m_isGround)
+	{
+		m_Position.y += vy;
+	}
+	else
+		vy = 0.f;
 }
 
 void Heart::Render()
@@ -197,6 +252,14 @@ void Heart::OnCollision(Object* other)
 		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
 			m_Hp -= 1; 
 			m_limit += 1;
+		}
+	}
+	if (other->m_Tag == "Platform") {
+		RECT rc;
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
+		{
+			m_isGround = true;
+			m_isFall = false;
 		}
 	}
 }

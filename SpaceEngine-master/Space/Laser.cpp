@@ -29,13 +29,13 @@ Laser::Laser(Vec2 Pos, float Rotation, int direction) //각도를 구해서 그 방향으�
 	m_ColBox->SetParent(this);
 
 	m_Rotation = Rotation + D3DXToRadian(90);
+	m_Laser->m_Rotation = Rotation + D3DXToRadian(90);
 	m_direction = direction;
 
 	m_ColBox->A = 0;
 
 	SetPosition(Pos);
 	m_Laser->SetPosition(Pos);
-
 	m_Speed = 500;
 	rTime = 0;
 }
@@ -52,7 +52,7 @@ void Laser::Update(float deltaTime, float Time)
 	if(m_Laser->m_CurrentFrame>=3&& m_Laser->m_CurrentFrame <= 5)
 	ObjMgr->CollisionCheak(this, "Soul");
 
-	if (m_Laser->A <= 0) {
+	if (m_Laser->																	A <= 0) {
 		ObjMgr->RemoveObject(this);
 	}
 
