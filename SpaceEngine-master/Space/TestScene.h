@@ -1,6 +1,7 @@
 #pragma once
 class TestScene : public Scene
 {
+	Sprite* m_Ground;
 	LineMgr* m_Line;
 	TextMgr* m_Text;
 	SoundMgr* m_TSBgm;
@@ -12,6 +13,8 @@ class TestScene : public Scene
 	int direction;
 	int test;
 	bool one;
+	int random;
+	bool brandom;
 public:
 	TestScene();
 	~TestScene();

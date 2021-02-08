@@ -27,7 +27,7 @@ GasterBlaster::GasterBlaster(Vec2 SpawnPos, int direction)// Å©±â : È¦ÂßÇÑ, Áß°£
 	m_gasterblaster->volumeUp();
 	m_gasterblaster->volumeUp();
 	m_Rotation = D3DXToRadian(0);
-	random = rand() % 900 + 200;
+	random = rand() % 800 + 200;
 	//if(random%200==0)
 	Pos.y = random;
 }

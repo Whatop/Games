@@ -48,7 +48,7 @@ void Laser::Update(float deltaTime, float Time)
 {
 	rTime += dt;
 	m_Laser->Update(deltaTime, Time);
-	m_Laser->A -= 110 * dt;
+	m_Laser->A -= 120 * dt;
 	if(m_Laser->m_CurrentFrame>=3&& m_Laser->m_CurrentFrame <= 5)
 	ObjMgr->CollisionCheak(this, "Soul");
 

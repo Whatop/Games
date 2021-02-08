@@ -20,6 +20,7 @@ class Heart : public Object
 	Soul_Color m_Color;
 	Soul_Movement m_Move;
 	bool a;
+	bool f;
 	Vec2 Dir;
 	SoundMgr* m_Bgm;
 	SoundMgr* m_Start																																										;
@@ -33,6 +34,8 @@ class Heart : public Object
 	float m_JumpAccel;
 	float m_PrevAccel;
 	float m_JumpLate;
+
+	float JTime; //점프 강도 정해주는 시간
 
 	bool m_isFall;
 	bool m_isGround;

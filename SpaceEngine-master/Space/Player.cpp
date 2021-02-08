@@ -172,23 +172,7 @@ void Player::Update(float deltaTime, float Time)
 	ObjMgr->CollisionCheak(this, "Solids");
 	ObjMgr->CollisionCheak(this, "Dialog");
 	ObjMgr->CollisionCheak(this, "Save");
-	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
-	{
-		SceneDirector::GetInst()->ChangeScene(new MainScene());
-	}
-	if (INPUT->GetKey(VK_F2) == KeyState::DOWN)
-	{
-		ObjMgr->DeleteObject("Chet");
-		ObjMgr->DeleteObject("Chest");
-		ObjMgr->DeleteObject("Save");
-		ObjMgr->DeleteObject("sans");
-		ObjMgr->DeleteObject("Solids");
-		ObjMgr->DeleteObject("Pillar");
-		UI::GetInst()->b = false;
-		UI::GetInst()->d = false;	
-		ObjMgr->AddObject(new Heart(Vec2(m_Position.x + m_Player->m_Size.x / 2 - 11, m_Position.y + m_Player->m_Size.y / 2)), "Soul");
-		SceneDirector::GetInst()->ChangeScene(new TestScene());
-	}
+	
 	if (INPUT->GetKey('Z') == KeyState::DOWN)
 	{
 		if (Save && SceneDirector::GetInst()->m_Move != Interaction::NONE) {//이렇게 제한 안걸어놓으면 계속생성되서 문제임

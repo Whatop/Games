@@ -14,6 +14,11 @@ UI::~UI()
 void UI::Init()
 {
 	m_Curtain = Sprite::Create(L"Painting/Map/Layer.png",COLORKEY_WHITE);
+	m_HpBar = Sprite::Create(L"Painting/UI/MaxHp.png");
+	m_HpBar->SetPosition(1500, 950);
+	m_SpHp = Sprite::Create(L"Painting/UI/Hp.png");
+	m_SpHp->SetPosition(1500, 950);
+	//m_Poison = Sprite::Create(L"Painting/UI/Poison.png");
 	ztime = 0;
 	ptime = 0;
 	m_Pos = 0;
@@ -25,6 +30,10 @@ void UI::Init()
 	m_Text->SetColor(255, 255, 255, 255);
 	m_Curtain->SetPosition(1920/2, 700/2);
 	ObjMgr->AddObject(m_Curtain, "UI");
+
+	ObjMgr->AddObject(m_SpHp, "UI");
+	ObjMgr->AddObject(m_HpBar, "UI");
+	//ObjMgr->AddObject(m_Poison, "UI");
 	textTime = 0;
 	UpdateText = " *  ";
 }
@@ -105,8 +114,15 @@ void UI::Update()
 
 void UI::Render()
 {
-	m_Curtain->Render();
 	if(d)
 	Renderer::GetInst()->GetSprite()->End();
+	m_HpGage = m_HpBar->m_Size.x / 92;
+	int Hp = 92 - m_Hp;
+	if (m_Hp >= 0)
+	{
+		SetRect(&m_HpBar->m_Collision, m_HpBar->m_Position.x - m_HpBar->m_Size.x / 2, m_HpBar->m_Position.y - m_HpBar->m_Size.y / 2,
+			m_HpBar->m_Position.x + m_HpBar->m_Size.x / 2, m_HpBar->m_Position.y + m_HpBar->m_Size.y / 2);
 
+		m_HpBar->m_Rect.right = m_HpBar->m_Size.x - (Hp * m_HpGage);
+	}
 }

@@ -1,15 +1,16 @@
 #include "stdafx.h"
 #include "Heart.h"
+#include "UI.h"
 
 Heart::Heart(Vec2 Pos)
 {
 	//red R 255 G - B -
 	//blue R 8 G 3 B 198
 
-	m_red = Sprite::Create(L"Painting/Soul/red.png");
+	m_red = Sprite::Create(L"Painting/Soul/red.png",COLORKEY_BALCK);
 	m_red->SetParent(this);
 	SetPosition(Pos);
-	m_ColBox = Sprite::Create(L"Painting/Soul/ColBox.png");
+	m_ColBox = Sprite::Create(L"Painting/Soul/ColBox.png",COLORKEY_BALCK);
 	stime = 0;
 	a = false;
 	m_Hp = 92;
@@ -23,11 +24,14 @@ Heart::Heart(Vec2 Pos)
 	m_Start->volumeUp();
 	m_Start->volumeUp();
 
-	m_JumpPower = 75.f; 
+	m_JumpPower = 15.f; 
 	m_JumpTime = 0;
 	m_JumpAccel = 0.f;
 	m_PrevAccel = 0.f;
 	m_JumpLate = 0.f;
+	JTime = 0.f;
+	m_isFall = false;
+	m_isGround = false;
 
 }
 
@@ -38,12 +42,17 @@ Heart::~Heart()
 
 void Heart::Update(float deltaTime, float Time)
 {
+	m_isGround = false;
+
 	ObjMgr->CollisionCheak(this, "Bone");
 	ObjMgr->CollisionCheak(this, "BlueBone");
 	ObjMgr->CollisionCheak(this, "GasterBlaster");
+	
 	ObjMgr->CollisionCheak(this, "Platform");
+	ObjMgr->CollisionCheak(this, "Ground");
 	//가블 레이저는 레이저에서 처리함
-	m_Start->Update(deltaTime, Time);
+	if (m_JumpLate > 0)
+	m_JumpLate -= dt;
 
 	if (a == false) {
 		stime += dt;
@@ -90,6 +99,16 @@ void Heart::Update(float deltaTime, float Time)
 			Move();
 		}
 	}
+	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
+	{
+		m_Color = Soul_Color::RED;
+	}
+	if (INPUT->GetKey(VK_F2) == KeyState::DOWN)
+	{
+		m_Color = Soul_Color::BULE;
+	}
+	if (m_Move != Soul_Movement::JUMP && m_Color==Soul_Color::BULE&&m_Position.y < 1040)
+		Gravity();
 
 	if (m_Color == Soul_Color::RED) {
 		m_red->R = 255;
@@ -106,6 +125,8 @@ void Heart::Update(float deltaTime, float Time)
 		m_Hp += 1;
 		m_limit = 0;
 	}
+	m_Start->Update(deltaTime, Time);
+	UI::GetInst()->m_Hp = m_Hp;
 }
 
 
@@ -151,18 +172,32 @@ void Heart::Move()
 	}
 	else if (m_Color == Soul_Color::BULE) //점프 만들기
 	{
-		if (INPUT->GetKey('W') == KeyState::PRESS && m_Move != Soul_Movement::JUMP && m_JumpLate <= 0.f)
+		if (INPUT->GetKey('W') == KeyState::DOWN && m_Move != Soul_Movement::JUMP && m_JumpLate <= 0.f)
 		{
 			m_JumpTime = 0;
+			Pos = m_Position;
 			m_Move = Soul_Movement::JUMP;
+
 		}
+	
 		if (m_Move == Soul_Movement::JUMP)
 		{
+			if (INPUT->GetKey('W') == KeyState::PRESS)
+			{
+				JTime += dt;
+				if (JTime >= dt)
+					m_JumpPower = 25.f;
+				if (JTime >= dt)
+					m_JumpPower = 30.f;
+				if (JTime >= 0.2f)
+					m_JumpPower = 35.f;
+			}
 			static float minus;
+			
 
 			m_PrevAccel = m_JumpAccel;
 
-			m_JumpAccel = ((-9.8f) / 2 * m_JumpTime * m_JumpTime) + (m_JumpPower * m_JumpTime);
+			m_JumpAccel = ((-2.8f) / 2 * m_JumpTime * m_JumpTime) + (m_JumpPower * m_JumpTime);
 			m_JumpTime += dt * 20.f;
 			m_Position.y = Pos.y - m_JumpAccel;
 
@@ -190,16 +225,31 @@ void Heart::Move()
 			{
 				m_PrevAccel = 0.f;
 				m_JumpLate = 0.1f;
-				m_Move = Soul_Movement::JUMP;
 				m_Position.y += minus;
+				m_JumpPower = 15.f;
+				JTime = 0.f;
+				m_Move = Soul_Movement::NONE;
+
 			}
+		}
+		if (m_Move != Soul_Movement::JUMP) {
 			if (INPUT->GetKey('A') == KeyState::PRESS)
 			{
+				m_Move = Soul_Movement::LEFT;
 				m_Position.x -= m_Speed * dt;
 			}
-			else if (INPUT->GetKey('D') == KeyState::PRESS)
+			if (INPUT->GetKey('A') == KeyState::UP)
 			{
+				m_Move = Soul_Movement::NONE;
+			}
+			if (INPUT->GetKey('D') == KeyState::PRESS)
+			{
+				m_Move = Soul_Movement::RIGHT;
 				m_Position.x += m_Speed * dt;
+			}
+			if (INPUT->GetKey('D') == KeyState::UP)
+			{
+				m_Move = Soul_Movement::NONE;
 			}
 		}
 	}
@@ -220,9 +270,7 @@ void Heart::Gravity()
 
 void Heart::Render()
 {
-	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-	m_Text->print(std::to_string(m_Hp), 1600, 800);
-	Renderer::GetInst()->GetSprite()->End();
+
 	m_red->Render();
 	m_ColBox->Render();
 }
@@ -257,6 +305,14 @@ void Heart::OnCollision(Object* other)
 	if (other->m_Tag == "Platform") {
 		RECT rc;
 		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
+		{
+			m_isGround = true;
+			m_isFall = false;
+		}
+	}
+	if (other->m_Tag == "Ground") {
+		RECT rc;
+		if (IntersectRect(&rc, &m_Collision, &other->m_Collision))
 		{
 			m_isGround = true;
 			m_isFall = false;
