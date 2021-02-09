@@ -24,7 +24,7 @@ Heart::Heart(Vec2 Pos)
 	m_Start->volumeUp();
 	m_Start->volumeUp();
 
-	m_JumpPower = 15.f; 
+	m_JumpPower = 45.f; 
 	m_JumpTime = 0;
 	m_JumpAccel = 0.f;
 	m_PrevAccel = 0.f;
@@ -182,15 +182,9 @@ void Heart::Move()
 	
 		if (m_Move == Soul_Movement::JUMP)
 		{
-			if (INPUT->GetKey('W') == KeyState::PRESS)
+			if (INPUT->GetKey('W') == KeyState::UP)
 			{
-				JTime += dt;
-				if (JTime >= dt)
-					m_JumpPower = 25.f;
-				if (JTime >= dt)
-					m_JumpPower = 30.f;
-				if (JTime >= 0.2f)
-					m_JumpPower = 35.f;
+				Gravity();
 			}
 			static float minus;
 			
@@ -226,8 +220,6 @@ void Heart::Move()
 				m_PrevAccel = 0.f;
 				m_JumpLate = 0.1f;
 				m_Position.y += minus;
-				m_JumpPower = 15.f;
-				JTime = 0.f;
 				m_Move = Soul_Movement::NONE;
 
 			}

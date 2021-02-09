@@ -59,8 +59,8 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 		brandom = true;
 	}
 	
-	if (brandom == 1) {
-		if (rtime >= 1.f && direction < Count) {//   조건 추가 
+	if (random == 1) {
+		if (rtime >= 1.f && direction <= Count) {//   조건 추가 
 
 			if (direction % 2 != 0) {
 				randomx = 2080;
@@ -73,38 +73,40 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 			ObjMgr->AddObject(new GasterBlaster(Vec2(randomx, -400), direction), "GasterBlaster");
 			direction++;
 			rtime = 0;
-			std::cout << "방향 :"<<direction << std::endl;
-			std::cout << "랜덤 :"<<random << std::endl;
-		}
-		else if(direction > Count)
-		{
+		}	
+		else if(direction > Count){
+
+			std::cout << "방향 :" << direction << std::endl;
+			std::cout << "랜덤 :" << random << std::endl;
 			brandom = false;
 			direction = 0;
 		}
 	}
 	else if (random == 2) {
-		if (btime >= 1 && direction < Count) {// direction < Count  조건 추가 
+		if (btime >= 1 && direction <= Count) {// direction < Count  조건 추가 
 		//	(Vec2 Pos,std::string color, std::string size, int
 			ObjMgr->AddObject(new Bones(Vec2(2080,100),"while","small", _right), "Bone");
 			ObjMgr->AddObject(new Bones(Vec2(2080,300),"while","middle",_right), "Bone");
 			ObjMgr->AddObject(new Bones(Vec2(2080,500),"while","big",_right), "Bone");
 			ObjMgr->AddObject(new Bones(Vec2(2080,700),"while","long", _right), "Bone");
-			ObjMgr->AddObject(new Bones(Vec2(2920/2,-100),"while","lie", _down), "Bone");
+			ObjMgr->AddObject(new Bones(Vec2(2700,-100),"while","lie", _down), "Bone");
 
 			ObjMgr->AddObject(new Bones(Vec2(3480, 100), "while", "small", _left), "Bone");
 			ObjMgr->AddObject(new Bones(Vec2(3480, 300), "while", "middle", _left), "Bone");
 			ObjMgr->AddObject(new Bones(Vec2(3480, 500), "while", "big", _left), "Bone");
 			ObjMgr->AddObject(new Bones(Vec2(3480, 700), "while", "long", _left), "Bone");
-			ObjMgr->AddObject(new Bones(Vec2(2920 / 2, 1180), "while", "lie", _up), "Bone");
+			ObjMgr->AddObject(new Bones(Vec2(2700, 1180), "while", "lie", _up), "Bone");
 
-			ObjMgr->AddObject(new Platform(Vec2(1980, 1180), _right), "Platform");
+			ObjMgr->AddObject(new Platform(Vec2(2080, 500), _right), "Platform");
 			direction++;
 			btime = 0;
 		}
-		else if (direction > Count)
-		{
+		else if (direction > Count) {
+
+			std::cout << "방향 :" << direction << std::endl;
+			std::cout << "랜덤 :" << random << std::endl;
 			brandom = false;
-			direction = 0;
+			direction=0;
 		}
 	}
 	

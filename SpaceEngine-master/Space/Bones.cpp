@@ -35,6 +35,7 @@ Bones::Bones(Vec2 Pos, std::string color, std::string size, int direction)
 	}
 	m_ColBox->SetParent(this);
 	SetPosition(Pos);
+	m_ColBox->A = 0;
 	m_Bones->SetPosition(Pos);
 	m_direction = direction;
 	m_Speed = 500.f;//속도설정 빠름 보통 해놀까?
