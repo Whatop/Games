@@ -39,6 +39,7 @@ class Heart : public Object
 
 	bool m_isFall;
 	bool m_isGround;
+	bool m_Jump;//점프판정
 
 
 	TextMgr* m_Text;

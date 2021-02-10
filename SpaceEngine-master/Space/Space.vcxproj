@@ -31,6 +31,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GasterBlaster.cpp" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Heart.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Interaction1.cpp" />
@@ -76,6 +77,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GasterBlaster.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="Heart.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Interaction1.h" />

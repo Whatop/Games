@@ -4,6 +4,7 @@
 #include "Laser.h"
 #include "Bones.h"
 #include "Platform.h"
+#include "Ground.h"
 #include "UI.h"
 
 
@@ -19,9 +20,7 @@ void TestScene::Init()
 {
 	SoundMgr::Init();
 	SceneDirector::GetInst()->SetScene(scene::testscene);
-	m_Ground = Sprite::Create(L"Painting/Map/Ground.png");
-	m_Ground->SetPosition(2800, 1080);
-	m_Ground->SetTag("Ground");
+	
 	rtime = 0;
 	m_Text = new TextMgr();
 	m_Text->Init(32, true, false, L"Determination Mono");
@@ -40,7 +39,8 @@ void TestScene::Init()
 	test = 1;
 	rtime = 0;
 	btime = 0;
-	one = false;
+	one = false; 
+	ObjMgr->AddObject(new Ground(), "Ground");
 	std::cout << "----------테스트룸입장----------" << std::endl;
 }
 
@@ -116,7 +116,6 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 
 void TestScene::Render()
 {
-	m_Ground->Render();
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y)
 		+ "\n" + std::to_string(dt) + "  " + std::to_string(gt), 500, 0);

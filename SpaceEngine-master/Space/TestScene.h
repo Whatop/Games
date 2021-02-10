@@ -1,7 +1,6 @@
 #pragma once
 class TestScene : public Scene
 {
-	Sprite* m_Ground;
 	LineMgr* m_Line;
 	TextMgr* m_Text;
 	SoundMgr* m_TSBgm;

@@ -5,7 +5,8 @@ Platform::Platform(Vec2 Pos,int direction)
 {
 	m_platfrom = Sprite::Create(L"Painting/platfrom.png");
 	m_platfrom->SetParent(this);
-	SetPosition(Pos);
+	SetPosition(Pos); 
+
 	m_direction = direction;
 	m_Speed = 300.f;
 }
