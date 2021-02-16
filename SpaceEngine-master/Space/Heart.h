@@ -31,6 +31,8 @@ class Heart : public Object
 
 	float m_JumpTime;
 	float JTime; //점프 강도 정해주는 시간
+	float m_PrevAccel;
+	float m_JumpAccel;
 
 	bool m_isFall;
 	bool m_isGround;

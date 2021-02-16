@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Platform.h"
 
-Platform::Platform(Vec2 Pos,int direction)
+Platform::Platform(Vec2 Pos,int direction)//분리하기
 {
 	m_platfrom = Sprite::Create(L"Painting/platfrom.png");
 	m_platfrom->SetParent(this);
