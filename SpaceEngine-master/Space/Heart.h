@@ -30,18 +30,13 @@ class Heart : public Object
 	int m_limit;
 
 	float m_JumpTime;
-	float m_JumpPower;
-	float m_JumpAccel;
-	float m_PrevAccel;
-	float m_JumpLate;
-
 	float JTime; //점프 강도 정해주는 시간
 
 	bool m_isFall;
 	bool m_isGround;
-	bool m_Jump;//점프판정
+	int m_Gravity;
 
-
+	
 	TextMgr* m_Text;
 public:
 	Heart(Vec2 Pos);
