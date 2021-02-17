@@ -2,7 +2,7 @@
 #include "Heart.h"
 #include "UI.h"
 
-Heart::Heart(Vec2 Pos) //파란영혼 다리판정 만들기.
+Heart::Heart(Vec2 Pos)
 {
 	//red R 255 G - B -
 	//blue R 8 G 3 B 198
@@ -11,6 +11,11 @@ Heart::Heart(Vec2 Pos) //파란영혼 다리판정 만들기.
 	m_red->SetParent(this);
 	SetPosition(Pos);
 	m_ColBox = Sprite::Create(L"Painting/Soul/ColBox.png",COLORKEY_BALCK);
+	m_Left = Sprite::Create(L"Painting/Soul/Left.png");
+	m_Right = Sprite::Create(L"Painting/Soul/Right.png");
+	m_Up= Sprite::Create(L"Painting/Soul/Up.png");
+	m_Down = Sprite::Create(L"Painting/Soul/Down.png");
+	
 	stime = 0;
 	a = false;
 	m_Hp = 92;
@@ -30,6 +35,7 @@ Heart::Heart(Vec2 Pos) //파란영혼 다리판정 만들기.
 	m_isFall = false;
 	m_isGround = false;
 	m_Gravity = _down;
+	m_Layer = 1;
 }
 
 Heart::~Heart()
@@ -132,7 +138,6 @@ void Heart::Update(float deltaTime, float Time)
 		m_red->G = 3;
 		m_red->B = 198;
 	}
-	m_ColBox->SetPosition(m_Position.x, m_Position.y);
 	if (m_limit > 20) {
 		m_Hp += 1;
 		m_limit = 0;
@@ -141,19 +146,26 @@ void Heart::Update(float deltaTime, float Time)
 	UI::GetInst()->m_Hp = m_Hp;
 
 	if (m_Gravity == _left) {
-
 		m_Rotation = D3DXToRadian(90);
+		m_Directon = m_Left;
 	}
 	else if (m_Gravity == _right) {
-
 		m_Rotation = D3DXToRadian(270);
+		m_Directon = m_Right;
 	}
 	else if (m_Gravity == _up) {
 		m_Rotation = D3DXToRadian(180);
+		m_Directon = m_Up;
 	}
 	else if (m_Gravity == _down) {
 		m_Rotation = D3DXToRadian(0);
+		m_Directon = m_Down;
 	}
+	m_ColBox->SetPosition(m_Position.x, m_Position.y);
+	m_Left->SetPosition(m_Position.x - m_Size.x / 2 - 2, m_Position.y);
+	m_Right->SetPosition(m_Position.x + m_Size.x / 2 + 2, m_Position.y);
+	m_Up->SetPosition(m_Position.x, m_Position.y - m_Size.y / 2 - 2);
+	m_Down->SetPosition(m_Position.x, m_Position.y + m_Size.y / 2 + 2);
 }
 
 
@@ -210,8 +222,9 @@ void Heart::Move()
 			m_PrevAccel = m_JumpAccel;
 
 			m_JumpAccel = ((-9.8f) / 2 * m_JumpTime * m_JumpTime) + (75.f * m_JumpTime);//올라갔다가 낮아져아되
-			m_JumpTime += dt * 13.6f;
-			
+			m_JumpTime += dt * 10.6f;
+			JTime += dt;
+
 			if (INPUT->GetKey('W') == KeyState::UP) {
 				m_PrevAccel = 2000.f;
 			}
@@ -244,16 +257,12 @@ void Heart::Move()
 
 				if (m_PrevAccel > m_JumpAccel)
 				{
+					JTime = 0.f;
 					m_PrevAccel = 0.f;
 					m_JumpAccel = 0.f;
 					m_JumpTime = 0.f;
 					m_Move = Soul_Movement::NONE;
 				}
-
-			/*	if (m_isGround && m_JumpTime > 0.36f) {
-					
-				}*/
-				
 		}
 		if (m_Move != Soul_Movement::JUMP) {
 			if (INPUT->GetKey('A') == KeyState::PRESS)
@@ -287,24 +296,19 @@ void Heart::Gravity()
 	if (!m_isGround)
 	{
 		if (m_Gravity == _left) {
-
 			m_Position.x -= vy;
 		}
 		else if (m_Gravity == _right) {
-
 			m_Position.x += vy;
 		}
 		else if (m_Gravity == _up) {
 			m_Position.y -= vy;
 		}
 		else if (m_Gravity == _down) {
-
 			m_Position.y += vy;
 		}
 	}
 	else
-		vy = 0.f;
-	if(m_Color==Soul_Color::RED)
 		vy = 0.f;
 }
 
@@ -312,6 +316,10 @@ void Heart::Render()
 {
 	m_red->Render();
 	m_ColBox->Render();
+	m_Left->Render();
+	m_Right->Render();
+	m_Up->Render();
+	m_Down->Render();
 }
 
 void Heart::OnCollision(Object* other)
@@ -342,15 +350,15 @@ void Heart::OnCollision(Object* other)
 		}
 	}
 	if (other->m_Tag == "Platform") {
-		RECT rc;
-		if (IntersectRect(&rc, &m_Collision, &other->m_Collision))
+		RECT rc; 
+		if (IntersectRect(&rc, &m_Directon->m_Collision, &other->m_Collision))
 		{
 			m_isGround = true;
 		}
 	}
 	if (other->m_Tag == "Ground") {
 		RECT rc;
-		if (IntersectRect(&rc, &m_Collision, &other->m_Collision))
+		if (IntersectRect(&rc, &m_Directon->m_Collision, &other->m_Collision))
 		{
 			m_isGround = true;
 		}

@@ -3,6 +3,7 @@ class Platform : public Object
 {
 private:
 	Sprite* m_platfrom;
+	Sprite* m_pColBox;
 	float m_Speed;
 	float ptime;
 	int m_direction;

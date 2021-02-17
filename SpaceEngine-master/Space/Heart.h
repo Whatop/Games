@@ -17,6 +17,13 @@ class Heart : public Object
 {
 	Sprite* m_red;
 	Sprite* m_ColBox;
+
+	Sprite* m_Left;
+	Sprite* m_Right;
+	Sprite* m_Up;
+	Sprite* m_Down;
+	Sprite* m_Directon;
+
 	Soul_Color m_Color;
 	Soul_Movement m_Move;
 	bool a;
