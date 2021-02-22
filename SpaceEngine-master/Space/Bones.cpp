@@ -4,23 +4,23 @@
 Bones::Bones(Vec2 Pos, std::string color, std::string size, int direction)
 {
 	if (size == "small") {
-		m_Bones = Sprite::Create(L"Painting/sans/Attack/Bone_small.png",COLORKEY_BALCK);
+		m_Bones = Sprite::Create(L"Painting/sans/Attack/Bone_small.png", COLORKEY_BLACK);
 		m_ColBox = Sprite::Create(L"Painting/sans/Attack/ColBox/small.png");
 	}
 	if (size == "middle") {
-		m_Bones = Sprite::Create(L"Painting/sans/Attack/Bone.png", COLORKEY_BALCK);
+		m_Bones = Sprite::Create(L"Painting/sans/Attack/Bone.png", COLORKEY_BLACK);
 		m_ColBox = Sprite::Create(L"Painting/sans/Attack/ColBox/middle.png");
 	}
 	if (size == "big") {
-		m_Bones = Sprite::Create(L"Painting/sans/Attack/Bone_big.png", COLORKEY_BALCK);
+		m_Bones = Sprite::Create(L"Painting/sans/Attack/Bone_big.png", COLORKEY_BLACK);
 		m_ColBox = Sprite::Create(L"Painting/sans/Attack/ColBox/big.png");
 	}
 	if (size == "long") {
-		m_Bones = Sprite::Create(L"Painting/sans/Attack/Bone_long.png", COLORKEY_BALCK);
+		m_Bones = Sprite::Create(L"Painting/sans/Attack/Bone_long.png", COLORKEY_BLACK);
 		m_ColBox = Sprite::Create(L"Painting/sans/Attack/ColBox/long.png");
 	}
 	if (size == "lie") {
-		m_Bones = Sprite::Create(L"Painting/sans/Attack/Bone_lie.png", COLORKEY_BALCK);
+		m_Bones = Sprite::Create(L"Painting/sans/Attack/Bone_lie.png", COLORKEY_BLACK);
 		m_ColBox = Sprite::Create(L"Painting/sans/Attack/ColBox/lie.png");
 	}
 	if(color == "while") {

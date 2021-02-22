@@ -13,6 +13,7 @@ UI::~UI()
 
 void UI::Init()
 {
+	m_UI = Sprite::Create(L"Painting/Map/UI.png",COLORKEY_BLACK);
 	m_Curtain = Sprite::Create(L"Painting/Map/Layer.png",COLORKEY_WHITE);
 	m_HpBar = Sprite::Create(L"Painting/UI/MaxHp.png");
 	m_HpBar->SetPosition(1500, 950);
@@ -29,6 +30,8 @@ void UI::Init()
 	m_Text->Init(65, true, false, L"±¼¸²");
 	m_Text->SetColor(255, 255, 255, 255);
 	m_Curtain->SetPosition(1920/2, 700/2);
+	m_UI->SetPosition(1920/2, 1080/2);
+	ObjMgr->AddObject(m_UI, "UI");
 	ObjMgr->AddObject(m_Curtain, "UI");
 
 	ObjMgr->AddObject(m_SpHp, "UI");
@@ -75,11 +78,14 @@ void UI::Update()
 
 	}
 	if (SceneDirector::GetInst()->m_scene == scene::mainscene ||
-		SceneDirector::GetInst()->m_scene == scene::dialogscene)
+		SceneDirector::GetInst()->m_scene == scene::dialogscene) {
 		m_Curtain->A = 255;
-	else
+		m_UI->A = 0;
+	}
+	else {
 		m_Curtain->A = 0;
-
+		m_UI->A = 255;
+	}
 	if (d) {
 		Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 		textTime += dt;

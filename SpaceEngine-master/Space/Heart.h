@@ -45,6 +45,10 @@ class Heart : public Object
 	bool m_isGround;
 	int m_Gravity;
 
+	bool left;
+	bool right;
+	bool up;
+	bool down;
 	
 	TextMgr* m_Text;
 public:

@@ -7,15 +7,20 @@ Heart::Heart(Vec2 Pos)
 	//red R 255 G - B -
 	//blue R 8 G 3 B 198
 
-	m_red = Sprite::Create(L"Painting/Soul/red.png",COLORKEY_BALCK);
+	m_red = Sprite::Create(L"Painting/Soul/red.png", COLORKEY_BLACK);
 	m_red->SetParent(this);
 	SetPosition(Pos);
-	m_ColBox = Sprite::Create(L"Painting/Soul/ColBox.png",COLORKEY_BALCK);
+	m_ColBox = Sprite::Create(L"Painting/Soul/ColBox.png", COLORKEY_BLACK);
 	m_Left = Sprite::Create(L"Painting/Soul/Left.png");
 	m_Right = Sprite::Create(L"Painting/Soul/Right.png");
-	m_Up= Sprite::Create(L"Painting/Soul/Up.png");
+	m_Up = Sprite::Create(L"Painting/Soul/Up.png");
 	m_Down = Sprite::Create(L"Painting/Soul/Down.png");
-	
+
+	m_ColBox->m_Visible = false;
+	m_Left->m_Visible = false;
+	m_Right->m_Visible = false;
+	m_Up->m_Visible = false;
+	m_Down->m_Visible = false;
 	stime = 0;
 	a = false;
 	m_Hp = 92;
@@ -24,6 +29,7 @@ Heart::Heart(Vec2 Pos)
 	m_Text->Init(60, true, false, L"Determination Mono");
 	m_Text->SetColor(255, 255, 255, 255);
 	m_Move = Soul_Movement::NONE;
+	m_Color = Soul_Color::RED;
 	m_Start = new SoundMgr("Sound/Start.mp3", false);
 	m_Start->play();
 	m_Start->volumeUp();
@@ -46,36 +52,43 @@ Heart::~Heart()
 void Heart::Update(float deltaTime, float Time)
 {
 	m_isGround = false;
+	left = false;
+	right= false;
+	up= false;
+	down = false;
 
 	ObjMgr->CollisionCheak(this, "Bone");
 	ObjMgr->CollisionCheak(this, "BlueBone");
 	ObjMgr->CollisionCheak(this, "GasterBlaster");
-	
 	ObjMgr->CollisionCheak(this, "Platform");
-	ObjMgr->CollisionCheak(this, "Ground");
+
+	ObjMgr->CollisionCheak(this, "LGround");
+	ObjMgr->CollisionCheak(this, "RGround");
+	ObjMgr->CollisionCheak(this, "UGround");
+	ObjMgr->CollisionCheak(this, "DGround");
 	//가블 레이저는 레이저에서 처리함
 
 
 	if (a == false) {
 		stime += dt;
-		if (stime > 0.15f)
-			m_red->A = 0;
-
-		if (stime > 0.25f)
-			m_red->A = 255;
-
-		if (stime > 0.35f)
-			m_red->A = 0;
-
 		if (stime > 0.45f)
-			m_red->A = 255;
+			m_Visible = false;
 
 		if (stime > 0.55f)
-			m_red->A = 0;
+			m_Visible = true;
 
-		if (stime > 0.65f)
+		if (stime > 0.65f)		
+			m_Visible = false;
+
+		if (stime > 0.75f)
+			m_Visible = true;
+
+		if (stime > 0.85f)
+			m_Visible = false;
+
+		if (stime > 1.95f)
 		{
-			m_red->A = 255;
+			m_Visible = true;
 			a = true;
 		}
 	}
@@ -84,12 +97,13 @@ void Heart::Update(float deltaTime, float Time)
 		mtime += dt;
 
 		Vec2 A, B;
-		A = m_Position;
-		B = Vec2(m_Position.x + App::GetInst()->m_Width / 2, 1080/2);
+		A = m_Position; // 좌 1810 우 3730
+						// 상 0 하 1080
+		B = Vec2(2775, 1080/2);
 		A -= B;
 		D3DXVec2Normalize(&Dir, &A);
 
-		if (mtime >= 0.f && mtime <= 0.45f)
+		if (mtime >= 0.f && mtime <= 0.35f)
 		{
 			Translate(-Dir.x * 800 * dt, -Dir.y * 800 * dt);
 		}
@@ -145,22 +159,21 @@ void Heart::Update(float deltaTime, float Time)
 	m_Start->Update(deltaTime, Time);
 	UI::GetInst()->m_Hp = m_Hp;
 
-	if (m_Gravity == _left) {
-		m_Rotation = D3DXToRadian(90);
-		m_Directon = m_Left;
-	}
-	else if (m_Gravity == _right) {
-		m_Rotation = D3DXToRadian(270);
-		m_Directon = m_Right;
-	}
-	else if (m_Gravity == _up) {
-		m_Rotation = D3DXToRadian(180);
-		m_Directon = m_Up;
-	}
-	else if (m_Gravity == _down) {
+	if (m_Color == Soul_Color::RED) {
 		m_Rotation = D3DXToRadian(0);
-		m_Directon = m_Down;
 	}
+		if (m_Gravity == _left) {
+			m_Rotation = D3DXToRadian(90);
+		}
+		else if (m_Gravity == _right) {
+			m_Rotation = D3DXToRadian(270);
+		}
+		else if (m_Gravity == _up) {
+			m_Rotation = D3DXToRadian(180);
+		}
+		else if (m_Gravity == _down) {
+			m_Rotation = D3DXToRadian(0);
+		}
 	m_ColBox->SetPosition(m_Position.x, m_Position.y);
 	m_Left->SetPosition(m_Position.x - m_Size.x / 2 - 2, m_Position.y);
 	m_Right->SetPosition(m_Position.x + m_Size.x / 2 + 2, m_Position.y);
@@ -169,10 +182,12 @@ void Heart::Update(float deltaTime, float Time)
 }
 
 
-void Heart::Move()
+void Heart::Move()//Ground를 없에고 판정을 좌표로 해보기 
 {
+	// 좌 1810 우 3730
+	// 상 0 하 1080
 	if (m_Color == Soul_Color::RED) {
-		if (INPUT->GetKey('W') == KeyState::PRESS)
+		if (INPUT->GetKey('W') == KeyState::PRESS&& m_Position.y > 0+30+16)
 		{
 			m_Move = Soul_Movement::UP;
 			m_Position.y -= m_Speed * dt;
@@ -181,7 +196,7 @@ void Heart::Move()
 		{
 			m_Move = Soul_Movement::NONE;
 		}
-		if (INPUT->GetKey('S') == KeyState::PRESS)
+		if (INPUT->GetKey('S') == KeyState::PRESS && m_Position.y < 1080-30 - 16)
 		{
 			m_Move == Soul_Movement::DOWN;
 			m_Position.y += m_Speed * dt;
@@ -190,7 +205,7 @@ void Heart::Move()
 		{
 			m_Move = Soul_Movement::NONE;
 		}
-		if (INPUT->GetKey('A') == KeyState::PRESS)
+		if (INPUT->GetKey('A') == KeyState::PRESS&& m_Position.x > 1810+30 + 16)
 		{
 			m_Move = Soul_Movement::LEFT;
 			m_Position.x -= m_Speed * dt;
@@ -199,7 +214,7 @@ void Heart::Move()
 		{
 			m_Move = Soul_Movement::NONE;
 		}
-		if (INPUT->GetKey('D') == KeyState::PRESS)
+		if (INPUT->GetKey('D') == KeyState::PRESS && m_Position.x < 3730-30 - 16)
 		{
 			m_Move = Soul_Movement::RIGHT;
 			m_Position.x += m_Speed * dt;
@@ -351,16 +366,42 @@ void Heart::OnCollision(Object* other)
 	}
 	if (other->m_Tag == "Platform") {
 		RECT rc; 
-		if (IntersectRect(&rc, &m_Directon->m_Collision, &other->m_Collision))
+		if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
 		{
 			m_isGround = true;
 		}
 	}
-	if (other->m_Tag == "Ground") {
+	if (other->m_Tag == "LGround") {
 		RECT rc;
-		if (IntersectRect(&rc, &m_Directon->m_Collision, &other->m_Collision))
+		if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
 		{
 			m_isGround = true;
+			left = true;
 		}
 	}
+	if (other->m_Tag == "RGround") {
+		RECT rc;
+		if (IntersectRect(&rc, &m_Right->m_Collision, &other->m_Collision))
+		{
+			m_isGround = true;
+			right = true;
+		}
+	}
+	if (other->m_Tag == "UGround") {
+		RECT rc;
+		if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
+		{
+			m_isGround = true;
+			up = true;
+		}
+	}
+	if (other->m_Tag == "DGround") {
+		RECT rc;
+		if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
+		{
+			m_isGround = true;
+			down = true;
+		}
+	}
+	
 }

@@ -3,20 +3,26 @@
 
 Ground::Ground(int direction)
 {
-	m_Ground = Sprite::Create(L"Painting/Map/Ground.png");
-	m_Ground->SetParent(this);
 	if (direction == _left) {
-		SetPosition(2000, 1080 / 2);
-		m_Rotation = D3DXToRadian(90);
+		m_Ground = Sprite::Create(L"Painting/Map/Wall.png");
+		m_Ground->SetParent(this);
+		SetPosition(1810, 1080 / 2);
 	}
 	if (direction == _right) {
-		SetPosition(3500, 1080 / 2);
-		m_Rotation = D3DXToRadian(90);
+		m_Ground = Sprite::Create(L"Painting/Map/Wall.png");
+		m_Ground->SetParent(this);
+		SetPosition(3735, 1080 / 2);
 	}
-	if (direction == _up)
+	if (direction == _up) {
+		m_Ground = Sprite::Create(L"Painting/Map/Ground.png");
+		m_Ground->SetParent(this);
 		SetPosition(2800, 0);
-	if (direction == _down)
+	}
+	if (direction == _down) {
+		m_Ground = Sprite::Create(L"Painting/Map/Ground.png");
+		m_Ground->SetParent(this);
 		SetPosition(2800, 1080);
+	}
 }
 
 Ground::~Ground()

@@ -4,7 +4,7 @@
 Text_Bubbles::Text_Bubbles(Vec2 Pos)
 {
 	SoundMgr::Init();
-	m_Text_Bubbles = Sprite::Create(L"Painting/sans/TextBubble.png",COLORKEY_BALCK);
+	m_Text_Bubbles = Sprite::Create(L"Painting/sans/TextBubble.png", COLORKEY_BLACK);
 	m_Text_Bubbles->SetParent(this);
 
 	SetPosition(Pos.x,Pos.y-m_Text_Bubbles->m_Size.y-10);

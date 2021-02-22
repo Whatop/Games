@@ -1,6 +1,7 @@
 #pragma once
 class UI : public Singleton<UI>
 {
+	Sprite* m_UI;
 	Sprite* m_Curtain;
 	Sprite* m_Pillar;
 	Sprite* m_HpBar;

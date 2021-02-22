@@ -40,10 +40,10 @@ void TestScene::Init()
 	rtime = 0;
 	btime = 0;
 	one = false; 
-	//ObjMgr->AddObject(new Ground(_left), "Ground");
-	//ObjMgr->AddObject(new Ground(_right), "Ground");
-	//ObjMgr->AddObject(new Ground(_up), "Ground");
-	ObjMgr->AddObject(new Ground(_down), "Ground");
+	ObjMgr->AddObject(new Ground(_left), "LGround");
+	ObjMgr->AddObject(new Ground(_right), "RGround");
+	ObjMgr->AddObject(new Ground(_up), "UGround");
+	ObjMgr->AddObject(new Ground(_down), "DGround");
 	std::cout << "----------테스트룸입장----------" << std::endl;
 }
 
@@ -130,7 +130,7 @@ void TestScene::Render()
 {
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y)
-		+ "\n" + std::to_string(dt) + "  " + std::to_string(gt), 500, 0);
+		+ "\n" + std::to_string(dt) + "  " + std::to_string(gt), 250, 900);
 	m_Text->print(std::to_string(UI::GetInst()->m_Hp), 1600, 800);
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 	//m_Line->DrawLine(m_Vertex, 5);
