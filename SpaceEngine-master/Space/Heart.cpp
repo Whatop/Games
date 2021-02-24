@@ -164,15 +164,19 @@ void Heart::Update(float deltaTime, float Time)
 	}
 		if (m_Gravity == _left) {
 			m_Rotation = D3DXToRadian(90);
+			m_Directon = m_Left;
 		}
 		else if (m_Gravity == _right) {
 			m_Rotation = D3DXToRadian(270);
+			m_Directon = m_Right;
 		}
 		else if (m_Gravity == _up) {
 			m_Rotation = D3DXToRadian(180);
+			m_Directon = m_Up;
 		}
 		else if (m_Gravity == _down) {
 			m_Rotation = D3DXToRadian(0);
+			m_Directon = m_Down;
 		}
 	m_ColBox->SetPosition(m_Position.x, m_Position.y);
 	m_Left->SetPosition(m_Position.x - m_Size.x / 2 - 2, m_Position.y);
@@ -366,7 +370,7 @@ void Heart::OnCollision(Object* other)
 	}
 	if (other->m_Tag == "Platform") {
 		RECT rc; 
-		if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
+		if (IntersectRect(&rc, &m_Directon->m_Collision, &other->m_Collision))
 		{
 			m_isGround = true;
 		}
@@ -374,6 +378,11 @@ void Heart::OnCollision(Object* other)
 	if (other->m_Tag == "LGround") {
 		RECT rc;
 		if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
+		{
+			m_isGround = true;
+			left = true;
+		}
+		if (IntersectRect(&rc, &m_Right ->m_Collision, &other->m_Collision))
 		{
 			m_isGround = true;
 			left = true;
