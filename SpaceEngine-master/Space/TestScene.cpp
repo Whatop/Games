@@ -74,6 +74,7 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 
 			//ObjMgr->AddObject(new GasterBlaster(Vec2(randomx, -400), direction), "GasterBlaster");
 			//ObjMgr->AddObject(new GasterBlaster(Vec2(randomx, -400), direction), "GasterBlaster");
+
 			ObjMgr->AddObject(new Platform(Vec2(3780, 200), _left), "Platform");
 			ObjMgr->AddObject(new Platform(Vec2(1780, 400), _right), "Platform");
 			ObjMgr->AddObject(new Platform(Vec2(3780, 600), _left), "Platform");
@@ -91,7 +92,7 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 		}
 	}
 	else if (random == 2) {
-		if (btime >= 1 && direction <= Count) {// direction < Count  조건 추가 
+		if (btime >= 1 && direction <= Count) {
 		//	(Vec2 Pos,std::string color, std::string size, int
 		/*	ObjMgr->AddObject(new Bones(Vec2(2080,100),"while","small", _right), "Bone");
 			ObjMgr->AddObject(new Bones(Vec2(2080,300),"while","middle",_right), "Bone");

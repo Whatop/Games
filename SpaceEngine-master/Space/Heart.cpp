@@ -109,7 +109,7 @@ void Heart::Update(float deltaTime, float Time)
 		}
 		else {
 			atime += dt;
-			if (atime >= 0.4f && atime <= 1.3f) {
+			if (atime >= 0.4f && atime <= 0.7f) {
 				SceneDirector::GetInst()->SetScene(scene::testscene);
 			}
 			Move();
@@ -191,6 +191,9 @@ void Heart::Move()//Ground를 없에고 판정을 좌표로 해보기
 	// 좌 1810 우 3730
 	// 상 0 하 1080
 	if (m_Color == Soul_Color::RED) {
+		std::cout << "내위치 : " << m_Position.x << std::endl;
+		std::cout << "카메라 위치: " << Camera::GetInst()->m_Position.x << std::endl;
+
 		if (INPUT->GetKey('W') == KeyState::PRESS&& m_Position.y > 0+30+16)
 		{
 			m_Move = Soul_Movement::UP;
