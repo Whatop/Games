@@ -56,7 +56,38 @@ void Heart::Update(float deltaTime, float Time)
 	right= false;
 	up= false;
 	down = false;
-
+	if (m_Gravity == _left) {
+		m_Rotation = D3DXToRadian(90);
+		m_Directon = m_Left;
+		if (!(m_Position.x > Camera::GetInst()->m_Position.x + 30 + 8)) {
+			m_Position.x = Camera::GetInst()->m_Position.x + 36;
+			m_isGround = true;
+		}
+	}
+	else if (m_Gravity == _right) {
+		m_Rotation = D3DXToRadian(270);
+		m_Directon = m_Right;
+		if (!(m_Position.x < Camera::GetInst()->m_Position.x + 1920 - 30 - 8)) {
+			m_Position.x = Camera::GetInst()->m_Position.x + 1920-36;
+			m_isGround = true;
+		}
+	}
+	else if (m_Gravity == _up) {
+		m_Rotation = D3DXToRadian(180);
+		m_Directon = m_Up;
+		if (!(m_Position.y > 0 + 30 + 8)) {
+			m_Position.y = 36;
+			m_isGround = true;
+		}
+	}
+	else if (m_Gravity == _down) {
+		m_Rotation = D3DXToRadian(0);
+		m_Directon = m_Down;
+		if (!(m_Position.y < 1080 - 30 - 8)) {
+			m_Position.y = 1080 - 36;
+			m_isGround = true;
+		}
+	}
 	ObjMgr->CollisionCheak(this, "Bone");
 	ObjMgr->CollisionCheak(this, "BlueBone");
 	ObjMgr->CollisionCheak(this, "GasterBlaster");
@@ -86,7 +117,7 @@ void Heart::Update(float deltaTime, float Time)
 		if (stime > 0.85f)
 			m_Visible = false;
 
-		if (stime > 1.95f)
+		if (stime > 0.95f)
 		{
 			m_Visible = true;
 			a = true;
@@ -109,7 +140,7 @@ void Heart::Update(float deltaTime, float Time)
 		}
 		else {
 			atime += dt;
-			if (atime >= 0.4f && atime <= 0.7f) {
+			if (atime >= 0.4f && atime <= 0.6f) {
 				SceneDirector::GetInst()->SetScene(scene::testscene);
 			}
 			Move();
@@ -139,7 +170,7 @@ void Heart::Update(float deltaTime, float Time)
 	{
 		m_Gravity = _down;
 	}
-	if (m_Color==Soul_Color::BULE&&m_Move!= Soul_Movement::JUMP)
+	if (m_Color == Soul_Color::BULE && m_Move != Soul_Movement::JUMP)
 		Gravity();
 
 	if (m_Color == Soul_Color::RED) {
@@ -162,22 +193,7 @@ void Heart::Update(float deltaTime, float Time)
 	if (m_Color == Soul_Color::RED) {
 		m_Rotation = D3DXToRadian(0);
 	}
-		if (m_Gravity == _left) {
-			m_Rotation = D3DXToRadian(90);
-			m_Directon = m_Left;
-		}
-		else if (m_Gravity == _right) {
-			m_Rotation = D3DXToRadian(270);
-			m_Directon = m_Right;
-		}
-		else if (m_Gravity == _up) {
-			m_Rotation = D3DXToRadian(180);
-			m_Directon = m_Up;
-		}
-		else if (m_Gravity == _down) {
-			m_Rotation = D3DXToRadian(0);
-			m_Directon = m_Down;
-		}
+		
 	m_ColBox->SetPosition(m_Position.x, m_Position.y);
 	m_Left->SetPosition(m_Position.x - m_Size.x / 2 - 2, m_Position.y);
 	m_Right->SetPosition(m_Position.x + m_Size.x / 2 + 2, m_Position.y);
@@ -191,40 +207,54 @@ void Heart::Move()//Ground를 없에고 판정을 좌표로 해보기
 	// 좌 1810 우 3730
 	// 상 0 하 1080
 	if (m_Color == Soul_Color::RED) {
-		std::cout << "내위치 : " << m_Position.x << std::endl;
+		std::cout << "내위치 x : " << m_Position.x << std::endl;
+		std::cout << "내위치 y : " << m_Position.y << std::endl;
 		std::cout << "카메라 위치: " << Camera::GetInst()->m_Position.x << std::endl;
+		std::cout << "카메라 위치: " << Camera::GetInst()->m_Position.y << std::endl;
 
-		if (INPUT->GetKey('W') == KeyState::PRESS&& m_Position.y > 0+30+16)
+		if (INPUT->GetKey('W') == KeyState::PRESS && m_Position.y > 0 + 30 + 8)
 		{
 			m_Move = Soul_Movement::UP;
-			m_Position.y -= m_Speed * dt;
+			m_Position.y -=m_Speed * dt;
+		}
+		else if (!(m_Position.y > 0 + 30 + 8)) {
+			m_Position.y = 36;
 		}
 		if (INPUT->GetKey('W') == KeyState::UP)
 		{
 			m_Move = Soul_Movement::NONE;
 		}
-		if (INPUT->GetKey('S') == KeyState::PRESS && m_Position.y < 1080-30 - 16)
+		if (INPUT->GetKey('S') == KeyState::PRESS && m_Position.y < 1080 - 30 - 8)
 		{
 			m_Move == Soul_Movement::DOWN;
 			m_Position.y += m_Speed * dt;
+		}
+		else if (!(m_Position.y < 1080 - 30 - 8)) {
+			m_Position.y = 1080 - 36;
 		}
 		if (INPUT->GetKey('S') == KeyState::UP)
 		{
 			m_Move = Soul_Movement::NONE;
 		}
-		if (INPUT->GetKey('A') == KeyState::PRESS&& m_Position.x > 1810+30 + 16)
+		if (INPUT->GetKey('A') == KeyState::PRESS&& m_Position.x > Camera::GetInst()->m_Position.x + 30 + 8)
 		{
 			m_Move = Soul_Movement::LEFT;
 			m_Position.x -= m_Speed * dt;
+		}
+		else if (!(m_Position.x > Camera::GetInst()->m_Position.x + 30 + 8)) {
+			m_Position.x = Camera::GetInst()->m_Position.x + 36;
 		}
 		if (INPUT->GetKey('A') == KeyState::UP)
 		{
 			m_Move = Soul_Movement::NONE;
 		}
-		if (INPUT->GetKey('D') == KeyState::PRESS && m_Position.x < 3730-30 - 16)
+		if (INPUT->GetKey('D') == KeyState::PRESS && m_Position.x < Camera::GetInst()->m_Position.x + 1920 - 30 - 8)
 		{
 			m_Move = Soul_Movement::RIGHT;
 			m_Position.x += m_Speed * dt;
+		}
+		else if (!(m_Position.x < Camera::GetInst()->m_Position.x + 1920 - 30 - 8)) {
+			m_Position.x = Camera::GetInst()->m_Position.x + 1920-36;
 		}
 		if (INPUT->GetKey('D') == KeyState::UP)
 		{
@@ -247,36 +277,51 @@ void Heart::Move()//Ground를 없에고 판정을 좌표로 해보기
 			m_JumpTime += dt * 10.6f;
 			JTime += dt;
 
+			if (m_Gravity == _left) {
+				m_Position.x = Pos.x + m_JumpAccel;
+			}
+			else if (m_Gravity == _right) {
+				m_Position.x = Pos.x - m_JumpAccel;
+			}
+			else if (m_Gravity == _up) {
+				m_Position.y = Pos.y + m_JumpAccel;
+			}
+			else if (m_Gravity == _down) {
+				m_Position.y = Pos.y - m_JumpAccel;
+			}
+
 			if (INPUT->GetKey('W') == KeyState::UP) {
 				m_PrevAccel = 2000.f;
 			}
 
-			if (INPUT->GetKey('A') == KeyState::PRESS && m_Gravity == _down)
-					m_Position.x -= m_Speed * dt;
-
-			else if (INPUT->GetKey('D') == KeyState::PRESS && m_Gravity == _down)
-					m_Position.x += m_Speed * dt;
-
-			if (INPUT->GetKey('A') == KeyState::PRESS && m_Gravity == _up)
-				m_Position.x += m_Speed * dt;
-
-			else if (INPUT->GetKey('D') == KeyState::PRESS && m_Gravity == _up)
-				m_Position.x -= m_Speed * dt;
-
-
+			if (INPUT->GetKey('A') == KeyState::PRESS) {
 				if (m_Gravity == _left) {
-					m_Position.x = Pos.x + m_JumpAccel;
+					m_Position.y -= m_Speed * dt;
 				}
 				else if (m_Gravity == _right) {
-					m_Position.x = Pos.x - m_JumpAccel;
+					m_Position.y += m_Speed * dt;
 				}
 				else if (m_Gravity == _up) {
-					m_Position.y = Pos.y + m_JumpAccel;
+					m_Position.x += m_Speed * dt;
 				}
 				else if (m_Gravity == _down) {
-					m_Position.y = Pos.y - m_JumpAccel;
+					m_Position.x -= m_Speed * dt;
 				}
-
+			}
+			else if (INPUT->GetKey('D') == KeyState::PRESS) {
+				if (m_Gravity == _left) {
+					m_Position.y += m_Speed * dt;
+				}
+				else if (m_Gravity == _right) {
+					m_Position.y -= m_Speed * dt;
+				}
+				else if (m_Gravity == _up) {
+					m_Position.x -= m_Speed * dt;
+				}
+				else if (m_Gravity == _down) {
+					m_Position.x += m_Speed * dt;
+				}
+			}
 				if (m_PrevAccel > m_JumpAccel)
 				{
 					JTime = 0.f;
@@ -290,7 +335,30 @@ void Heart::Move()//Ground를 없에고 판정을 좌표로 해보기
 			if (INPUT->GetKey('A') == KeyState::PRESS)
 			{
 				m_Move = Soul_Movement::LEFT;
-				m_Position.x -= m_Speed * dt;
+				if (m_Gravity == _left && m_Position.y > 0 + 30 + 8) {
+					m_Position.y -= m_Speed * dt;
+				}
+				else if (!(m_Position.y > 0 + 30 + 8)) {
+					m_Position.y = 36;
+				}
+				if (m_Gravity == _right && m_Position.y < 1080 - 30 - 8) {
+					m_Position.y += m_Speed * dt;
+				}
+				else if (!(m_Position.y < 1080 - 30 - 8)) {
+					m_Position.y = 1080 - 36;
+				}
+				if (m_Gravity == _up && m_Position.x < Camera::GetInst()->m_Position.x + 1920 - 30 - 8) {
+					m_Position.x += m_Speed * dt;
+				}
+				else if (!(m_Position.x < Camera::GetInst()->m_Position.x + 1920 - 30 - 8)) {
+					m_Position.x = Camera::GetInst()->m_Position.x + 1920 - 36;
+				}
+				if (m_Gravity == _down && m_Position.x > Camera::GetInst()->m_Position.x + 30 + 8) {
+					m_Position.x -= m_Speed * dt;
+				}
+				else if (!(m_Position.x > Camera::GetInst()->m_Position.x + 30 + 8)) {
+					m_Position.x = Camera::GetInst()->m_Position.x + 36;
+				}
 			}
 			if (INPUT->GetKey('A') == KeyState::UP)
 			{
@@ -299,7 +367,30 @@ void Heart::Move()//Ground를 없에고 판정을 좌표로 해보기
 			if (INPUT->GetKey('D') == KeyState::PRESS)
 			{
 				m_Move = Soul_Movement::RIGHT;
-				m_Position.x += m_Speed * dt;
+				if (m_Gravity == _left && m_Position.y < 1080 - 30 - 8) {
+					m_Position.y += m_Speed * dt;
+				}
+				else if (!(m_Position.y < 1080 - 30 - 8)) {
+					m_Position.y = 1080 - 36;
+				}
+				if (m_Gravity == _right && m_Position.y > 0 + 30 + 8) {
+					m_Position.y -= m_Speed * dt;
+				}
+				else if (!(m_Position.y > 0 + 30 + 8)) {
+					m_Position.y = 36;
+				}
+				if (m_Gravity == _up && m_Position.x > Camera::GetInst()->m_Position.x + 30 + 8) {
+					m_Position.x -= m_Speed * dt;
+				}
+				else if (!(m_Position.x > Camera::GetInst()->m_Position.x + 30 + 8)) {
+					m_Position.x = Camera::GetInst()->m_Position.x + 36;
+				}
+				if (m_Gravity == _down && m_Position.x < Camera::GetInst()->m_Position.x + 1920 - 30 - 8) {
+					m_Position.x += m_Speed * dt;
+				}
+				else if (!(m_Position.x < Camera::GetInst()->m_Position.x + 1920 - 30 - 8)) {
+					m_Position.x = Camera::GetInst()->m_Position.x + 1920 - 36;
+				}
 			}
 			if (INPUT->GetKey('D') == KeyState::UP)
 			{
@@ -381,11 +472,6 @@ void Heart::OnCollision(Object* other)
 	if (other->m_Tag == "LGround") {
 		RECT rc;
 		if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
-		{
-			m_isGround = true;
-			left = true;
-		}
-		if (IntersectRect(&rc, &m_Right ->m_Collision, &other->m_Collision))
 		{
 			m_isGround = true;
 			left = true;
