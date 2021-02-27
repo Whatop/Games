@@ -93,10 +93,10 @@ void Heart::Update(float deltaTime, float Time)
 	ObjMgr->CollisionCheak(this, "GasterBlaster");
 	ObjMgr->CollisionCheak(this, "Platform");
 
-	ObjMgr->CollisionCheak(this, "LGround");
-	ObjMgr->CollisionCheak(this, "RGround");
-	ObjMgr->CollisionCheak(this, "UGround");
-	ObjMgr->CollisionCheak(this, "DGround");
+	//ObjMgr->CollisionCheak(this, "LGround");
+	//ObjMgr->CollisionCheak(this, "RGround");
+	//ObjMgr->CollisionCheak(this, "UGround");
+	//ObjMgr->CollisionCheak(this, "DGround"); 좌표로 처리함
 	//가블 레이저는 레이저에서 처리함
 
 
@@ -469,37 +469,37 @@ void Heart::OnCollision(Object* other)
 			m_isGround = true;
 		}
 	}
-	if (other->m_Tag == "LGround") {
-		RECT rc;
-		if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
-		{
-			m_isGround = true;
-			left = true;
-		}
-	}
-	if (other->m_Tag == "RGround") {
-		RECT rc;
-		if (IntersectRect(&rc, &m_Right->m_Collision, &other->m_Collision))
-		{
-			m_isGround = true;
-			right = true;
-		}
-	}
-	if (other->m_Tag == "UGround") {
-		RECT rc;
-		if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
-		{
-			m_isGround = true;
-			up = true;
-		}
-	}
-	if (other->m_Tag == "DGround") {
-		RECT rc;
-		if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
-		{
-			m_isGround = true;
-			down = true;
-		}
-	}
+	//if (other->m_Tag == "LGround") {
+	//	RECT rc;
+	//	if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
+	//	{
+	//		m_isGround = true;
+	//		left = true;
+	//	}
+	//}
+	//if (other->m_Tag == "RGround") {
+	//	RECT rc;
+	//	if (IntersectRect(&rc, &m_Right->m_Collision, &other->m_Collision))
+	//	{
+	//		m_isGround = true;
+	//		right = true;
+	//	}
+	//}
+	//if (other->m_Tag == "UGround") {
+	//	RECT rc;
+	//	if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
+	//	{
+	//		m_isGround = true;
+	//		up = true;
+	//	}
+	//}
+	//if (other->m_Tag == "DGround") {
+	//	RECT rc;
+	//	if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
+	//	{
+	//		m_isGround = true;
+	//		down = true;
+	//	}
+	//}
 	
 }
