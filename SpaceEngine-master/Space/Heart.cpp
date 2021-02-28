@@ -52,6 +52,7 @@ Heart::~Heart()
 void Heart::Update(float deltaTime, float Time)
 {
 	m_isGround = false;
+	m_Wall = false;
 	left = false;
 	right= false;
 	up= false;
@@ -63,6 +64,10 @@ void Heart::Update(float deltaTime, float Time)
 			m_Position.x = Camera::GetInst()->m_Position.x + 36;
 			m_isGround = true;
 		}
+		if (!(m_Position.x < Camera::GetInst()->m_Position.x + 1920 - 30 - 8)) {
+			m_Position.x = Camera::GetInst()->m_Position.x + 1920 - 36;
+			m_Wall = true;
+		}
 	}
 	else if (m_Gravity == _right) {
 		m_Rotation = D3DXToRadian(270);
@@ -70,6 +75,10 @@ void Heart::Update(float deltaTime, float Time)
 		if (!(m_Position.x < Camera::GetInst()->m_Position.x + 1920 - 30 - 8)) {
 			m_Position.x = Camera::GetInst()->m_Position.x + 1920-36;
 			m_isGround = true;
+		}
+		if (!(m_Position.x > Camera::GetInst()->m_Position.x + 30 + 8)) {
+			m_Position.x = Camera::GetInst()->m_Position.x + 36;
+			m_Wall = true;
 		}
 	}
 	else if (m_Gravity == _up) {
@@ -79,6 +88,10 @@ void Heart::Update(float deltaTime, float Time)
 			m_Position.y = 36;
 			m_isGround = true;
 		}
+		if (!(m_Position.y < 1080 - 30 - 8)) {
+			m_Position.y = 1080 - 36;
+			m_Wall = true;
+		}
 	}
 	else if (m_Gravity == _down) {
 		m_Rotation = D3DXToRadian(0);
@@ -86,6 +99,10 @@ void Heart::Update(float deltaTime, float Time)
 		if (!(m_Position.y < 1080 - 30 - 8)) {
 			m_Position.y = 1080 - 36;
 			m_isGround = true;
+		}
+		if (!(m_Position.y > 0 + 30 + 8)) {
+			m_Position.y = 36;
+			m_Wall = true;
 		}
 	}
 	ObjMgr->CollisionCheak(this, "Bone");
@@ -290,7 +307,7 @@ void Heart::Move()//Ground를 없에고 판정을 좌표로 해보기
 				m_Position.y = Pos.y - m_JumpAccel;
 			}
 
-			if (INPUT->GetKey('W') == KeyState::UP) {
+			if (INPUT->GetKey('W') == KeyState::UP||m_Wall) {
 				m_PrevAccel = 2000.f;
 			}
 

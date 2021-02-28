@@ -44,7 +44,7 @@ class Heart : public Object
 	bool m_isFall;
 	bool m_isGround;
 	int m_Gravity;
-
+	bool m_Wall;//¹Ý´ë º®
 	bool left;
 	bool right;
 	bool up;
@@ -58,6 +58,7 @@ public:
 	float stime;
 	float mtime;
 	float atime;
+
 	void Update(float deltaTime, float Time);
 	void Render();	
 	void OnCollision(Object* other);
