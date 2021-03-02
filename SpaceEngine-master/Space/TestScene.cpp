@@ -4,7 +4,6 @@
 #include "Laser.h"
 #include "Bones.h"
 #include "Platform.h"
-#include "Ground.h"
 #include "UI.h"
 
 
@@ -40,10 +39,6 @@ void TestScene::Init()
 	rtime = 0;
 	btime = 0;
 	one = false; 
-	ObjMgr->AddObject(new Ground(_left), "LGround");
-	ObjMgr->AddObject(new Ground(_right), "RGround");
-	ObjMgr->AddObject(new Ground(_up), "UGround");
-	ObjMgr->AddObject(new Ground(_down), "DGround");
 	std::cout << "----------테스트룸입장----------" << std::endl;
 }
 

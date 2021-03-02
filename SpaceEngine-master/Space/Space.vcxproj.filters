@@ -159,9 +159,6 @@
     <ClCompile Include="Platform.cpp">
       <Filter>Game\Object\Sans\Attack</Filter>
     </ClCompile>
-    <ClCompile Include="Ground.cpp">
-      <Filter>Game\Object\Interaction</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -280,9 +277,6 @@
     </ClInclude>
     <ClInclude Include="Platform.h">
       <Filter>Game\Object\Sans\Attack</Filter>
-    </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>Game\Object\Interaction</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
