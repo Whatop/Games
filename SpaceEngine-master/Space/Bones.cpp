@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Bones.h"
 
-Bones::Bones(Vec2 Pos, std::string color, std::string size, int direction)
+Bones::Bones(Vec2 Pos, std::string color, std::string size, int direction,float Speed)
 {
 	if (size == "small") {
 		m_Bones = Sprite::Create(L"Painting/sans/Attack/Bone_small.png", COLORKEY_BLACK);
@@ -38,7 +38,7 @@ Bones::Bones(Vec2 Pos, std::string color, std::string size, int direction)
 	m_ColBox->A = 0;
 	m_Bones->SetPosition(Pos);
 	m_direction = direction;
-	m_Speed = 500.f;//속도설정 빠름 보통 해놀까?
+	m_Speed = Speed;//속도설정 빠름 보통 해놀까?
 	dtime = 0.f;
 
 }

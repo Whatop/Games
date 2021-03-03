@@ -92,17 +92,17 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 	
 		if (btime >= 1 && direction <= Count) {
 		//	(Vec2 Pos,std::string color, std::string size, int
-			ObjMgr->AddObject(new Bones(Vec2(1810,100),"while","long", _right), "Bone");//뼈에 스피드 주기
+			ObjMgr->AddObject(new Bones(Vec2(1810,100),"while","long", _right, 500.f), "Bone");//뼈에 스피드 주기
 			//ObjMgr->AddObject(new Bones(Vec2(2080,300),"while","middle",_right), "Bone");
-			ObjMgr->AddObject(new Bones(Vec2(1810,500),"while","long",_right), "Bone");
+			ObjMgr->AddObject(new Bones(Vec2(1810,500),"while","long",_right, 500.f), "Bone");
 			//ObjMgr->AddObject(new Bones(Vec2(2080,700),"while","long", _right), "Bone");
-			ObjMgr->AddObject(new Bones(Vec2(1810, 900), "while", "long", _right), "Bone");
+			ObjMgr->AddObject(new Bones(Vec2(1810, 900), "while", "long", _right, 500.f), "Bone");
 			//ObjMgr->AddObject(new Bones(Vec2(2700,-100),"while","lie", _down), "Bone");
 
 			//ObjMgr->AddObject(new Bones(Vec2(3480, 100), "while", "small", _left), "Bone");
-			ObjMgr->AddObject(new Bones(Vec2(3730, 300), "while", "long", _left), "Bone");
+			ObjMgr->AddObject(new Bones(Vec2(3730, 300), "while", "long", _left, 500.f), "Bone");
 			//ObjMgr->AddObject(new Bones(Vec2(3480, 500), "while", "big", _left), "Bone");
-			ObjMgr->AddObject(new Bones(Vec2(3730, 700), "while", "long", _left), "Bone");
+			ObjMgr->AddObject(new Bones(Vec2(3730, 700), "while", "long", _left, 500.f), "Bone");
 			//ObjMgr->AddObject(new Bones(Vec2(2700, 1180), "while", "lie", _up), "Bone");
 
 			ObjMgr->AddObject(new Platform(Vec2(3780, 200), _left), "Platform");

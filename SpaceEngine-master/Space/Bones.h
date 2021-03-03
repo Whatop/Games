@@ -7,7 +7,7 @@ class Bones : public Object
 	float m_Speed;
 	float dtime;
 public:
-	Bones(Vec2 Pos,std::string type, std::string size, int);
+	Bones(Vec2 Pos,std::string type, std::string size, int,float);
 	~Bones();
 
 	void Update(float deltaTime, float Time);
