@@ -6,6 +6,7 @@ class TestScene : public Scene
 	SoundMgr* m_TSBgm;
 	float rtime;
 	float btime;
+	float dtime;
 	float randomx;
 	float randomy;
 	int Count;
