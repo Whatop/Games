@@ -30,7 +30,9 @@ class Heart : public Object
 	bool f;
 	Vec2 Dir;
 	SoundMgr* m_Bgm;
-	SoundMgr* m_Start																																										;
+	SoundMgr* m_Start;
+	SoundMgr* m_hit;
+	
 	Vec2 Pos;
 	float m_Speed;
 	int m_Hp;

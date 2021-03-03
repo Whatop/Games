@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Save.h"
 
-Save::Save(Vec2 Pos)
+Save::Save(Vec2 Pos) // 사운드는 눌렀을때 나오기 때문에 Player에 있다.  회복 -> 저장 
+//눌렀을때 회복, 저장끝낼떄 저장
 {
 	m_Save = new Animation();
 	m_Save->SetParent(this);

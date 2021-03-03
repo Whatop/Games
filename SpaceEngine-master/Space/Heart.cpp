@@ -35,6 +35,10 @@ Heart::Heart(Vec2 Pos)
 	m_Start->volumeUp();
 	m_Start->volumeUp();
 
+	m_hit = new SoundMgr("Sound/hit.mp3", false);
+	m_hit->play();
+
+
 	m_JumpTime = 0.f;
 	
 	JTime = 0.f;
@@ -205,6 +209,7 @@ void Heart::Update(float deltaTime, float Time)
 		m_limit = 0;
 	}
 	m_Start->Update(deltaTime, Time);
+	m_hit->Update(deltaTime, Time);
 	UI::GetInst()->m_Hp = m_Hp;
 
 	if (m_Color == Soul_Color::RED) {
@@ -475,7 +480,7 @@ void Heart::OnCollision(Object* other)
 	if (other->m_Tag == "Laser") {
 		RECT rc;
 		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
-			m_Hp -= 1; 
+			m_Hp -= 1;
 			m_limit += 1;
 		}
 	}
