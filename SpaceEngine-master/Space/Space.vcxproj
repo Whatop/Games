@@ -22,6 +22,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="BattleScene.cpp" />
+    <ClCompile Include="BonePlate.cpp" />
     <ClCompile Include="Bones.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Chest.cpp" />
@@ -67,6 +68,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="BattleScene.h" />
+    <ClInclude Include="BonePlate.h" />
     <ClInclude Include="Bones.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Chest.h" />

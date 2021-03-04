@@ -9,7 +9,7 @@ Platform::Platform(Vec2 Pos,int direction)
 	SetPosition(Pos);
 //	m_platfrom->SetPosition(Pos);
 	m_direction = direction;
-	m_Speed = 300.f;
+	m_Speed = 200.f;
 }
 
 Platform::~Platform()

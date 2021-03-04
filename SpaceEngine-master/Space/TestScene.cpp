@@ -5,6 +5,7 @@
 #include "Bones.h"
 #include "Platform.h"
 #include "UI.h"
+#include "BonePlate.h"
 
 
 TestScene::TestScene()
@@ -40,6 +41,7 @@ void TestScene::Init()
 	btime = 0;
 	one = false; 
 	std::cout << "----------테스트룸입장----------" << std::endl;
+	ObjMgr->AddObject(new BonePlate(Vec2(1810 + 1920/2, 400)), "Bone");
 }
 
 void TestScene::Release()
