@@ -31,7 +31,7 @@ class Heart : public Object
 	Vec2 Dir;
 	SoundMgr* m_Bgm;
 	SoundMgr* m_Start;
-	SoundMgr* m_hit;
+	SoundMgr* m_hitsound;
 	
 	Vec2 Pos;
 	float m_Speed;
@@ -42,6 +42,7 @@ class Heart : public Object
 	float JTime; //점프 강도 정해주는 시간
 	float m_PrevAccel;
 	float m_JumpAccel;
+	float m_spawnsound;
 
 	bool m_isFall;
 	bool m_isGround;
@@ -51,6 +52,7 @@ class Heart : public Object
 	bool right;
 	bool up;
 	bool down;
+	bool hit;
 	
 	TextMgr* m_Text;
 public:

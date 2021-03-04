@@ -35,9 +35,7 @@ Heart::Heart(Vec2 Pos)
 	m_Start->volumeUp();
 	m_Start->volumeUp();
 
-	m_hit = new SoundMgr("Sound/hit.mp3", false);
-	m_hit->play();
-
+	m_hitsound = new SoundMgr("Sound/hit.mp3", false);
 
 	m_JumpTime = 0.f;
 	
@@ -55,12 +53,14 @@ Heart::~Heart()
 
 void Heart::Update(float deltaTime, float Time)
 {
+	m_spawnsound += dt;
 	m_isGround = false;
 	m_Wall = false;
 	left = false;
 	right= false;
 	up= false;
 	down = false;
+	
 	if (m_Gravity == _left) {
 		m_Rotation = D3DXToRadian(90);
 		m_Directon = m_Left;
@@ -204,12 +204,18 @@ void Heart::Update(float deltaTime, float Time)
 		m_red->G = 3;
 		m_red->B = 198;
 	}
-	if (m_limit > 20) {
+	if (m_limit > 20) { //딜 덜들어가도록
 		m_Hp += 1;
 		m_limit = 0;
 	}
 	m_Start->Update(deltaTime, Time);
-	m_hit->Update(deltaTime, Time);
+	m_hitsound->Update(deltaTime, Time);
+	if (hit) {
+		if (m_spawnsound >= 20*dt) {
+			m_hitsound->play();
+		}
+		hit = false;
+	}
 	UI::GetInst()->m_Hp = m_Hp;
 
 	if (m_Color == Soul_Color::RED) {
@@ -457,24 +463,27 @@ void Heart::Render()
 	m_Down->Render();
 }
 
-void Heart::OnCollision(Object* other)
+void Heart::OnCollision(Object* other) //여따 독추가
 {
 	if (other->m_Tag == "BlueBone" && m_Move != Soul_Movement::NONE) {
 		RECT rc;
 		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
 			m_Hp -= 1;
+			hit = true;
 		}
 	}
 	if (other->m_Tag == "Bone") {
 		RECT rc;
 		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
 			m_Hp -= 1;
+			hit = true;
 		}
 	}
 	if (other->m_Tag == "GasterBlaster") {
 		RECT rc;
 		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
 			m_Hp -= 1;
+			hit = true;
 		}
 	}
 	if (other->m_Tag == "Laser") {
@@ -482,6 +491,7 @@ void Heart::OnCollision(Object* other)
 		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision)) {
 			m_Hp -= 1;
 			m_limit += 1;
+			hit = true;
 		}
 	}
 	if (other->m_Tag == "Platform") {
@@ -491,37 +501,4 @@ void Heart::OnCollision(Object* other)
 			m_isGround = true;
 		}
 	}
-	//if (other->m_Tag == "LGround") {
-	//	RECT rc;
-	//	if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
-	//	{
-	//		m_isGround = true;
-	//		left = true;
-	//	}
-	//}
-	//if (other->m_Tag == "RGround") {
-	//	RECT rc;
-	//	if (IntersectRect(&rc, &m_Right->m_Collision, &other->m_Collision))
-	//	{
-	//		m_isGround = true;
-	//		right = true;
-	//	}
-	//}
-	//if (other->m_Tag == "UGround") {
-	//	RECT rc;
-	//	if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
-	//	{
-	//		m_isGround = true;
-	//		up = true;
-	//	}
-	//}
-	//if (other->m_Tag == "DGround") {
-	//	RECT rc;
-	//	if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
-	//	{
-	//		m_isGround = true;
-	//		down = true;
-	//	}
-	//}
-	
 }
