@@ -31,14 +31,14 @@
     <Filter Include="Game\Object\Interaction">
       <UniqueIdentifier>{f5ec3b74-7972-47d7-a329-111cbc6a43d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Scene">
-      <UniqueIdentifier>{6a0b488c-024d-464b-b7e5-e43bc432ea1d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Object\Sans\Attack">
       <UniqueIdentifier>{c92192cb-4bab-4df4-aa73-714a38421db7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sound">
       <UniqueIdentifier>{04f4aafb-3ea5-4a96-aca2-135dd29db1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene">
+      <UniqueIdentifier>{6a0b488c-024d-464b-b7e5-e43bc432ea1d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -91,7 +91,7 @@
       <Filter>Game\Mgrs</Filter>
     </ClCompile>
     <ClCompile Include="MainScene.cpp">
-      <Filter>Game\Object\Scene</Filter>
+      <Filter>Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Game\Object\Player</Filter>
@@ -106,7 +106,7 @@
       <Filter>Game\Object\Sans</Filter>
     </ClCompile>
     <ClCompile Include="BattleScene.cpp">
-      <Filter>Game\Object\Scene</Filter>
+      <Filter>Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Chest.cpp">
       <Filter>Game\Object\Interaction</Filter>
@@ -136,7 +136,7 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="TestScene.cpp">
-      <Filter>Game\Object\Scene</Filter>
+      <Filter>Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Bones.cpp">
       <Filter>Game\Object\Sans\Attack</Filter>
@@ -145,7 +145,7 @@
       <Filter>Game\Object\Sans\Attack</Filter>
     </ClCompile>
     <ClCompile Include="GameOver.cpp">
-      <Filter>Game\Object\Scene</Filter>
+      <Filter>Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Laser.cpp">
       <Filter>Game\Object\Sans\Attack</Filter>
@@ -214,7 +214,7 @@
       <Filter>Game\Mgrs</Filter>
     </ClInclude>
     <ClInclude Include="MainScene.h">
-      <Filter>Game\Object\Scene</Filter>
+      <Filter>Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Game\Object\Player</Filter>
@@ -229,7 +229,7 @@
       <Filter>Game\Object\Sans</Filter>
     </ClInclude>
     <ClInclude Include="BattleScene.h">
-      <Filter>Game\Object\Scene</Filter>
+      <Filter>Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Chest.h">
       <Filter>Game\Object\Interaction</Filter>
@@ -256,7 +256,7 @@
       <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="TestScene.h">
-      <Filter>Game\Object\Scene</Filter>
+      <Filter>Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Bones.h">
       <Filter>Game\Object\Sans\Attack</Filter>
@@ -265,7 +265,7 @@
       <Filter>Game\Object\Sans\Attack</Filter>
     </ClInclude>
     <ClInclude Include="GameOver.h">
-      <Filter>Game\Object\Scene</Filter>
+      <Filter>Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Laser.h">
       <Filter>Game\Object\Sans\Attack</Filter>

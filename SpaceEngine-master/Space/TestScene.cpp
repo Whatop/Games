@@ -134,7 +134,7 @@ void TestScene::Render()
 	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y)
 		+ "\n" + std::to_string(dt) + "  " + std::to_string(gt), 250, 900);
 	m_Text->print(std::to_string(UI::GetInst()->m_Hp), 1600, 800);
-	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
+	Renderer::GetInst()->GetSprite()->End();
 	//m_Line->DrawLine(m_Vertex, 5);
 
 }
