@@ -52,29 +52,37 @@ void UI::Release()
 void UI::Update()
 {
 	SetCursor(NULL);
-	if (Game::GetInst()->m_MouseShape == MouseShape::BONESMALL) {
-		m_Mouse = Sprite::Create(L"Painting/sans/Attack/Bone_small.png",COLORKEY_BLACK);
-	}
-	if (Game::GetInst()->m_MouseShape == MouseShape::BONE) {
-		m_Mouse = Sprite::Create(L"Painting/sans/Attack/Bone.png", COLORKEY_BLACK);
-	}
-	if (Game::GetInst()->m_MouseShape == MouseShape::BONEBIG) {
-		m_Mouse = Sprite::Create(L"Painting/sans/Attack/Bone_big.png", COLORKEY_BLACK);
-	}
-	if (Game::GetInst()->m_MouseShape == MouseShape::BONELONG) {
-		m_Mouse = Sprite::Create(L"Painting/sans/Attack/Bone_long.png", COLORKEY_BLACK);
-	}
-	if (Game::GetInst()->m_MouseShape == MouseShape::BONELIE) {
-		m_Mouse = Sprite::Create(L"Painting/sans/Attack/Bone_lie.png", COLORKEY_BLACK);
-	}
-	if (Game::GetInst()->m_MouseShape == MouseShape::GASTERBALSTER) {
-		m_Mouse = Sprite::Create(L"Painting/sans/Attack/GasterBlaster/gasterblaster1.png", COLORKEY_GASTER);
-	}
-	if (Game::GetInst()->m_MouseShape == MouseShape::PLATFORM) {
-		m_Mouse = Sprite::Create(L"Painting/platfrom/platfrom.png", COLORKEY_BLACK);
-	}
-	
-	m_Mouse->SetPosition(INPUT->GetMousePos());
+
+		if (Game::GetInst()->m_MouseShape == MouseShape::BONESMALL) {
+			m_Mouse = Sprite::Create(L"Painting/sans/Attack/Bone_small.png", COLORKEY_BLACK);
+		}
+		if (Game::GetInst()->m_MouseShape == MouseShape::BONE) {
+			m_Mouse = Sprite::Create(L"Painting/sans/Attack/Bone.png", COLORKEY_BLACK);
+		}
+		if (Game::GetInst()->m_MouseShape == MouseShape::BONEBIG) {
+			m_Mouse = Sprite::Create(L"Painting/sans/Attack/Bone_big.png", COLORKEY_BLACK);
+		}
+		if (Game::GetInst()->m_MouseShape == MouseShape::BONELONG) {
+			m_Mouse = Sprite::Create(L"Painting/sans/Attack/Bone_long.png", COLORKEY_BLACK);
+		}
+		if (Game::GetInst()->m_MouseShape == MouseShape::BONELIE) {
+			m_Mouse = Sprite::Create(L"Painting/sans/Attack/Bone_lie.png", COLORKEY_BLACK);
+		}
+		if (Game::GetInst()->m_MouseShape == MouseShape::GASTERBALSTER) {
+			m_Mouse = Sprite::Create(L"Painting/sans/Attack/GasterBlaster/gasterblaster1.png", COLORKEY_GASTER);
+		}
+		if (Game::GetInst()->m_MouseShape == MouseShape::PLATFORM) {
+			m_Mouse = Sprite::Create(L"Painting/platfrom/platfrom.png", COLORKEY_BLACK);
+		}
+
+		m_Mouse->SetPosition(INPUT->GetMousePos());
+		if (SceneDirector::GetInst()->m_scene != scene::testscene) {
+			m_Mouse->m_Visible = false;
+		}
+		else {
+			m_Mouse->m_Visible = true;
+		}
+
 	for (auto& iter : ObjMgr->m_Objects)
 	{
 		if (iter->m_Tag == "Player")

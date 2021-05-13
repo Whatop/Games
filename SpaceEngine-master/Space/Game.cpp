@@ -96,7 +96,7 @@ void Game::Rota(bool dir)
 		}
 	}
 	else if (!dir) {
-		if (Rotae <= 4) {
+		if (Rotae <= 1) {
 			Rotae = 4;
 		}
 		else {

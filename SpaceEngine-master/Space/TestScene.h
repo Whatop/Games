@@ -12,7 +12,8 @@ class TestScene : public Scene
 	Sprite* DirButton[5];
 	Sprite* ActButton[8];
 	Sprite* Mouse;
-
+	std::string m_Name;
+	std::string m_Mode;
 
 	bool m_Puase;
 	float rtime;
