@@ -54,7 +54,6 @@ public:
 	void SetDestroy(bool destroy) { m_Destroy = destroy; }
 	void SetTag(const std::string tag);
 	void SetParent(Object* obj);
-	void SetVertex();
 public:
 	bool GetDestroy() { return m_Destroy; }
 };

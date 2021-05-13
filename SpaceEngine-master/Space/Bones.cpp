@@ -49,23 +49,24 @@ Bones::~Bones()
 
 void Bones::Update(float deltaTime, float Time)
 {
-	dtime += dt;
-	if (m_direction == _left) {
-		m_Position.x -= m_Speed * dt;
+	if (Game::GetInst()->m_Puase == false) {
+		dtime += dt;
+		if (m_direction == _left) {
+			m_Position.x -= m_Speed * dt;
+		}
+		else if (m_direction == _right) {
+			m_Position.x += m_Speed * dt;
+		}
+		else if (m_direction == _up) {
+			m_Position.y -= m_Speed * dt;
+		}
+		else if (m_direction == _down) {
+			m_Position.y += m_Speed * dt;
+		}
+		if (dtime >= 5)
+			ObjMgr->RemoveObject(this);
+		m_Bones->SetPosition(m_Position.x, m_Position.y);
 	}
-	else if(m_direction == _right) {
-		m_Position.x += m_Speed * dt;
-	}
-	else if (m_direction == _up) {
-		m_Position.y -= m_Speed * dt;
-	}
-	else if (m_direction ==_down) {
-		m_Position.y += m_Speed * dt;
-	}
-	if (dtime >= 5)
-		ObjMgr->RemoveObject(this);
-	m_Bones->SetPosition(m_Position.x, m_Position.y );
-	
 }
 
 void Bones::Render()

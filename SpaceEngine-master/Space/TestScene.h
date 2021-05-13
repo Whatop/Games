@@ -4,6 +4,17 @@ class TestScene : public Scene
 	LineMgr* m_Line;
 	TextMgr* m_Text;
 	SoundMgr* m_TSBgm;
+
+	Sprite* StopButton;
+	Sprite* ResumeButton;
+	Sprite* TempButton;
+
+	Sprite* DirButton[5];
+	Sprite* ActButton[8];
+	Sprite* Mouse;
+
+
+	bool m_Puase;
 	float rtime;
 	float btime;
 	float dtime;
@@ -15,12 +26,14 @@ class TestScene : public Scene
 	bool one;
 	int random;
 	bool brandom;
+	bool Mode;
 public:
 	TestScene();
 	~TestScene();
 
 	void Init();
 	void Release();
+	void Button();
 
 	void Update(float deltaTime, float time);
 	void Render();

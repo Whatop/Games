@@ -15,7 +15,7 @@ Chest::~Chest()
 
 void Chest::Update(float deltaTime, float Time)
 {
-	m_Rotation += D3DXToRadian(1);
+//	m_Rotation += D3DXToRadian(1);
 }
 
 void Chest::Render()

@@ -16,6 +16,8 @@ Heart::Heart(Vec2 Pos)
 	m_Up = Sprite::Create(L"Painting/Soul/Up.png");
 	m_Down = Sprite::Create(L"Painting/Soul/Down.png");
 
+
+
 	m_ColBox->m_Visible = false;
 	m_Left->m_Visible = false;
 	m_Right->m_Visible = false;
@@ -40,6 +42,7 @@ Heart::Heart(Vec2 Pos)
 	m_JumpTime = 0.f;
 	
 	JTime = 0.f;
+	QTime = 0.1f;
 	m_isFall = false;
 	m_isGround = false;
 	m_Gravity = _down;
@@ -109,64 +112,18 @@ void Heart::Update(float deltaTime, float Time)
 			m_Wall = true;
 		}
 	}
-	ObjMgr->CollisionCheak(this, "Bone");
-	ObjMgr->CollisionCheak(this, "BlueBone");
-	ObjMgr->CollisionCheak(this, "GasterBlaster");
-	ObjMgr->CollisionCheak(this, "Platform");
-
+	if (Game::GetInst()->m_Puase == false) {
+		ObjMgr->CollisionCheak(this, "Bone");
+		ObjMgr->CollisionCheak(this, "BlueBone");
+		ObjMgr->CollisionCheak(this, "GasterBlaster");
+		ObjMgr->CollisionCheak(this, "Platform");
+	}
 	//ObjMgr->CollisionCheak(this, "LGround");
 	//ObjMgr->CollisionCheak(this, "RGround");
 	//ObjMgr->CollisionCheak(this, "UGround");
 	//ObjMgr->CollisionCheak(this, "DGround"); 좌표로 처리함
 	//가블 레이저는 레이저에서 처리함
 
-
-	if (a == false) {
-		stime += dt;
-		if (stime > 0.45f)
-			m_Visible = false;
-
-		if (stime > 0.55f)
-			m_Visible = true;
-
-		if (stime > 0.65f)		
-			m_Visible = false;
-
-		if (stime > 0.75f)
-			m_Visible = true;
-
-		if (stime > 0.85f)
-			m_Visible = false;
-
-		if (stime > 0.95f)
-		{
-			m_Visible = true;
-			a = true;
-		}
-	}
-
-	else if (a == true) {
-		mtime += dt;
-
-		Vec2 A, B;
-		A = m_Position; // 좌 1810 우 3730
-						// 상 0 하 1080
-		B = Vec2(2775, 1080/2);
-		A -= B;
-		D3DXVec2Normalize(&Dir, &A);
-
-		if (mtime >= 0.f && mtime <= 0.35f)
-		{
-			Translate(-Dir.x * 800 * dt, -Dir.y * 800 * dt);
-		}
-		else {
-			atime += dt;
-			if (atime >= 0.4f && atime <= 0.6f) {
-				SceneDirector::GetInst()->SetScene(scene::testscene);
-			}
-			Move();
-		}
-	}
 	if (INPUT->GetKey(VK_F1) == KeyState::DOWN)
 	{
 		m_Color = Soul_Color::RED;
@@ -208,13 +165,62 @@ void Heart::Update(float deltaTime, float Time)
 		m_Hp += 1;
 		m_limit = 0;
 	}
-	m_Start->Update(deltaTime, Time);
-	m_hitsound->Update(deltaTime, Time);
 	if (hit) {
-		if (m_spawnsound >= 20*dt) {
+		if (m_spawnsound >= 0.1f) {
+
 			m_hitsound->play();
+			m_spawnsound = 0;
 		}
 		hit = false;
+	}
+	m_hitsound->Update(deltaTime, Time);
+	m_Start->Update(deltaTime, Time);
+
+	if (a == false) {
+		stime += dt;
+		if (stime > 0.45f)
+			m_Visible = false;
+
+		if (stime > 0.55f)
+			m_Visible = true;
+
+		if (stime > 0.65f)
+			m_Visible = false;
+
+		if (stime > 0.75f)
+			m_Visible = true;
+
+		if (stime > 0.85f)
+			m_Visible = false;
+
+		if (stime > 0.95f)
+		{
+			m_Visible = true;
+			a = true;
+		}
+	}
+
+	else if (a == true) {
+		mtime += dt;
+
+		Vec2 A, B;
+		A = m_Position; // 좌 1810 우 3730
+						// 상 0 하 1080
+		B = Vec2(2775, 1080 / 2);
+		A -= B;
+		D3DXVec2Normalize(&Dir, &A);
+
+		if (mtime >= 0.f && mtime <= 0.35f)
+		{
+			Translate(-Dir.x * 800 * dt, -Dir.y * 800 * dt);
+		}
+		else {
+			atime += dt;
+			if (atime >= 0.4f && atime <= 0.6f) {
+				SceneDirector::GetInst()->SetScene(scene::testscene);
+			}
+			Move();
+		}
 	}
 	UI::GetInst()->m_Hp = m_Hp;
 
@@ -227,6 +233,7 @@ void Heart::Update(float deltaTime, float Time)
 	m_Right->SetPosition(m_Position.x + m_Size.x / 2 + 2, m_Position.y);
 	m_Up->SetPosition(m_Position.x, m_Position.y - m_Size.y / 2 - 2);
 	m_Down->SetPosition(m_Position.x, m_Position.y + m_Size.y / 2 + 2);
+	Button();
 }
 
 
@@ -234,11 +241,11 @@ void Heart::Move()//Ground를 없에고 판정을 좌표로 해보기
 {
 	// 좌 1810 우 3730
 	// 상 0 하 1080
-	if (m_Color == Soul_Color::RED) {
+	if (m_Color == Soul_Color::RED) {/*
 		std::cout << "내위치 x : " << m_Position.x << std::endl;
 		std::cout << "내위치 y : " << m_Position.y << std::endl;
 		std::cout << "카메라 위치: " << Camera::GetInst()->m_Position.x << std::endl;
-		std::cout << "카메라 위치: " << Camera::GetInst()->m_Position.y << std::endl;
+		std::cout << "카메라 위치: " << Camera::GetInst()->m_Position.y << std::endl;*/
 
 		if (INPUT->GetKey('W') == KeyState::PRESS && m_Position.y > 0 + 30 + 8)
 		{
@@ -426,6 +433,11 @@ void Heart::Move()//Ground를 없에고 판정을 좌표로 해보기
 			}
 		}
 	}
+}
+
+void Heart::Button()
+{
+	
 }
 
 void Heart::Gravity()

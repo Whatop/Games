@@ -12,6 +12,7 @@ class UI : public Singleton<UI>
 	Vec2 PlayerPos;
 	std::string UpdateText;
 public:
+	Sprite* m_Mouse;
 	UI();
 	~UI();
 

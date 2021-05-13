@@ -32,20 +32,23 @@ void SceneDirector::SetScene(scene scene)
 void SceneDirector::Update(float deltaTime, float time)
 {
 	Camera::GetInst()->Update(deltaTime, time);
-	UI::GetInst()->Update();
 	Input::GetInst()->Update();
-	ObjMgr->Update(deltaTime, time);
 
 	if (m_CurrentScene)
 		m_CurrentScene->Update(deltaTime, time);
 
+	ObjMgr->Update(deltaTime, time);
+
+	if(Game::GetInst()->m_isCreateUI)
+		UI::GetInst()->Update();
 }
 
 void SceneDirector::Render()
 {
-	UI::GetInst()->Render();
 	if (m_CurrentScene)
 		m_CurrentScene->Render();
 	ObjMgr->Render();
 
+	if (Game::GetInst()->m_isCreateUI)
+		UI::GetInst()->Render();
 }

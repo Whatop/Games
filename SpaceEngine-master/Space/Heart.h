@@ -38,6 +38,7 @@ class Heart : public Object
 	int m_Hp;
 	int m_limit;
 
+	float QTime;
 	float m_JumpTime;
 	float JTime; //점프 강도 정해주는 시간
 	float m_PrevAccel;
@@ -67,6 +68,7 @@ public:
 	void Render();	
 	void OnCollision(Object* other);
 
+	void Button();
 	void Gravity();
 	void Move();
 };

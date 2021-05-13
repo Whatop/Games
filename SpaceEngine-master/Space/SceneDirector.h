@@ -30,6 +30,7 @@ public:
 
 	void ChangeScene(Scene* newScene);
 	void SetScene(scene scene);
+	scene GetScene() {return m_scene;}
 
 	void Update(float deltaTime, float time);
 	void Render();

@@ -10,6 +10,8 @@ class GasterBlaster : public Object
 	Vec2 Pos;
 	float m_Speed;
 
+
+	bool two;
 	bool ntRange;
 	int m_direction;
 	float lifeTime;

@@ -177,11 +177,11 @@ void Player::Update(float deltaTime, float Time)
 	{
 		if (Save && SceneDirector::GetInst()->m_Move != Interaction::NONE) {//이렇게 제한 안걸어놓으면 계속생성되서 문제임
 																			       //사실 간단하게 Object뺴고 Singleton 쓰면되는대 귀찮음
-			ObjMgr->AddObject(new Interaction1(Vec2(m_Position.x-300, m_Position.y - 300), "Save"),"Interaction");
+			ObjMgr->AddObject(new Interaction1(Vec2(m_Position.x+200, m_Position.y - 300), "Save"),"Interaction");
 			SceneDirector::GetInst()->m_Move = Interaction::NONE;
 		}
 		if (Chest && SceneDirector::GetInst()->m_Move != Interaction::NONE) {
-			ObjMgr->AddObject(new Interaction1(Vec2(m_Position.x-600, m_Position.y-400), "Chest"), "Interaction");
+			ObjMgr->AddObject(new Interaction1(Vec2(m_Position.x, m_Position.y-300), "Chest"), "Interaction");
 			SceneDirector::GetInst()->m_Move = Interaction::NONE;
 		}
 
@@ -216,14 +216,10 @@ void Player::Update(float deltaTime, float Time)
 	m_Right->m_Position = Vec2(m_Position.x+ m_ColBox->m_Size.x/2, m_Position.y+25);
 	m_Up->m_Position = Vec2(m_Position.x, m_Position.y);
 	m_Down->m_Position = Vec2(m_Position.x,m_Position.y + 50);
-
-	m_Player->SetVertex();
-
 }
 
 void Player::Render()
 {
-	m_Line->DrawLine(m_Vertex, 5);
 	m_Player->Render();
 
 	m_ColBox->Render();
@@ -234,12 +230,12 @@ void Player::Render()
 
 }
 
-void Player::OnCollision(Object* other)
+void Player::OnCollision(Object* a)
 {
-	if (other->m_Tag == "Dialog")
+	if (a->m_Tag == "Dialog")
 	{
 		RECT rc;
-		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &a->m_Collision))
 		{
 			SceneDirector::GetInst()->SetScene(scene::dialogscene);
 			ObjMgr->DeleteObject("Dialog");
@@ -247,27 +243,27 @@ void Player::OnCollision(Object* other)
 		}
 	}
 
-	if (other->m_Tag == "Chest")
+	if (a->m_Tag == "Chest")
 	{
 		RECT rc;
-		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &a->m_Collision))
 		{
-			if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
+			if (IntersectRect(&rc, &m_Left->m_Collision, &a->m_Collision))
 			{
 				Left = true;
 				Chest = true;
 			}
-			else if (IntersectRect(&rc, &m_Right->m_Collision, &other->m_Collision))
+			else if (IntersectRect(&rc, &m_Right->m_Collision, &a->m_Collision))
 			{
 				Right = true;
 				Chest = true;
 			}
-			if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
+			if (IntersectRect(&rc, &m_Down->m_Collision, &a->m_Collision))
 			{
 				Down = true;
 				Chest = true;
 			}
-			else if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
+			else if (IntersectRect(&rc, &m_Up->m_Collision, &a->m_Collision))
 			{
 				Up = true;
 				Chest = true;
@@ -275,48 +271,48 @@ void Player::OnCollision(Object* other)
 		}
 	}
 		
-	if (other->m_Tag == "Solids")
+	if (a->m_Tag == "Solids")
 	{
 		RECT rc;
-			if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
+			if (IntersectRect(&rc, &m_Left->m_Collision, &a->m_Collision))
 			{	
 				Left = true;
 			}
-			else if (IntersectRect(&rc, &m_Right->m_Collision, &other->m_Collision))
+			else if (IntersectRect(&rc, &m_Right->m_Collision, &a->m_Collision))
 			{
 				Right = true;
 			}
-			if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
+			if (IntersectRect(&rc, &m_Down->m_Collision, &a->m_Collision))
 			{
 				Down = true;
 			}
-			else if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
+			else if (IntersectRect(&rc, &m_Up->m_Collision, &a->m_Collision))
 			{
 				Up = true;
 			}
 		
 	}
-	if (other->m_Tag == "Save")
+	if (a->m_Tag == "Save")
 	{
 		RECT rc;
-		if (IntersectRect(&rc, &m_ColBox->m_Collision, &other->m_Collision))
+		if (IntersectRect(&rc, &m_ColBox->m_Collision, &a->m_Collision))
 		{
-			if (IntersectRect(&rc, &m_Left->m_Collision, &other->m_Collision))
+			if (IntersectRect(&rc, &m_Left->m_Collision, &a->m_Collision))
 			{
 				Right = true;
 				Save = true;
 			}
-			else if (IntersectRect(&rc, &m_Right->m_Collision, &other->m_Collision))
+			else if (IntersectRect(&rc, &m_Right->m_Collision, &a->m_Collision))
 			{
 				Left = true;
 				Save = true;
 			}
-			if (IntersectRect(&rc, &m_Down->m_Collision, &other->m_Collision))
+			if (IntersectRect(&rc, &m_Down->m_Collision, &a->m_Collision))
 			{
 				Down = true;
 				Save = true;
 			}
-			else if (IntersectRect(&rc, &m_Up->m_Collision, &other->m_Collision))
+			else if (IntersectRect(&rc, &m_Up->m_Collision, &a->m_Collision))
 			{
 				Up = true;
 				Save = true;

@@ -18,6 +18,8 @@ MainScene::~MainScene()
 void MainScene::Init()
 {
 	SceneDirector::GetInst()->SetScene(scene::mainscene);
+	Game::GetInst()->ReleaseUI();
+	Game::GetInst()->CreateUI();
 	m_BG = Sprite::Create(L"Painting/Map/Last_Corridor.png");
 	m_BG->SetPosition(4200/2, 720/2);
 
@@ -69,9 +71,4 @@ void MainScene::Update(float deltaTime, float time)
 void MainScene::Render()
 {
 	m_BG->Render();
-
-	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y) + "\n" + std::to_string(dt) + "  " + std::to_string(gt), 250, 900);
-	Renderer::GetInst()->GetSprite()->End();
-	
 }

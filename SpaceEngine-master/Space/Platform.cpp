@@ -18,17 +18,19 @@ Platform::~Platform()
 
 void Platform::Update(float deltaTime, float Time)
 {
-	if (m_direction == _left) {
-		m_Position.x -= m_Speed * dt;
-	}
-	else if (m_direction == _right) {
-		m_Position.x += m_Speed * dt;
-	}
-	else if (m_direction == _up) {
-		m_Position.y -= m_Speed * dt;
-	}
-	else if (m_direction == _down) {
-		m_Position.y += m_Speed * dt;
+	if (Game::GetInst()->m_Puase == false) {
+		if (m_direction == _left) {
+			m_Position.x -= m_Speed * dt;
+		}
+		else if (m_direction == _right) {
+			m_Position.x += m_Speed * dt;
+		}
+		else if (m_direction == _up) {
+			m_Position.y -= m_Speed * dt;
+		}
+		else if (m_direction == _down) {
+			m_Position.y += m_Speed * dt;
+		}
 	}
 	//m_platfrom->SetPosition(m_Position.x,m_Position.y+2);
 }
