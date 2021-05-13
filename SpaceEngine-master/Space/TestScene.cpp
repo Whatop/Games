@@ -66,6 +66,8 @@ void TestScene::Init()
 	m_TSBgm = new SoundMgr("Sound/MEGALOVANIA.mp3", true);
 	m_TSBgm->play();
 	m_TSBgm->volumeDown();
+	m_TSBgm->volumeDown();
+	m_TSBgm->volumeDown();
 	//Count = 10 보통 마지막은 안쏨
 	//Count = 12 빠름 마지막은 안씀
 	Count = 10;
@@ -217,7 +219,7 @@ void TestScene::Button()
 		DirButton[3]->m_Visible = false;
 		Mouse->m_Visible = false;
 	}
-	if (INPUT->GetKey('0') == KeyState::DOWN) {
+	if (INPUT->GetKey('M') == KeyState::DOWN) {
 		if (!Mode) {
 			Mode = true;
 		}
@@ -225,34 +227,44 @@ void TestScene::Button()
 			Mode = false;
 		}
 	}
+	if (INPUT->GetKey('C') == KeyState::DOWN) {
+		if (!Color) {
+			Color = true;
+
+		}
+		else {
+			Color = false;
+		}
+	}
+
 	if (Mode) {
 		if (Game::GetInst()->shape == 1) {
 			if (INPUT->GetButtonDown()) {
-				ObjMgr->AddObject(new Bones(INPUT->GetMousePos(), "while", "small", Game::GetInst()->Dir, 1000), "Bone");
+				ObjMgr->AddObject(new Bones(INPUT->GetMousePos(), m_Color, "small", Game::GetInst()->Dir, 1000), m_TempTag);
 				INPUT->ButtonDown(false);
 			}
 		}
 		else if (Game::GetInst()->shape == 2) {
 			if (INPUT->GetButtonDown()) {
-				ObjMgr->AddObject(new Bones(INPUT->GetMousePos(), "while", "middle", Game::GetInst()->Dir, 1000), "Bone");
+				ObjMgr->AddObject(new Bones(INPUT->GetMousePos(), m_Color, "middle", Game::GetInst()->Dir, 1000), m_TempTag);
 				INPUT->ButtonDown(false);
 			}
 		}
 		else if (Game::GetInst()->shape == 3) {
 			if (INPUT->GetButtonDown()) {
-				ObjMgr->AddObject(new Bones(INPUT->GetMousePos(), "while", "big", Game::GetInst()->Dir, 1000), "Bone");
+				ObjMgr->AddObject(new Bones(INPUT->GetMousePos(), m_Color, "big", Game::GetInst()->Dir, 1000), m_TempTag);
 				INPUT->ButtonDown(false);
 			}
 		}
 		else if (Game::GetInst()->shape == 4) {
 			if (INPUT->GetButtonDown()) {
-				ObjMgr->AddObject(new Bones(INPUT->GetMousePos(), "while", "long", Game::GetInst()->Dir, 1000), "Bone");
+				ObjMgr->AddObject(new Bones(INPUT->GetMousePos(), m_Color, "long", Game::GetInst()->Dir, 1000), m_TempTag);
 				INPUT->ButtonDown(false);
 			}
 		}
 		else if (Game::GetInst()->shape == 5) {
 			if (INPUT->GetButtonDown()) {
-				ObjMgr->AddObject(new Bones(INPUT->GetMousePos(), "while", "lie", Game::GetInst()->Dir, 1000), "Bone");
+				ObjMgr->AddObject(new Bones(INPUT->GetMousePos(), m_Color, "lie", Game::GetInst()->Dir, 1000), m_TempTag);
 				INPUT->ButtonDown(false);
 			}
 		}
@@ -290,10 +302,25 @@ void TestScene::Update(float deltaTime, float time) // 화면 밖에서 내려오기
 	if (Mode) {
 		m_Mode = "그리기 모드 ON";
 	}
-	else if (!Mode) {
+	else{
 		m_Mode = "그리기 모드 OFF";
 	}
 
+	if (Color) {
+		m_Color = "blue";
+		m_TempTag = "BlueBone";
+		Mouse->R = 0;
+		Mouse->G = 168;
+		Mouse->B = 255;
+	}
+	else {
+		 m_Color = "while";
+		m_TempTag = "Bone";
+		Mouse->R = 255;
+		Mouse->G = 255;
+		Mouse->B = 255;
+	}
+	Game::GetInst()->Color = Color;
 	m_TSBgm->Update(deltaTime, time);
 }
 
@@ -314,7 +341,10 @@ void TestScene::Render()
 
 	m_Text->print(m_Mode, 1675, 480);
 
+	m_Text->print("뼈 색깔 : "+m_Color, 1675, 680);
+
 	m_Text->print(std::to_string(UI::GetInst()->m_Hp), 1650, 900);
+
 	Renderer::GetInst()->GetSprite()->End();
 	//m_Line->DrawLine(m_Vertex, 5);
 

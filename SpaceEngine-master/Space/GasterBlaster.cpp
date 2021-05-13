@@ -23,8 +23,7 @@ GasterBlaster::GasterBlaster(Vec2 SpawnPos, int direction)// Å©±â : È¦ÂßÇÑ, Áß°£
 	rTime = 0;
 	two = false;
 	m_gasterblaster = new SoundMgr("Sound/gasterblaster.mp3", false);
-	m_gasterblaster->volumeUp();
-	m_gasterblaster->volumeUp();
+
 	m_Rotation = D3DXToRadian(0);
 	random = rand() % 800 + 200;
 	//if(random%200==0)
@@ -40,7 +39,9 @@ void GasterBlaster::Update(float deltaTime, float Time)
 {
 	if (Game::GetInst()->m_Puase == false) {
 		if (two == false) {
-			m_gasterblaster->play();
+			m_gasterblaster->play();	
+			m_gasterblaster->volumeUp();
+			m_gasterblaster->volumeUp();
 			two = true;
 		}
 		if (m_direction % 2 != 0) {

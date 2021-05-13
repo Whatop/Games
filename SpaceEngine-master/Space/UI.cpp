@@ -82,7 +82,16 @@ void UI::Update()
 		else {
 			m_Mouse->m_Visible = true;
 		}
-
+		if (Game::GetInst()->Color) {
+			m_Mouse->R = 0;
+			m_Mouse->G = 168;
+			m_Mouse->B = 255;
+		}
+		else {
+			m_Mouse->R = 255;
+			m_Mouse->G = 255;
+			m_Mouse->B = 255;
+		}
 	for (auto& iter : ObjMgr->m_Objects)
 	{
 		if (iter->m_Tag == "Player")

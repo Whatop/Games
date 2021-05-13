@@ -31,6 +31,8 @@ public:
 	void Init();
 	void Release();
 
+	bool Color;
+		
 	void CollisionMapInit(Sprite* cMap);
 
 	void CreateUI();

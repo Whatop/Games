@@ -84,6 +84,7 @@ void Game::Shape(bool dir)
 	else if (shape == 7) {
 		m_MouseShape = MouseShape::GASTERBALSTER;
 	}
+	
 }
 void Game::Rota(bool dir)
 {

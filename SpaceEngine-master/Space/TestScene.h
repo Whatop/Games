@@ -14,6 +14,8 @@ class TestScene : public Scene
 	Sprite* Mouse;
 	std::string m_Name;
 	std::string m_Mode;
+	std::string m_Color;
+	std::string m_TempTag;
 
 	bool m_Puase;
 	float rtime;
@@ -28,6 +30,8 @@ class TestScene : public Scene
 	int random;
 	bool brandom;
 	bool Mode;
+	bool Color;
+
 public:
 	TestScene();
 	~TestScene();
