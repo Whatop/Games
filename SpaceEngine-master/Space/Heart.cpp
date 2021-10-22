@@ -46,7 +46,7 @@ Heart::Heart(Vec2 Pos)
 	m_isFall = false;
 	m_isGround = false;
 	m_Gravity = _down;
-	m_Layer = 1;
+	m_Layer = 3;
 }
 
 Heart::~Heart()

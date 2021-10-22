@@ -18,7 +18,6 @@ TestScene::~TestScene()
 
 void TestScene::Init()
 {
-	SoundMgr::Init();
 	SceneDirector::GetInst()->SetScene(scene::testscene);
 	ObjMgr->DeleteObject("UI");
 

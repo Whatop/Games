@@ -29,6 +29,7 @@ Interaction1::Interaction1(Vec2 Pos,std::string string)
 	SetPosition(Pos);
 	m_Interaction->m_CurrentFrame = 1;
 	delayTime = 0;
+	Game::GetInst()->Count++;
 }
 
 Interaction1::~Interaction1()
@@ -38,43 +39,39 @@ Interaction1::~Interaction1()
 
 void Interaction1::Update(float deltaTime, float Time)
 {
-	delayTime += dt;
-	std::cout << delayTime << std::endl;
-	if (INPUT->GetKey(VK_LEFT)== KeyState::DOWN) {
-		m_Interaction->m_CurrentFrame = 1;
-	}
-	else if (INPUT->GetKey(VK_RIGHT) == KeyState::DOWN&& m_Interaction->m_CurrentFrame == 1 ) {
-		m_Interaction->m_CurrentFrame = 2;
-	}
-	else if (m_Interaction->m_CurrentFrame == 1){
-			if (INPUT->GetKey('Z') == KeyState::DOWN&&delayTime>0.3f) {//이것은 꼼수 Z눌렀을때 3으로 바로넘어가서 제한걸어놓음
+	if (Game::GetInst()->Count == 1) {
+		delayTime += dt;
+		std::cout << delayTime << std::endl;
+		if (INPUT->GetKey(VK_LEFT) == KeyState::DOWN) {
+			m_Interaction->m_CurrentFrame = 1;
+		}
+		else if (INPUT->GetKey(VK_RIGHT) == KeyState::DOWN && m_Interaction->m_CurrentFrame == 1) {
+			m_Interaction->m_CurrentFrame = 2;
+		}
+		if (m_Interaction->m_CurrentFrame == 3) {
+			if (INPUT->GetKey('Z') == KeyState::DOWN && delayTime > 0.3f) {//이것은 꼼수 Z눌렀을때 3으로 바로넘어가서 제한걸어놓음
+				ObjMgr->RemoveObject(this);
+				SceneDirector::GetInst()->m_Move = Interaction::MOVE;
+				Game::GetInst()->isCount = true;
+			}
+		}
+		else if (m_Interaction->m_CurrentFrame == 1) {
+			if (INPUT->GetKey('Z') == KeyState::DOWN && delayTime > 0.3f) {//이것은 꼼수 Z눌렀을때 3으로 바로넘어가서 제한걸어놓음
 				m_Interaction->m_CurrentFrame = 3;
-		}
-	}
-	else if (m_Interaction->m_CurrentFrame == 3) {
-		if (INPUT->GetKey('Z') == KeyState::DOWN && delayTime > 0.3f) {//이것은 꼼수 Z눌렀을때 3으로 바로넘어가서 제한걸어놓음
+			}
+		} 
+		else if (INPUT->GetKey('X') == KeyState::DOWN) {
 			ObjMgr->RemoveObject(this);
 			SceneDirector::GetInst()->m_Move = Interaction::MOVE;
+			Game::GetInst()->isCount = true;
 		}
+
+
 	}
-	else if (INPUT->GetKey('X') == KeyState::DOWN) {
+	else {
 		ObjMgr->RemoveObject(this);
-		SceneDirector::GetInst()->m_Move = Interaction::MOVE;
+		Game::GetInst()->Count = 0;
 	}
-
-	if (m_Interaction->m_CurrentFrame == 2) {
-		if (INPUT->GetKey(VK_RETURN) == KeyState::DOWN) {
-			ObjMgr->RemoveObject(this);
-			SceneDirector::GetInst()->m_Move = Interaction::MOVE;
-		}
-	}
-	else if (m_Interaction->m_CurrentFrame == 1) {
-		if (INPUT->GetKey(VK_RETURN) == KeyState::DOWN) {
-			m_Interaction->m_CurrentFrame = 3;
-		}
-	}
-
-	m_Interaction->Update(deltaTime, Time);
 }
 
 void Interaction1::Render()

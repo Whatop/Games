@@ -50,7 +50,7 @@ void App::Run()
 		else
 		{
 			Renderer::GetInst()->Begin();
-			SceneDirector::GetInst()->Update(timeDelta, Time);
+			SceneDirector::GetInst()->Update(timeDelta , Time);
 			DeltaTime = timeDelta;
 			Time += timeDelta;
 			SceneDirector::GetInst()->Render();

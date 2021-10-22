@@ -74,6 +74,7 @@ Player::Player()
 	m_Right->m_Visible = false;
 	m_Down->m_Visible = false;
 	m_Up->m_Visible = false;
+	m_Layer = 2;
 }
 //-10 3590 333 560
 Player::~Player()
@@ -177,12 +178,16 @@ void Player::Update(float deltaTime, float Time)
 	{
 		if (Save && SceneDirector::GetInst()->m_Move != Interaction::NONE) {//이렇게 제한 안걸어놓으면 계속생성되서 문제임
 																			       //사실 간단하게 Object뺴고 Singleton 쓰면되는대 귀찮음
-			ObjMgr->AddObject(new Interaction1(Vec2(m_Position.x+200, m_Position.y - 300), "Save"),"Interaction");
-			SceneDirector::GetInst()->m_Move = Interaction::NONE;
+			if (Game::GetInst()->Count == 0) {
+				ObjMgr->AddObject(new Interaction1(Vec2(m_Position.x + 200, m_Position.y - 300), "Save"), "Interaction");
+				SceneDirector::GetInst()->m_Move = Interaction::NONE;
+			}
 		}
 		if (Chest && SceneDirector::GetInst()->m_Move != Interaction::NONE) {
-			ObjMgr->AddObject(new Interaction1(Vec2(m_Position.x, m_Position.y-300), "Chest"), "Interaction");
-			SceneDirector::GetInst()->m_Move = Interaction::NONE;
+			if (Game::GetInst()->Count == 0) {
+				ObjMgr->AddObject(new Interaction1(Vec2(m_Position.x, m_Position.y - 300), "Chest"), "Interaction");
+				SceneDirector::GetInst()->m_Move = Interaction::NONE;
+			}
 		}
 
 

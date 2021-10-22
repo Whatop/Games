@@ -160,6 +160,9 @@
       <Filter>Game\Object\Sans\Attack</Filter>
     </ClCompile>
     <ClCompile Include="BonePlate.cpp" />
+    <ClCompile Include="IntroScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -280,6 +283,9 @@
       <Filter>Game\Object\Sans\Attack</Filter>
     </ClInclude>
     <ClInclude Include="BonePlate.h" />
+    <ClInclude Include="IntroScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Sound\gasterblaster.mp3">
@@ -292,6 +298,9 @@
       <Filter>Sound</Filter>
     </Media>
     <Media Include="Sound\Word\Word2.mp3">
+      <Filter>Sound</Filter>
+    </Media>
+    <Media Include="Sound\새로운 파일들\Intro.mp3">
       <Filter>Sound</Filter>
     </Media>
   </ItemGroup>

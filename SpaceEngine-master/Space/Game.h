@@ -32,7 +32,12 @@ public:
 	void Release();
 
 	bool Color;
-		
+	
+	int Count;
+
+	bool isCount;
+	float DelayCount;
+
 	void CollisionMapInit(Sprite* cMap);
 
 	void CreateUI();

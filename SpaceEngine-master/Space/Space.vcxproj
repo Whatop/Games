@@ -35,6 +35,7 @@
     <ClCompile Include="Heart.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Interaction1.cpp" />
+    <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="Laser.cpp" />
     <ClCompile Include="LineMgr.cpp" />
     <ClCompile Include="MainScene.cpp" />
@@ -81,6 +82,7 @@
     <ClInclude Include="Heart.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Interaction1.h" />
+    <ClInclude Include="IntroScene.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="LineMgr.h" />
     <ClInclude Include="MainScene.h" />
@@ -111,6 +113,7 @@
     <Media Include="Sound\MEGALOVANIA.mp3" />
     <Media Include="Sound\TestRoom.mp3" />
     <Media Include="Sound\Word\Word2.mp3" />
+    <Media Include="Sound\새로운 파일들\Intro.mp3" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

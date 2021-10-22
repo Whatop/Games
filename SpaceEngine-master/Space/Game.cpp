@@ -19,6 +19,7 @@ void Game::Init()
 	m_DebugMode = false;
 	m_Puase = true; 
 	Game::GetInst()->m_MouseShape = MouseShape::none;
+	Count = 0;
 }
 
 void Game::Release()
@@ -129,6 +130,18 @@ void Game::Update()
 
 	if (m_isCreateUI)
 		UI::GetInst()->Update();
+
+	if (isCount) {
+		DelayCount += dt;
+		if (DelayCount > 0.4f) {
+			Count--;
+			DelayCount = 0.f;
+			isCount = false;
+		}
+	}
+
+	if (Count < 0)
+		Count = 0;
 }
 
 void Game::Render()

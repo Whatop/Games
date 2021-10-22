@@ -17,6 +17,7 @@ MainScene::~MainScene()
 //Determination Mono
 void MainScene::Init()
 {
+	ObjMgr->Release();
 	SceneDirector::GetInst()->SetScene(scene::mainscene);
 	Game::GetInst()->ReleaseUI();
 	Game::GetInst()->CreateUI();
