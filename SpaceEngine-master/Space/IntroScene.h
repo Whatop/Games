@@ -14,25 +14,38 @@ public:
 	Sprite* m_IntroCut10;
 	Sprite* m_IntroCut11;
 	Sprite* m_IntroCut12;
-	Sprite* m_IntroCut13;
 	Sprite* m_IntroFrame;
 
 	Sprite* m_Skip;
 
 	SoundMgr* IntroSound;
 	SoundMgr* BGIntroSound;
+	SoundMgr* TextSound;
 
+	TextMgr* IntroText;
+
+	std::ifstream fin;
+	std::string text;
+	std::string Wtext;
+	float textdelay;
+	bool istextsound;
 
 	IntroScene();
 	~IntroScene();
 
+	bool one;
+
 	float m_Count;
 	float m_Start;
 	int m_Cut;
+	int textCount;
 	bool start;
+
+
 	void Init();
 	void Release();
 
 	void Update(float deltaTime, float time);
 	void Render();
+	void IntroChange();
 };

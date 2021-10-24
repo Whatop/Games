@@ -9,7 +9,7 @@ Dialog::Dialog(Vec2 Pos)
 	m_Dialog->A = 0;
 
 	m_Text = new TextMgr();
-	m_Text->Init(32, true, false, L"Determination Mono");
+	m_Text->Init(32, true, false, "DungGeunMo");
 	m_Text->SetColor(255, 255, 255, 255);
 }
 

@@ -33,7 +33,7 @@ void MainScene::Init()
 //	ObjMgr->AddObject(new Solids(L"Painting/Solids/middle.png", Vec2(0, 702/2)), "Solids");
 
 	m_Text = new TextMgr();
-	m_Text->Init(32, true, false, L"Determination Mono");
+	m_Text->Init(32, true, false, "DungGeunMo");
 	m_Text->SetColor(255, 255, 255, 255);
 
 	//486 343+72

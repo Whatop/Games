@@ -19,7 +19,7 @@ TextMgr::~TextMgr()
 {
 }
 
-bool TextMgr::Init(int height, bool bold, bool italic, const std::wstring& fontname)
+bool TextMgr::Init(int height, bool bold, bool italic, const std::string& fontname)
 {
 	UINT weight = FW_NORMAL;
 	if (bold)

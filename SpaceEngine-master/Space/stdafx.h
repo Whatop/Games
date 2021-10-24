@@ -30,6 +30,8 @@ inline void SafeDelete(T*& x);
 #include<cmath>
 #include<mmsystem.h> 
 
+#include<fstream> 
+
 #include <fmod.h>
 //
 

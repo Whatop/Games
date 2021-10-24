@@ -28,7 +28,7 @@ Heart::Heart(Vec2 Pos)
 	m_Hp = 92;
 	m_Speed = 450;
 	m_Text = new TextMgr();
-	m_Text->Init(60, true, false, L"Determination Mono");
+	m_Text->Init(60, true, false, "DungGeunMo");
 	m_Text->SetColor(255, 255, 255, 255);
 	m_Move = Soul_Movement::NONE;
 	m_Color = Soul_Color::RED;

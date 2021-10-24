@@ -14,7 +14,7 @@ public:
 
 	float m_Angle;
 
-	bool Init(int height, bool bold, bool italic, const std::wstring& fontname);
+	bool Init(int height, bool bold, bool italic, const std::string& fontname);
 	int print(const std::string& str, int x, int y);
 
 	void SetColor(int a, int r, int g, int b);

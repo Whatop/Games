@@ -27,7 +27,7 @@ void UI::Init()
 	b = false;
 	c = false;
 	m_Text = new TextMgr();
-	m_Text->Init(65, true, false, L"±¼¸²");
+	m_Text->Init(65, true, false, "DungGeunMo");
 	m_Text->SetColor(255, 255, 255, 255);
 	m_Curtain->SetPosition(1920/2, 1080/2);
 	m_UI->SetPosition(1920/2, 700/2);
